@@ -1,0 +1,69 @@
+{
+  "name": "moebius-site",
+  "version": "0.0.1",
+  "description": "asd",
+  "main": "moebius.js",
+  "types": "moebius.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rm -rf dist/*",
+    "assets": "mkdir -p dist && cp -a ./public/. ./dist/ && cp -a ./src/assets/. ./dist/",
+    "prebuild": "npm run clean && npm run assets",
+    "build": "rollup -c rollup.config.js",
+    "postbuild": "bash -c 'mv -f ./dist/*.{js,map} ./dist/js'",
+    "build:watch": "rollup -c rollup.config.js -w",
+    "commit": "npx git-cz",
+    "dev": "npx browser-sync start -s \"dist\" --files \"dist/*.*\"  --single"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/phun-ky/moebius-site.git"
+  },
+  "author": "Alexander Vassbotn Røyne-Helgesen <alexander+github.com@phun-ky.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/phun-ky/moebius-site/issues"
+  },
+  "homepage": "https://github.com/phun-ky/moebius-site#readme",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^11.2.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@testing-library/dom": "^7.29.4",
+    "@testing-library/user-event": "^12.7.1",
+    "@typescript-eslint/eslint-plugin": "^5.7.0",
+    "@typescript-eslint/parser": "^5.7.0",
+    "conventional-changelog-conventionalcommits": "^7.0.2",
+    "cssnano": "^6.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-compat": "^3.13.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jest": "^24.4.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "git-cz": "^4.9.0",
+    "network-information-types": "^0.1.1",
+    "postcss": "^8.4.23",
+    "postcss-cli": "^10.1.0",
+    "prettier": "^2.4.1",
+    "prettier-eslint": "^13.0.0",
+    "rollup": "^2.39.0",
+    "rollup-plugin-dts": "^4.0.1",
+    "rollup-plugin-svg-import": "^2.0.0",
+    "rollup-plugin-typescript2": "^0.35.0",
+    "stylus": "^0.60.0",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/git-cz"
+    }
+  }
+}
