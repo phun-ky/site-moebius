@@ -2,7 +2,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import ts from 'rollup-plugin-typescript2';
 import dts from 'rollup-plugin-dts';
 import typescript from 'typescript';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import styles from '@ironkinoko/rollup-plugin-styles';
@@ -44,6 +44,7 @@ export default [
   {
     input: './dts/main.d.ts',
     output: [{ file: './moebius-site.d.ts', format: 'es' }],
+    external: [/\.styl$/], // ignore .styl file
     plugins: [dts()]
   }
 ];
