@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2022",
+    "module": "es2022",
     "lib": ["ES2021", "dom"],
     "sourceMap": true,
     "declaration": true,
@@ -16,13 +17,7 @@
     "baseUrl": "src/",
     "typeRoots": ["./node_modules/@types"],
     "resolveJsonModule": true,
-    "types": ["jest", "node", "./node_modules/network-information-types"]
+    "types": ["node", "./node_modules/network-information-types"]
   },
-  "exclude": [
-    "node_modules",
-    "build",
-    "dist",
-    "scripts",
-    "dts"
-  ]
+  "exclude": ["node_modules", "build", "dist", "scripts", "dts"]
 }
