@@ -54,7 +54,7 @@
     "prettier": "^2.4.1",
     "prettier-eslint": "^13.0.0",
     "rollup": "^2.39.0",
-    "rollup-plugin-dts": "^4.0.1",
+    "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-svg-import": "^2.0.0",
     "rollup-plugin-typescript2": "^0.35.0",
     "stylus": "^0.60.0",
