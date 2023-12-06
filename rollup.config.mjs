@@ -20,10 +20,10 @@ export default [
     },
     plugins: [
       nodeResolve(),
-      json(),
       commonjs({
         requireReturnsDefault: true
       }),
+      json(),
       svg({
         // process SVG to DOM Node or String. Default: false
         stringify: true
@@ -37,8 +37,8 @@ export default [
         useTsconfigDeclarationDir: true,
         sourceMap: false,
         typescript
-      }),
-      terser()
+      })
+      // terser()
     ]
   },
   {

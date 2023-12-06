@@ -1,19 +1,970 @@
-*,
-*::after,
-*::before
-  margin 0
-  padding 0
-  word-break break-word
-  box-sizing border-box
-  -webkit-font-smoothing antialised
+@css{
+  :root{
+    --ph-input-background-color: var(--ph-color-well-background);
+    --ph-input-border-color: transparent;
+    --moebius-primary-hue: 50;
+    --moebius-primary-saturation: 100%;
+    --moebius-primary-lightness: 50%;
+    --moebius-secondary-hue: 50;
+    --moebius-secondary-saturation: 100%;
+    --moebius-secondary-lightness: 50%;
+    --moebius-divergent-hue: 50;
+    --moebius-divergent-saturation: 100%;
+    --moebius-divergent-lightness: 50%;
+    --ph-hue-map-primary-gradient-color: hsl(var(--moebius-primary-hue), var(--moebius-primary-saturation), var(--moebius-primary-lightness));
+    --ph-hue-map-secondary-gradient-color: hsl(var(--moebius-secondary-hue), var(--moebius-secondary-saturation), var(--moebius-secondary-lightness));
+    --ph-hue-map-divergent-background-color: hsl(var(--moebius-divergent-hue), var(--moebius-divergent-saturation), var(--moebius-divergent-lightness));
+    --moebius-spacing-smallest: 0.25rem;
+    --moebius-spacing-smaller: 0.5rem;
+    --moebius-spacing-small: 1rem;
+    --moebius-spacing-default: 1.5rem;
+    --moebius-spacing-large: 2rem;
+    --moebius-spacing-larger: 2.5rem;
+    --moebius-spacing-largest: 4rem;
+    --moebius-spacing-xxl: 6rem;
+    --moebius-radius-smaller: 0.375rem;
+    --moebius-radius-small: 0.5rem;
+    --moebius-radius-large: 0.875rem;
+    --moebius-radius-larger: 1.5rem;
+    --ph-color-well-background: #262831;
+    --ph-color-well-background-transparent: rgba(159, 168, 173,0.1);
+  }
 
-html,
-body
-  height 100%
-  min-height 100%
-  font-family system-ui,-apple-system,Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji
+  :root.theme--light{
+    --ph-color-well-background: #EEEEEE;
+    --ph-input-background-color: var(--ph-color-well-background);
+    --ph-input-border-color: rgba(51, 54, 56, 0.1);
+    --ph-well-border-color: rgba(51, 54, 56, 0.1);
+  }
 
-body
-  padding 0
-  margin 0
-  line-height 1.5
+  @media screen and (min-width: 425px){
+      :root{
+        --moebius-grid-gap: var(--moebius-spacing-small);
+      }
+    }
+  @media screen and (min-width: 768px){
+    :root{
+      --moebius-grid-gap: var(--moebius-spacing-default);
+    }
+  }
+  @media screen and (min-width: 1440px){
+    :root{
+      --moebius-grid-gap: var(--moebius-spacing-large);
+    }
+  }
+
+}
+
+
+
+.ph.tabs
+  & .ph.tabs-list
+    list-style: none
+    display: flex
+    flex-direction: column
+    padding: 0
+    margin: 0
+
+    @media screen and (min-width: 768px)
+      display: grid
+      grid-template-columns: repeat(2, 1fr)
+      grid-gap: 0
+
+    @media screen and (min-width: 1200px)
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+      grid-gap: var(--moebius-spacing-smallest)
+      justify-content: flex-start
+      align-items: bottom
+
+.ph.tabs
+  & .ph.tabs-list
+    & .ph.tabs-list-action[aria-selected]
+      color: var(--ph-color-text-accent)
+      font-size: 1.75rem
+      background-color: var(--ph-color-well-background)
+      line-height: 100%
+      border: 0.125rem solid var(--ph-input-border-color)
+      border-bottom: none
+
+      &::before
+        @media screen and (min-width: 1200px)
+          content: ''
+          background-color: var(--ph-color-well-background)
+          height: 0.125rem
+          position: absolute
+          top: 100%
+          left: 0
+          width: 100%
+          display: block
+
+      &::after
+        content: '\0020⬅'
+        display: inline-block
+        margin-left: 1ch
+
+        @media screen and (min-width: 1200px)
+          content: none
+          margin-left: none
+          display: none
+
+.ph.tabs
+  & .ph.tabs-list
+    & .ph.tabs-list-action
+      transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1)
+      color: var(--ph-color-text)
+      text-decoration: none
+      font-size: 1rem
+      line-height: 100%
+      padding-bottom: 0.75rem
+      padding-left: 0.75rem
+      padding-right: 0.75rem
+      padding-top: 0.75rem
+      display: flex
+      align-items: center
+      justify-content: flex-start
+      border: 0.125rem solid var(--ph-color-well-background)
+      border-bottom: none
+      flex-grow: 1
+
+      @media screen and (min-width: 1200px)
+        display: inline-flex
+        align-items: flex-end
+        flex-grow: 0
+        background-color: rgba(38, 42, 59, 0.3)
+        border-top-left-radius: 12px
+        border-top-right-radius: 12px
+        border: none
+
+.ph.tabs
+  & .ph.tabs-list
+    & .ph.tabs-list-item
+      padding: 0
+      margin: 0
+      min-height: 4rem
+      display: flex
+      flex-direction: column
+
+      @media screen and (min-width: 1200px)
+        flex-direction: row
+        align-items: flex-end
+
+.ph.tabs
+  & section[id^='section'].ph
+    background-color: var(--ph-color-well-background)
+    border-bottom-right-radius: var(--moebius-radius-larger)
+    border-bottom-left-radius: var(--moebius-radius-larger)
+    padding: 2rem
+    border: 0.125rem solid var(--ph-well-border-color)
+
+    @media screen and (min-width: 1200px)
+      border-top-right-radius: var(--moebius-radius-larger)
+
+.ph.settings
+  @media screen and (min-width: 2048px)
+    grid-area: settings
+
+
+  & .ph.color-settings:last-of-type
+    @media screen and (min-width: 2048px)
+      margin-bottom: 0
+
+.ph.container
+  max-width: 1440px
+
+  @media screen and (min-width: 2048px)
+    max-width: 2048px
+    width auto
+
+  @media screen and (min-width: 4096px)
+    max-width: 4096px
+
+.ph.section.workspace
+  & > .ph.container.workspace
+    @media screen and (min-width: 2048px)
+      display: grid
+      grid-template-areas: 'color-picker color-picker color-picker' 'palettes palettes settings'
+      grid-template-columns: 12rem 1fr 640px
+      grid-gap: 4rem 4rem
+
+
+
+  & .ph.palettes
+    @media screen and (min-width: 2048px)
+      grid-area: palettes
+      width: auto
+
+
+.ph.section
+  padding-top: 2rem
+  padding-bottom: 4rem
+
+  & + .ph.section
+    padding-top: 0
+
+.ph.svg
+  height: 256px
+  width: 256px
+  display: block
+  grid-area: svg
+
+.ph.swatch
+  display: grid
+  grid-template-columns: 1fr 1fr
+  grid-area: swatch
+  margin-bottom: 4rem
+  grid-gap: 0 0
+
+  @media screen and (min-width: 425px)
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr))
+
+  @media screen and (min-width: 768px)
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr))
+
+  @media screen and (min-width: 1440px)
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr))
+
+  @media screen and (min-width: 2048px)
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr))
+
+  & .ph.color
+    transition all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+    width: auto
+    aspect-ratio: 9 / 16
+    height: auto
+    text-transform: uppercase
+    @media screen and (min-width: 2048px)
+      max-width 12rem
+
+    &::before
+      text-transform: initial
+
+.ph.accents
+  display: grid
+  grid-template-columns: 1fr 1fr
+  grid-gap: 1rem
+  grid-area: accents
+  margin-bottom: 4rem
+
+  @media screen and (min-width: 425px)
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr))
+    grid-gap: 1.5rem
+
+  @media screen and (min-width: 768px)
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr))
+    grid-gap: 1.5rem
+
+  @media screen and (min-width: 1440px)
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr))
+    grid-gap: 2rem
+
+  & .ph.colors, & .ph.group
+    display: grid
+    justify-items: stretch
+    grid-gap: 0
+
+    & .ph.color
+      text-transform: uppercase
+      text-align: right
+      min-height: 2rem
+      font-weight: 500
+      font-size: 1.25rem
+      line-height: 2rem
+      padding: 0.5rem
+      font-family: var(--ph-font-family-code)
+
+      &::before
+        text-transform: initial
+
+.ph.gradient
+  display: block
+  width: 100%
+  height: 256px
+  grid-area: gradient
+
+input.ph
+  font-family: var(--ph-font-family)
+  height: 3rem
+  font-size: 1rem
+  line-height: 1.3333
+  padding: 0 0.5rem
+  color: var(--ph-color-text-accent)
+  background-color: var(--ph-input-background-color)
+  border: 0.125rem solid var(--ph-input-border-color)
+  border-radius: 6px
+  font-weight: 500
+
+.ph.color-blind-warning
+  grid-area: color-blind-warning
+
+.ph.palette
+  display: grid
+  grid-gap: 2rem
+  grid-template-areas: 'color-blind-warning' 'swatch' 'wheel' 'mix' 'gradient'
+  grid-template-columns: 1fr
+  margin-bottom: 4rem
+
+  @media screen and (min-width: 620px)
+    grid-template-areas: 'color-blind-warning color-blind-warning' 'swatch swatch' 'wheel mix' 'gradient gradient'
+    grid-template-columns: 1fr 1fr
+
+  @media screen and (min-width: 768px)
+    grid-template-areas: 'color-blind-warning color-blind-warning' 'swatch swatch' 'wheel mix' 'gradient gradient'
+    grid-template-columns: 1fr 1fr
+    grid-gap: 2rem
+
+  @media screen and (min-width: 1024px)
+    grid-template-areas: 'color-blind-warning color-blind-warning color-blind-warning' 'swatch swatch swatch' 'wheel mix gradient'
+    grid-template-columns: 255px 256px 1fr
+    grid-gap: 2rem
+
+  .ph.mix
+    grid-area: mix
+    height: 256px
+    width: 256px
+    background-color: var(--ph-color-well-background)
+    margin: 0 auto
+
+    @media screen and (min-width: 620px)
+      margin: 0
+
+  & .ph.svg
+    grid-area: wheel
+    margin: 0 auto
+
+    @media screen and (min-width: 620px)
+      margin: 0
+
+  & .ph.gradient
+    grid-area: gradient
+    margin-bottom: 0
+
+  & .ph.swatch
+    grid-area: swatch
+    margin-bottom: 0
+
+.ph.color-picker-inner
+  display: grid
+  grid-template-columns: 1fr
+  grid-template-areas: 'primary' 'secondary' 'divergent'
+  grid-gap: 1rem
+  color: var(--ph-color-text)
+  font-size: 0.875rem
+  line-height: 1.5rem
+  position: relative
+
+  & > h2:first-of-type
+    @media screen and (min-width: 2048px)
+      grid-area title
+
+  @media screen and (min-width: 425px)
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+    grid-template-areas: 'primary secondary divergent'
+
+  @media screen and (min-width: 768px)
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 12rem))
+    grid-gap: 1.5rem
+    grid-template-areas: 'primary secondary divergent'
+
+  @media screen and (min-width: 1024px)
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 12rem))
+    grid-template-areas: 'primary secondary divergent'
+    grid-gap: 2rem
+    font-size: 1rem
+    line-height: 1.75rem
+
+  @media screen and (min-width: 1200px)
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 12rem))
+    grid-template-areas: 'primary secondary divergent'
+    grid-gap: 2rem
+    font-size: 1rem
+    line-height: 1.75rem
+
+  @media screen and (min-width: 2048px)
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 12rem))
+    grid-template-areas: 'title title title' 'primary secondary divergent'
+    grid-gap: 2rem
+    font-size: 1rem
+    line-height: 1.75rem
+
+.ph.color-picker
+  position: relative
+
+  @media screen and (min-width: 2048px)
+    grid-area: color-picker
+
+
+
+  & .ph.color-picker-input-container
+    display: flex
+    flex-direction: column
+    border: 0
+    padding: 0
+    grid-gap: 1rem
+    width: 100%
+    justify-content: flex-start
+    align-items: flex-start
+
+    & .ph.color-picker-input
+      display: flex
+      flex-direction: column
+      position: relative
+      padding: 0
+      border: none
+      width: 100%
+
+    &.primary-color
+      grid-area: primary
+
+    &.secondary-color
+      grid-area: secondary
+
+    &.divergent-color
+      grid-area: divergent
+
+    & input[type='text'].ph
+      margin-top: 1rem
+      font-size: 1.375rem
+      font-family: var(--ph-font-family-code)
+      text-align: center
+      width: 100%
+
+    & .color-picker-button.ph
+      appearance: none
+      background: none
+      border: 0
+      cursor: pointer
+      aspect-ratio: 1 / 1
+      padding: 0
+      position: relative
+      border: 0.125rem solid var(--ph-input-border-color)
+      border-radius: 6px
+
+      &::before
+        bottom: 0.25rem
+        color: inherit
+        content: attr(data-color-name)
+        font-size: 1rem
+        font-weight: 400
+        left: 0.25rem
+        line-height: 1.333
+        position: absolute
+
+& .ph.color-picker-help
+  grid-area: help
+  max-width 640px
+  margin-bottom: 0
+
+form.ph.color-units
+  margin-bottom: 0
+  padding: 0
+  background-color: transparent
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(256px, 1fr))
+  grid-gap: 1rem
+
+  & .ph.input-group
+    position: relative
+    margin: 0
+
+    & label.ph
+      transform: translate(1rem, 1rem)
+
+  & input.ph
+    font-family: var(--ph-font-family-code)
+    background-color: var(--ph-color-well-background-transparent)
+    font-size: 1.375rem
+    height: 3.5rem
+    padding-top: 0.5rem
+    width: 100%
+    border-radius: 6px
+    border: none
+    font-weight: 500
+    text-align: left
+    padding-left: 1rem
+
+legend.ph
+  display: table
+  float: left
+  margin: 0
+  padding: 0
+  width: 100%
+  font-size: 1.25rem
+  line-height: 1.3333333
+  margin-bottom: 1rem
+  font-weight: 500
+  text-transform: uppercase
+  color: var(--ph-color-text)
+
+  & + *
+    clear: both
+
+.ph.input-group
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  align-items: flex-start
+  margin-bottom: 2rem
+
+label.ph
+  font-family: var(--ph-font-family)
+  font-size: 1rem
+  line-height: 1.333
+  font-weight: 500
+  margin-bottom: 0.25rem
+  color: var(--ph-color-text)
+
+.ph.color-output
+  margin-bottom: 4rem
+
+[data-color-hex]
+  cursor: pointer
+
+.ph.loading
+  & #moebius
+    animation-name initial
+    transform: translate3d(-50%, -50%, 0)
+
+.ph.loading
+  display none
+
+  &.is-loading
+    display block
+    background-image: radial-gradient(circle,var(--ph-background-radial-1) 0,var(--ph-background-radial-2) 100%)
+    position: fixed
+    top 0
+    left 0
+    right 0
+    bottom 0
+    z-index 900
+
+    & #moebius
+      --ph-moebius-ring-color-shadow: rgba(0, 0, 0, 0.1)
+      --ph-moebius-ring-color-shadow-hover: rgba(0, 0, 0, 0.3)
+      --ph-moebius-ring-color-1: rgba(219, 112, 147, 0.5)
+      --ph-moebius-ring-color-2: rgba(203, 24, 30, 0.5)
+      --ph-moebius-ring-color-3: rgba(224, 108, 25, 0.5)
+      --ph-moebius-ring-color-4: rgba(244, 212, 3, 0.5)
+      --ph-moebius-ring-color-5: rgba(0, 146, 65, 0.5)
+      --ph-moebius-ring-color-6: rgba(0, 151, 208, 0.5)
+      --ph-moebius-ring-color-7: rgba(0, 81, 154, 0.5)
+      --ph-moebius-ring-color-8: rgba(151, 70, 163, 0.5)
+      flex-grow: 0
+      flex-shrink: 0
+      height: 256px
+      width: 256px
+      animation-name: test
+      animation-iteration-count: infinite
+      animation-duration: 6500ms
+      animation-timing-function: linear
+      border-radius: 512px
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate3d(-50%, -50%, 0)
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), height 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1)
+      box-shadow: 39px 0px 0px 50px var(--ph-moebius-ring-color-1), 27px 27px 0px 50px var(--ph-moebius-ring-color-2), 0px 39px 0px 50px var(--ph-moebius-ring-color-3), -27px 27px 0px 50px var(--ph-moebius-ring-color-4), -39px 0px 0px 50px var(--ph-moebius-ring-color-5), -27px -27px 0px 50px var(--ph-moebius-ring-color-6), 0px -39px 0px 50px var(--ph-moebius-ring-color-7), 27px -27px 0px 50px var(--ph-moebius-ring-color-8), 39px 0px 10px 50px var(--ph-moebius-ring-color-shadow), 27px 27px 10px 50px var(--ph-moebius-ring-color-shadow), 0px 39px 10px 50px var(--ph-moebius-ring-color-shadow), -27px 27px 10px 50px var(--ph-moebius-ring-color-shadow), -39px 0px 10px 50px var(--ph-moebius-ring-color-shadow), -27px -27px 10px 50px var(--ph-moebius-ring-color-shadow), 0px -39px 10px 50px var(--ph-moebius-ring-color-shadow), 27px -27px 10px 50px var(--ph-moebius-ring-color-shadow), inset 0 0 30px 10px var(--ph-moebius-ring-color-shadow)
+
+      &:hover
+        height: 150px
+        width: 150px
+        box-shadow: 50px 0px 0px 50px var(--ph-moebius-ring-color-1), 35px 35px 0px 50px var(--ph-moebius-ring-color-2), 0px 50px 0px 50px var(--ph-moebius-ring-color-3), -35px 35px 0px 50px var(--ph-moebius-ring-color-4), -50px 0px 0px 50px var(--ph-moebius-ring-color-5), -35px -35px 0px 50px var(--ph-moebius-ring-color-6), 0px -50px 0px 50px var(--ph-moebius-ring-color-7), 35px -35px 0px 50px var(--ph-moebius-ring-color-8), 50px 0px 20px 45px var(--ph-moebius-ring-color-shadow-hover), 35px 35px 20px 45px var(--ph-moebius-ring-color-shadow-hover), 0px 50px 20px 45px var(--ph-moebius-ring-color-shadow-hover), -35px 35px 20px 45px var(--ph-moebius-ring-color-shadow-hover), -50px 0px 20px 45px var(--ph-moebius-ring-color-shadow-hover), -35px -35px 20px 45px var(--ph-moebius-ring-color-shadow-hover), 0px -50px 20px 45px var(--ph-moebius-ring-color-shadow-hover), 35px -35px 20px 45px var(--ph-moebius-ring-color-shadow-hover), inset 0 0 20px 10px var(--ph-moebius-ring-color-shadow-hover)
+
+
+
+
+.ph.app .ph.hero .ph.content
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  height: 480px
+  width: 100%
+  max-width: 100%
+  position: relative
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1)
+  background-color: var(--ph-color-well-background)
+
+.ph.app .ph.hero
+  position: relative
+  grid-template-areas: 'content logo' 'content logo'
+
+  .ph.logo
+    opacity: 1
+
+  & #logo
+    max-width: 25rem
+    width: 100%
+    fill: var(--ph-color-text-accent)
+    opacity: 1
+
+@keyframes test
+  0%
+    transform: translate3d(-50%, -50%, 0) rotate(0deg)
+    box-shadow: 50px 0px 0px 65px var(--ph-moebius-ring-color-1), 35px 35px 0px 65px var(--ph-moebius-ring-color-2), 0px 50px 0px 65px var(--ph-moebius-ring-color-3), -35px 35px 0px 65px var(--ph-moebius-ring-color-4), -50px 0px 0px 65px var(--ph-moebius-ring-color-5), -35px -35px 0px 65px var(--ph-moebius-ring-color-6), 0px -50px 0px 65px var(--ph-moebius-ring-color-7), 35px -35px 0px 65px var(--ph-moebius-ring-color-8), 50px 0px 10px 65px var(--ph-moebius-ring-color-shadow), 35px 35px 10px 65px var(--ph-moebius-ring-color-shadow), 0px 50px 10px 65px var(--ph-moebius-ring-color-shadow), -35px 35px 10px 65px var(--ph-moebius-ring-color-shadow), -50px 0px 10px 65px var(--ph-moebius-ring-color-shadow), -35px -35px 10px 65px var(--ph-moebius-ring-color-shadow), 0px -50px 10px 65px var(--ph-moebius-ring-color-shadow), 35px -35px 10px 65px var(--ph-moebius-ring-color-shadow), inset 0 0 30px 10px var(--ph-moebius-ring-color-shadow)
+
+  100%
+    transform: translate3d(-50%, -50%, 0) rotate(360deg)
+    box-shadow: 50px 0px 0px 65px var(--ph-moebius-ring-color-1), 35px 35px 0px 65px var(--ph-moebius-ring-color-2), 0px 50px 0px 65px var(--ph-moebius-ring-color-3), -35px 35px 0px 65px var(--ph-moebius-ring-color-4), -50px 0px 0px 65px var(--ph-moebius-ring-color-5), -35px -35px 0px 65px var(--ph-moebius-ring-color-6), 0px -50px 0px 65px var(--ph-moebius-ring-color-7), 35px -35px 0px 65px var(--ph-moebius-ring-color-8), 50px 0px 10px 65px var(--ph-moebius-ring-color-shadow), 35px 35px 10px 65px var(--ph-moebius-ring-color-shadow), 0px 50px 10px 65px var(--ph-moebius-ring-color-shadow), -35px 35px 10px 65px var(--ph-moebius-ring-color-shadow), -50px 0px 10px 65px var(--ph-moebius-ring-color-shadow), -35px -35px 10px 65px var(--ph-moebius-ring-color-shadow), 0px -50px 10px 65px var(--ph-moebius-ring-color-shadow), 35px -35px 10px 65px var(--ph-moebius-ring-color-shadow), inset 0 0 30px 10px var(--ph-moebius-ring-color-shadow)
+
+@keyframes test2
+  0%
+    transform: translate3d(-50%, -50%, 0) rotate(0deg)
+    height: 256px
+    width: 256px
+
+  20%
+    height: 200px
+    width: 200px
+
+  70%
+    height: 200px
+    width: 200px
+    box-shadow: 39px 0px 0px 50px var(--ph-moebius-ring-color-1), 27px 27px 0px 50px var(--ph-moebius-ring-color-2), 0px 39px 0px 50px var(--ph-moebius-ring-color-3), -27px 27px 0px 50px var(--ph-moebius-ring-color-4), -39px 0px 0px 50px var(--ph-moebius-ring-color-5), -27px -27px 0px 50px var(--ph-moebius-ring-color-6), 0px -39px 0px 50px var(--ph-moebius-ring-color-7), 27px -27px 0px 50px var(--ph-moebius-ring-color-8), 39px 0px 10px 50px var(--ph-moebius-ring-color-shadow), 27px 27px 10px 50px var(--ph-moebius-ring-color-shadow), 0px 39px 10px 50px var(--ph-moebius-ring-color-shadow), -27px 27px 10px 50px var(--ph-moebius-ring-color-shadow), -39px 0px 10px 50px var(--ph-moebius-ring-color-shadow), -27px -27px 10px 50px var(--ph-moebius-ring-color-shadow), 0px -39px 10px 50px var(--ph-moebius-ring-color-shadow), 27px -27px 10px 50px var(--ph-moebius-ring-color-shadow), inset 0 0 30px 10px var(--ph-moebius-ring-color-shadow)
+
+  80%
+    height: 200px
+    width: 200px
+    box-shadow: 39px 0px 0px 50px var(--ph-moebius-ring-color-1), 27px 27px 0px 50px var(--ph-moebius-ring-color-2), 0px 39px 0px 50px var(--ph-moebius-ring-color-3), -27px 27px 0px 50px var(--ph-moebius-ring-color-4), -39px 0px 0px 50px var(--ph-moebius-ring-color-5), -27px -27px 0px 50px var(--ph-moebius-ring-color-6), 0px -39px 0px 50px var(--ph-moebius-ring-color-7), 27px -27px 0px 50px var(--ph-moebius-ring-color-8), 39px 0px 10px 50px var(--ph-moebius-ring-color-shadow), 27px 27px 10px 50px var(--ph-moebius-ring-color-shadow), 0px 39px 10px 50px var(--ph-moebius-ring-color-shadow), -27px 27px 10px 50px var(--ph-moebius-ring-color-shadow), -39px 0px 10px 50px var(--ph-moebius-ring-color-shadow), -27px -27px 10px 50px var(--ph-moebius-ring-color-shadow), 0px -39px 10px 50px var(--ph-moebius-ring-color-shadow), 27px -27px 10px 50px var(--ph-moebius-ring-color-shadow), inset 0 0 30px 10px var(--ph-moebius-ring-color-shadow)
+
+  90%
+    height: 150px
+    width: 150px
+    box-shadow: 50px 0px 0px 50px var(--ph-moebius-ring-color-1), 35px 35px 0px 50px var(--ph-moebius-ring-color-2), 0px 50px 0px 50px var(--ph-moebius-ring-color-3), -35px 35px 0px 50px var(--ph-moebius-ring-color-4), -50px 0px 0px 50px var(--ph-moebius-ring-color-5), -35px -35px 0px 50px var(--ph-moebius-ring-color-6), 0px -50px 0px 50px var(--ph-moebius-ring-color-7), 35px -35px 0px 50px var(--ph-moebius-ring-color-8), 50px 0px 10px 50px var(--ph-moebius-ring-color-shadow), 35px 35px 10px 50px var(--ph-moebius-ring-color-shadow), 0px 50px 10px 50px var(--ph-moebius-ring-color-shadow), -35px 35px 10px 50px var(--ph-moebius-ring-color-shadow), -50px 0px 10px 50px var(--ph-moebius-ring-color-shadow), -35px -35px 10px 50px var(--ph-moebius-ring-color-shadow), 0px -50px 10px 50px var(--ph-moebius-ring-color-shadow), 35px -35px 10px 50px var(--ph-moebius-ring-color-shadow), inset 0 0 30px 10px var(--ph-moebius-ring-color-shadow)
+
+  100%
+    height: 200px
+    width: 200px
+    transform: translate3d(-50%, -50%, 0) rotate(360deg)
+    box-shadow: 39px 0px 0px 50px var(--ph-moebius-ring-color-1), 27px 27px 0px 50px var(--ph-moebius-ring-color-2), 0px 39px 0px 50px var(--ph-moebius-ring-color-3), -27px 27px 0px 50px var(--ph-moebius-ring-color-4), -39px 0px 0px 50px var(--ph-moebius-ring-color-5), -27px -27px 0px 50px var(--ph-moebius-ring-color-6), 0px -39px 0px 50px var(--ph-moebius-ring-color-7), 27px -27px 0px 50px var(--ph-moebius-ring-color-8), 39px 0px 10px 50px var(--ph-moebius-ring-color-shadow), 27px 27px 10px 50px var(--ph-moebius-ring-color-shadow), 0px 39px 10px 50px var(--ph-moebius-ring-color-shadow), -27px 27px 10px 50px var(--ph-moebius-ring-color-shadow), -39px 0px 10px 50px var(--ph-moebius-ring-color-shadow), -27px -27px 10px 50px var(--ph-moebius-ring-color-shadow), 0px -39px 10px 50px var(--ph-moebius-ring-color-shadow), 27px -27px 10px 50px var(--ph-moebius-ring-color-shadow), inset 0 0 30px 10px var(--ph-moebius-ring-color-shadow)
+
+
+details.ph
+  border-radius: var(--moebius-radius-largest)
+  background-color: var(--ph-color-well-background)
+  padding: 1rem 1.5rem
+  margin-bottom: 4rem
+
+  & h2.ph, h3.ph
+    margin: 0
+    display: inline-block
+
+[role='tabpanel']
+  & details.ph
+    margin-bottom: 0
+    border-radius: none
+    background-color: transparent
+    padding: 0
+
+form.ph.color-settings.color-blind-simulator
+  width: 100%
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  background-color: var(--ph-color-well-background)
+  padding: 2rem
+  border-radius: 12px
+
+  @media screen and (min-width: 768px)
+    flex-direction: row
+    flex-wrap: wrap
+    grid-gap: 1.5rem
+
+  @media screen and (min-width: 1024px)
+    grid-gap: 2rem
+
+form.ph.color-settings
+  width: 100%
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  background-color: var(--ph-color-well-background)
+  padding: 2rem
+  border-radius: 12px
+  grid-gap: 1rem
+  margin-bottom 2rem
+  > h2.ph:first-of-type
+    @media screen and (min-width: 2048px)
+      margin-top: 0
+
+  @media screen and (min-width: 768px)
+    display: grid
+    grid-template-columns: 1fr 1fr
+    grid-gap: 1.5rem
+
+  @media screen and (min-width: 1024px)
+    grid-gap: 2rem
+    grid-template-columns: 1fr 1fr
+
+  @media screen and (min-width: 2048px)
+    grid-template-columns: 1fr
+
+  & .ph.color-extras
+    border: none
+    padding: 0
+    margin: 0
+
+    & .ph.color-extras-inner
+      display: flex
+      flex-direction: column
+      flex-wrap: nowrap
+      grid-gap: 1rem
+      justify-content: space-between
+
+      @media screen and (min-width: 768px)
+        justify-content: flex-start
+
+
+
+
+
+  & .ph.color-scale, & .ph.color-blind
+    border: none
+    padding: 0
+    margin: 0
+
+    & .ph.color-scale-inner, & .ph.color-blind-inner
+      display: flex
+      flex-direction: row
+      flex-wrap: nowrap
+      grid-gap: 1rem
+      justify-content: space-between
+      margin-bottom: 1rem
+      border: none
+
+      @media screen and (min-width: 768px)
+        grid-gap: 1.5rem
+        justify-content: flex-start
+        margin-bottom: 0
+
+      @media screen and (min-width: 1024px)
+        grid-gap: 2rem
+
+      @media screen and (min-width: 2048px)
+        flex-wrap: wrap
+        grid-gap: 1rem 1rem
+
+    & .ph.input-group
+      grid-gap: 0.5rem
+      align-items: center
+      justify-content: center
+
+      @media screen and (min-width: 2048px)
+        margin-bottom: 0
+        flex-shrink: 0
+        flex-grow: 0
+        width: 8rem
+        align-items: flex-start
+
+input[readonly].ph
+  background-color: transparent
+  border-color: transparent
+  padding-left: 0
+
+input.ph.color-range
+  position: relative
+  z-index: 1
+  appearance: none
+  background-color: transparent
+  border-radius: 1.5rem
+  height: 1.5rem
+  width: 100%
+  display: block
+  border: none
+  outline: none
+  margin-top: 0.75rem
+  transition: color 0.05s linear
+  background-image: linear-gradient(to right, rgb(255, 0, 0), rgb(255, 255, 0), rgb(0, 255, 0), rgb(0, 255, 255), rgb(0, 0, 255), rgb(255, 0, 255), rgb(255, 0, 0))
+
+  &.lightness
+    background-image: linear-gradient(to right, rgb(0, 0, 0), rgb(255, 255, 255))
+
+  &.chroma
+    background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(217, 17, 240))
+
+  &:focus
+    outline: none
+
+  &:active, &:hover:active
+    cursor: grabbing
+
+  &::-moz-range-track
+    appearance: none
+    opacity: 0
+    outline: none !important
+
+  &::-ms-track
+    outline: none !important
+    appearance: none
+    opacity: 0
+
+  &::-webkit-slider-thumb
+    height: 1.5rem
+    width: 1.5rem
+    border-radius: 50%
+    appearance: none
+    background-color: var(--ph-color-background)
+    border: 0.5rem solid var(--ph-color-background)
+    outline: 0.25rem solid var(--ph-color-text-accent)
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1)
+    box-shadow: inset 0 0 var(--ph-color-link)
+
+    &:active, &:hover:active
+      box-shadow: inset 2rem 2rem var(--ph-color-link)
+
+    &:hover
+      box-shadow: inset 2rem 2rem var(--ph-color-link)
+
+  &::-moz-range-thumb
+    height: 1.5rem
+    width: 1.5rem
+    border-radius: 50%
+    appearance: none
+    background-color: var(--ph-color-background)
+    border: 0.5rem solid var(--ph-color-background)
+    outline: 0.25rem solid var(--ph-color-text-accent)
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1)
+    box-shadow: inset 0 0 var(--ph-color-link)
+
+    &:active, &:hover:active
+      box-shadow: inset 2rem 2rem var(--ph-color-link)
+
+    &:hover
+      box-shadow: inset 2rem 2rem var(--ph-color-link)
+
+.ph.hue-map
+  width: 100%
+  margin-bottom: 2rem
+  position: relative
+  border-radius: 6px
+  transition: background-image 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1)
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)
+  flex-grow: 1
+
+  @media screen and (min-width: 425px)
+    flex-grow: initial
+    aspect-ratio: 16 / 9
+
+  @media screen and (min-width: 768px)
+    aspect-ratio: 32 / 9
+
+  @media screen and (min-width: 1024px)
+    aspect-ratio: 32 / 9
+
+  &.primary
+    background-image: linear-gradient(to top, transparent, black), linear-gradient(to right, white, var(--ph-hue-map-primary-gradient-color))
+
+  &.secondary
+    background-image: linear-gradient(to top, transparent, black), linear-gradient(to right, white, var(--ph-hue-map-secondary-gradient-color))
+
+  &.divergent
+    background-color: var(--ph-hue-map-divergent-background-color)
+
+dialog.ph
+  flex-direction: column
+  margin: auto
+  border-radius: 12px
+  border: none
+  padding: 3rem 2rem 2rem
+  background-color: var(--ph-color-well-background)
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)
+  width: calc(100vw - 2rem)
+  height: calc(100vh - 2rem)
+  max-height: none
+
+  @media screen and (min-width: 425px)
+    width: 100%
+    height: max-content
+    max-height: 90vh
+    max-width: 425px
+
+  @media screen and (min-width: 768px)
+    max-width: 768px
+
+  @media screen and (min-width: 1024px)
+    width: 100%
+    max-height: 80vh
+    max-width: 1024px
+
+::backdrop
+  background-color: rgba(0, 0, 0, 0.55)
+
+dialog.ph[open]
+  display: flex
+  animation-name: fadein
+  animation-duration: 0.2s
+  animation-timing-function: cubic-bezier(0.2, 0, 1, 0.9)
+  animation-direction: forwards
+
+@keyframes fadein
+  0%
+    opacity: 0
+    transform: translate3d(0, 50%, 0)
+
+  50%
+    opacity: 0
+
+  100%
+    opacity: 1
+    transform: translate3d(0, 0, 0)
+
+dialog.ph
+  & .ph.close
+    position: absolute
+    top: 1rem
+    right: 1rem
+    background-color: transparent
+    border: none
+    color: var(--ph-color-text)
+    text-transform: uppercase
+    font-size: 0.875rem
+
+    &:hover
+      color: var(--ph-color-text-accent)
+
+[id*=-accents].ph
+  & > .ph.group
+    display: grid
+    grid-template-columns: 1fr 1rem
+    grid-template-areas: 'colors gradient'
+
+    & .ph.colors
+      grid-area: colors
+
+    &::after
+      grid-area: gradient
+      transition all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+      content: ''
+      height: 100%
+      width: 1rem
+
+groups = interpolate luminanceShift monochromatic 'complement' 'split' triad tetrad pentad hexad analogous
+
+accentGroupGradient()
+  for id in groups
+    for index in 1 .. 10
+      #{id}-accents.ph
+        & .ph.group:nth-child({index})
+          &::after
+            background-image: var(unquote('--moebius-accent-' + id + '-gradient-' + index))
+
+accentGroupGradient()
+
+.ph.button.color-unit-modal-toggle-button
+  width 100%
+  & .ph.icon
+    font-size: 1.5rem
+    line-height: 100%
+    margin-right: 0.5rem
+
+
+.ph.button
+  color: var(--ph-color-text-accent)
+  border-width: 0.125rem
+  border-radius: 0.375rem
+
+.ph.color
+  &.no-color
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='a' width='13.5' height='13.5' patternTransform='rotate(45)' patternUnits='userSpaceOnUse'%3E%3Cline y2='13.5' stroke='red' stroke-width='3'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23a)'/%3E%3C/svg%3E")

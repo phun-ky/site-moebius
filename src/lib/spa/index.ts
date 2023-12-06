@@ -35,6 +35,8 @@ export const spa = (() => {
   let _templateCallback;
   let _page;
   let clickEventArray: EventArray<EventDataId> = [];
+  let inputEventArray: EventArray<EventDataId> = [];
+  let changeEventArray: EventArray<EventDataId> = [];
   let onRouteChangeEventArray: EventArray<EventDataId> = [];
   let onAfterAppRenderEventArray: EventArray<EventDataId> = [];
   let effectIndex = 0;
@@ -74,6 +76,8 @@ export const spa = (() => {
 
     console.info(`trying to render "${page?.route?.name}"`);
     clickEventArray = [];
+    inputEventArray = [];
+    changeEventArray = [];
     onRouteChangeEventArray = [];
     onAfterAppRenderEventArray = [];
     // reset state indexes
@@ -98,7 +102,7 @@ export const spa = (() => {
     } catch (e) {
       if (e.message.indexOf('404') !== -1) {
         setTitle('404, page not found');
-        _html = `<h1>404, page not found</h1>`;
+        _html = '<h1>404, page not found</h1>';
       } else {
         _html = await _templateCallback('ErrorPage', {
           error: e
@@ -111,7 +115,6 @@ export const spa = (() => {
         );
       }
     }
-
     updateNodes(_root, _html);
 
     await waitFor(10);
@@ -183,6 +186,12 @@ export const spa = (() => {
 
     document.removeEventListener('click', handleClickListeners);
     document.addEventListener('click', handleClickListeners);
+
+    document.removeEventListener('input', handleInputListeners);
+    document.addEventListener('input', handleInputListeners);
+
+    document.removeEventListener('change', handleChangeListeners);
+    document.addEventListener('change', handleChangeListeners);
   };
   const handleAfterAppRenderListeners = () => {
     onAfterAppRenderEventArray.forEach((callback: EventDataAction) => {
@@ -190,13 +199,27 @@ export const spa = (() => {
     });
   };
   const handleOnRouteChangedListener = () => {
-    onRouteChangeEventArray.forEach((action: EventDataId) =>
-      action.callback()
-    );
+    onRouteChangeEventArray.forEach((action: EventDataId) => action.callback());
   };
   const handleClickListeners = (e: EventType<HTMLElement>) => {
     clickEventArray.forEach((target: EventDataId) => {
-      if (e.target.id === target.id) {
+      if (e.target.id === target.id || e.target.matches(target.id)) {
+        target.callback(e);
+      }
+    });
+  };
+  const handleInputListeners = (e: EventType<HTMLElement>) => {
+    inputEventArray.forEach((target: EventDataId) => {
+      if (e.target.id === target.id || e.target.matches(target.id)) {
+        e.preventDefault();
+        target.callback(e);
+      }
+    });
+  };
+  const handleChangeListeners = (e: EventType<HTMLElement>) => {
+    changeEventArray.forEach((target: EventDataId) => {
+      if (e.target.id === target.id || e.target.matches(target.id)) {
+        e.preventDefault();
         target.callback(e);
       }
     });
@@ -212,6 +235,14 @@ export const spa = (() => {
   // eslint-disable-next-line no-unused-vars
   const addOnClick = (id: string, callback: FunctionType) => {
     clickEventArray.push({ id, callback });
+  };
+  // eslint-disable-next-line no-unused-vars
+  const addOnInput = (id: string, callback: FunctionType) => {
+    inputEventArray.push({ id, callback });
+  };
+  // eslint-disable-next-line no-unused-vars
+  const addOnChange = (id: string, callback: FunctionType) => {
+    changeEventArray.push({ id, callback });
   };
   const addOnRouteChange = (callback: FunctionType) => {
     onRouteChangeEventArray.push(callback);
@@ -279,6 +310,8 @@ export const spa = (() => {
   return {
     addOnClick,
     addOnRouteChange,
+    addOnInput,
+    addOnChange,
     addOnAfterAppRender,
     useEffect,
     useState,
@@ -290,6 +323,8 @@ export const spa = (() => {
 export const {
   addOnClick,
   addOnRouteChange,
+  addOnInput,
+  addOnChange,
   addOnAfterAppRender,
   useEffect,
   useState,

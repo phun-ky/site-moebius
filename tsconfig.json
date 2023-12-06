@@ -15,7 +15,11 @@
     "strictNullChecks": true,
     "esModuleInterop": true,
     "baseUrl": "src/",
-    "typeRoots": ["./node_modules/@types"],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types",
+      "./node_modules/@phun-ky/moebius"
+    ],
     "resolveJsonModule": true,
     "types": ["node", "./node_modules/network-information-types"]
   },

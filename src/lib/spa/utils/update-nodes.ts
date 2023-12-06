@@ -1,6 +1,4 @@
-import { stringToHTML } from './string-to-html';
-
-import { DiffDOM } from 'diff-dom';
+import { DiffDOM, nodeToObj, stringToObj } from 'diff-dom';
 
 /**
  * A wrapper to be able to update DOM nodes, using the 3rd party library `diff-dom`.
@@ -37,9 +35,9 @@ import { DiffDOM } from 'diff-dom';
  * ```
  */
 export const updateNodes = (root: HTMLElement, html: string): void => {
-  const currentDOM = stringToHTML(root.innerHTML);
-  const newDOM = stringToHTML(html);
-  const dd = new DiffDOM();
+  const currentDOM = nodeToObj(root);
+  const newDOM = stringToObj(`<div class="ph app project">${html}</div>`);
+  const dd = new DiffDOM({ valueDiffing: false });
   const diff = dd.diff(currentDOM, newDOM);
 
   dd.apply(root, diff);
