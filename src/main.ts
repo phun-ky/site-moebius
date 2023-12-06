@@ -8,6 +8,7 @@ import './styles/index.styl';
 
 // Events that happens on URL change in our SPA
 window.addEventListener('popstate', popstate);
+// window.addEventListener('hashchange', popstate);
 // Events that happens after DOM is loaded
 document.addEventListener('DOMContentLoaded', DOMContentLoaded);
 // Events that happens after eveyr App render

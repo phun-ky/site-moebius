@@ -1,0 +1,101 @@
+.ph.toggle-controls
+  font-family: var(--ph-font-family)
+  font-size: 1rem
+  color: var(--ph-color-text-accent)
+  line-height: 1.333
+  font-weight: 500
+  flex-direction: column
+  align-items: flex-start
+  display: flex
+  flex-wrap: wrap
+  position: relative
+  justify-content: center
+  min-height: 3rem
+
+.ph.toggle-controls > label.ph
+  margin-bottom: 0
+  margin-left: 0
+  display: flex
+  flex-grow: 0
+  padding: 0
+  position: relative
+  height: 3rem
+
+
+.ph.toggle[type='checkbox']
+  flex-grow: 0
+  height: 0
+  left: -1000px
+  opacity: 0
+  padding: 0
+  position: absolute
+  width: 0
+
+.ph.toggle[type='checkbox'] + label.ph
+  width: 100%
+
+.ph.toggle[type='checkbox'] + label.ph
+  display: flex
+  align-items: center
+  cursor: pointer
+  font-size: 1.125rem
+  font-family: var(--ph-font-family)
+  font-weight: normal
+  margin-bottom: 0
+
+.ph.toggle[type='checkbox'] + label.ph
+  padding-left: 4.5rem
+
+.ph.toggle[type='checkbox'] + label.ph::after
+  content: ''
+  z-index: 1
+  display: block
+  box-sizing: border-box
+  overflow: hidden
+  margin-bottom: 0
+  cursor: pointer
+  height: 2rem
+  width: 4rem
+  position: absolute
+  left: 0
+  padding: 0
+  line-height: 2rem
+  border-radius: 1rem
+  background-color: var(--ph-color-well-background)
+  transition all 70ms cubic-bezier(.4,0,.2,1)
+  border .125rem solid var(--ph-color-text-accent)
+
+.ph.toggle[type='checkbox'] + label.ph::before
+  content: ''
+  z-index: 2
+  display: block
+  box-sizing: border-box
+  width: 1rem
+  height: 1rem
+  flex-shrink: 0
+  flex-grow: 0
+  margin: 0
+  background-color: var(--ph-color-text)
+  position: absolute
+  left: 0.5rem
+  border-radius: 50%
+  transition all 70ms cubic-bezier(.4,0,.2,1)
+
+.ph.toggle[type='checkbox']:checked + label.ph::after
+  background-image: none
+
+.ph.toggle[type='checkbox']:checked + label.ph::before
+  left: 2.5rem
+  background-color: var(--ph-color-link)
+  background-image: none
+
+.ph.toggle[type='checkbox']:focus + label.ph::after
+  outline: var(--ph-color-link) solid 0.1875rem
+  outline-offset: 0.125rem
+
+.ph.toggle[type='checkbox']:focus:not(:focus-visible) + label.ph::after
+  outline: none
+
+.ph.toggle[type='checkbox']:focus-visible + label.ph::after
+  outline: var(--ph-color-link) solid 0.1875rem
+  outline-offset: 0.125rem

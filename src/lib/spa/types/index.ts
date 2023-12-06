@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 export type FunctionType = (...args: unknown[]) => void;
 
-
 export type EventDataId = {
   id: string;
   // eslint-disable-next-line no-unused-vars
@@ -30,10 +29,7 @@ export type UseStateValue =
   | Record<string, unknown>;
 
 // eslint-disable-next-line no-unused-vars
-export type UseStateReturn = [
-  UseStateValue,
-  FunctionType
-];
+export type UseStateReturn = [UseStateValue, FunctionType];
 
 export type StateContext = {
   state: UseStateValue[];
@@ -49,7 +45,28 @@ export type EventType<T> = Event & {
     files?: FileList | null;
     id: string;
     parentElement: Element | null;
+    value?: string | null;
   };
+  offsetX?: number;
+  offsetY?: number;
+  currentTarget: HTMLElement & {
+    documentElement: HTMLElement;
+  };
+};
+
+/**
+ * Represents the mouse event object for an element.
+ * @template T - Type of the element used as a target.
+ */
+export type MouseEventType<T> = MouseEvent & {
+  target: T & {
+    files?: FileList | null;
+    id: string;
+    parentElement: Element | null;
+    value?: string | null;
+  };
+  offsetX?: number;
+  offsetY?: number;
   currentTarget: HTMLElement & {
     documentElement: HTMLElement;
   };
