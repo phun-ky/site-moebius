@@ -1,8 +1,8 @@
-import { colorBlindCheck } from 'features/color-blind/color-blind-check';
-import { ColorBlindWarning } from './components/ColorBlindWarning';
-import { getA11yTextColor } from 'utils/get-a11y-text-color';
-import { Color } from './components/Color';
 import { colorBlindSim } from 'features/color-blind/color-blind-sim';
+
+import { getA11yTextColor } from 'utils/get-a11y-text-color';
+
+import { Color } from './components/Color';
 
 export const Swatch = (colors: string[], id: string, options) => {
   if (!colors || (colors && colors.length === 0)) return;
@@ -11,12 +11,6 @@ export const Swatch = (colors: string[], id: string, options) => {
 
   const { numberOfColors = 7, colorBlindSim: colorBlindSimType } = options;
   const { MoebiusColor } = window;
-  const colorBlindCheckResult = colorBlindCheck(colors);
-  const isColorBlindSafe = colorBlindCheckResult.length === 0;
-
-  if (!isColorBlindSafe) {
-    ColorBlindWarning(colorBlindCheckResult);
-  }
 
   let diff = 0;
 
