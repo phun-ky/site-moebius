@@ -9,6 +9,8 @@ import { SettingsLuminanceShift } from './SettingsLuminanceShift';
 import { SettingsMonochromatic } from './SettingsMonochromatic';
 import { Swatch } from '../../Swatch';
 import { SVGPixels } from './SVGPixels';
+import { colorBlindCheck } from 'features/color-blind/color-blind-check';
+import { ColorBlindWarning } from './ColorBlindWarning';
 
 const html = String.raw;
 
@@ -21,8 +23,11 @@ export type MoebiusSitePaletteItemPropsType = {
 export const PaletteItem = (props: MoebiusSitePaletteItemPropsType) => {
   const { id, moebius, options } = props;
   const gradientStyle = getGradientStyle(moebius.colors[id]);
+  const colorBlindCheckResult = colorBlindCheck(moebius.colors[id]);
+  const isColorBlindSafe = colorBlindCheckResult.length === 0;
 
   return html`<div class="ph palette">
+      ${!isColorBlindSafe ? ColorBlindWarning(colorBlindCheckResult) : ''}
       <svg
         xlmns="http://www.w3.org/2000/svg"
         class="ph svg"
