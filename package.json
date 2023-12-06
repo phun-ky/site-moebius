@@ -38,7 +38,7 @@
     "@typescript-eslint/parser": "^5.7.0",
     "conventional-changelog-conventionalcommits": "^7.0.2",
     "cssnano": "^6.0.0",
-    "eslint": "^7.32.0",
+    "eslint": "^8.55.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-compat": "^3.13.0",
