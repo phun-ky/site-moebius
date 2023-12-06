@@ -40,15 +40,11 @@ export const Settings = (props: MoebiusSiteSettingsPropsType) => {
 
   return html`<aside class="ph settings">
     <h2 class="ph">Options</h2>
+
     <form
-      class="ph color-settings color-blind-simulator"
+      class="ph color-settings color-options"
       onsubmit="javascript:return false;"
     >
-      <h2 class="ph">Color blind simulator</h2>
-      ${SettingsColorBlind({ options })}
-    </form>
-    <form class="ph color-settings" onsubmit="javascript:return false;">
-      <h2 class="ph">Settings</h2>
       ${SettingsColorScale({ options })} ${SettingsColorExtras({ options })}
     </form>
   </aside>`;

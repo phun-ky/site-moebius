@@ -4,6 +4,6 @@ export const copy = async (string: string): Promise<void> => {
   try {
     await navigator.clipboard.writeText(string);
   } catch (err) {
-    console.error('Failed to copy: ', err);
+    console.error(`Failed to copy: \`${string}\` `, err);
   }
 };

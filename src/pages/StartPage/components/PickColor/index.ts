@@ -1,7 +1,7 @@
-import { Dialog } from 'components/Dialog';
-import { TextInput } from 'components/Input/TextInput';
+import { Dialog } from 'components/feedback/Dialog';
+import { TextInput } from 'components/input-fields/TextInput';
 import { PickColorButton } from './PickColorButton';
-import { Label } from 'components/Input/Label';
+import { Label } from 'components/input-fields/Label';
 import { MoebiusColorValueHexType } from '@phun-ky/moebius';
 import { addOnAfterAppRender, addOnChange, addOnClick } from 'lib/spa';
 import { handleHueMapClick } from './utils/handle-hue-map-click';
@@ -196,6 +196,7 @@ export const PickColor = (props: MoebiusSitePickColorPropsType) => {
   })}
       ${TextInput({
     id: `color-picker-input-${type}-text`,
+    label: 'Hex code',
     value: currentColor.hex.toUpperCase()
   })}
     </div>

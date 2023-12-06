@@ -3,6 +3,7 @@ export {};
 
 declare global {
   interface Window {
+    Prism: any;
     MoebiusColor: any;
     MoebiusPalettes: any;
     MoebiusSVGHelper: any;

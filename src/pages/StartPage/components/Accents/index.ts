@@ -1,5 +1,5 @@
 import { MoebiusColorValueHexType } from '@phun-ky/moebius';
-import { Color } from 'components/Swatch/components/Color';
+import { Color } from 'pages/StartPage/components/Swatch/components/Color';
 import { getA11yTextColor } from 'utils/get-a11y-text-color';
 
 const html = String.raw;

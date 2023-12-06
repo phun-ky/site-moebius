@@ -1,5 +1,5 @@
-import { Label } from 'components/Input/Label';
-import { TextInput } from 'components/Input/TextInput';
+import { Label } from 'components/input-fields/Label';
+import { TextInput } from 'components/input-fields/TextInput';
 
 const html = String.raw;
 

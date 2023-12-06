@@ -1,6 +1,6 @@
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
-import { RadioButton } from '../Input/RadioButton';
-import { Label } from '../Input/Label';
+import { RadioButton } from 'components/input-fields/RadioButton';
+import { Label } from 'components/input-fields/Label';
 
 const html = String.raw;
 

@@ -28,6 +28,7 @@
     --moebius-radius-larger: 1.5rem;
     --ph-color-well-background: #262831;
     --ph-color-well-background-transparent: rgba(159, 168, 173,0.1);
+    --ph-color-code-block-background: var(--ph-color-background);
   }
 
   :root.theme--light{
@@ -162,8 +163,7 @@
       border-top-right-radius: var(--moebius-radius-larger)
 
 .ph.settings
-  @media screen and (min-width: 2048px)
-    grid-area: settings
+  grid-area: settings
 
 
   & .ph.color-settings:last-of-type
@@ -182,17 +182,23 @@
 
 .ph.section.workspace
   & > .ph.container.workspace
+    grid-gap 4rem 4rem
+    display flex
+    flex-direction column
+    @media screen and (min-width: 1440px)
+      display: grid
+      grid-template-areas: 'color-picker color-picker help' 'settings settings settings' 'color-blind-simulator color-blind-simulator color-blind-simulator' 'palettes palettes palettes'
+      grid-template-columns: 1fr 1fr 1fr
     @media screen and (min-width: 2048px)
       display: grid
-      grid-template-areas: 'color-picker color-picker color-picker' 'palettes palettes settings'
-      grid-template-columns: 12rem 1fr 640px
-      grid-gap: 4rem 4rem
+      grid-template-areas: 'color-picker settings help' 'color-blind-simulator color-blind-simulator color-blind-simulator' 'palettes palettes palettes'
+      grid-template-columns: 1fr 1fr 1fr
 
 
 
   & .ph.palettes
+    grid-area: palettes
     @media screen and (min-width: 2048px)
-      grid-area: palettes
       width: auto
 
 
@@ -355,8 +361,7 @@ input.ph
   position: relative
 
   & > h2:first-of-type
-    @media screen and (min-width: 2048px)
-      grid-area title
+    grid-area title
 
   @media screen and (min-width: 425px)
     display: grid
@@ -391,9 +396,7 @@ input.ph
 
 .ph.color-picker
   position: relative
-
-  @media screen and (min-width: 2048px)
-    grid-area: color-picker
+  grid-area: color-picker
 
 
 
@@ -452,9 +455,10 @@ input.ph
         line-height: 1.333
         position: absolute
 
-& .ph.color-picker-help
+.ph.color-picker-help
   grid-area: help
-  max-width 640px
+  height max-content
+  max-width: none
   margin-bottom: 0
 
 form.ph.color-units
@@ -659,6 +663,7 @@ details.ph
     padding: 0
 
 form.ph.color-settings.color-blind-simulator
+  grid-area color-blind-simulator
   width: 100%
   display: flex
   flex-direction: column
@@ -666,14 +671,15 @@ form.ph.color-settings.color-blind-simulator
   background-color: var(--ph-color-well-background)
   padding: 2rem
   border-radius: 12px
+  grid-gap 1rem
 
   @media screen and (min-width: 768px)
     flex-direction: row
     flex-wrap: wrap
-    grid-gap: 1.5rem
 
-  @media screen and (min-width: 1024px)
-    grid-gap: 2rem
+
+  & > h2.ph
+    margin 0
 
 form.ph.color-settings
   width: 100%
@@ -684,7 +690,6 @@ form.ph.color-settings
   padding: 2rem
   border-radius: 12px
   grid-gap: 1rem
-  margin-bottom 2rem
   > h2.ph:first-of-type
     @media screen and (min-width: 2048px)
       margin-top: 0
@@ -699,7 +704,7 @@ form.ph.color-settings
     grid-template-columns: 1fr 1fr
 
   @media screen and (min-width: 2048px)
-    grid-template-columns: 1fr
+    grid-template-columns: 1fr 1fr
 
   & .ph.color-extras
     border: none
@@ -740,23 +745,24 @@ form.ph.color-settings
         margin-bottom: 0
 
       @media screen and (min-width: 1024px)
-        grid-gap: 2rem
+        flex-wrap: wrap
+        grid-gap: 2rem 2rem
 
       @media screen and (min-width: 2048px)
-        flex-wrap: wrap
-        grid-gap: 1rem 1rem
+        grid-gap: 2rem 2rem
 
     & .ph.input-group
       grid-gap: 0.5rem
       align-items: center
       justify-content: center
+      margin-bottom: 0
 
       @media screen and (min-width: 2048px)
-        margin-bottom: 0
         flex-shrink: 0
         flex-grow: 0
-        width: 8rem
         align-items: flex-start
+
+
 
 input[readonly].ph
   background-color: transparent

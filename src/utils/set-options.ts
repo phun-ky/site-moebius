@@ -1,4 +1,4 @@
-import { updateCSSVars } from 'components/PickColor/utils/update-css-vars';
+import { updateCSSVars } from 'pages/StartPage/components/PickColor/utils/update-css-vars';
 import {
   DEFAULT_OPTIONS,
   MoebiusSiteDefaultOptionsType
