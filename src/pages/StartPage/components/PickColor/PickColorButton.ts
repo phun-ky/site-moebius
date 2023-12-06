@@ -20,6 +20,7 @@ export const PickColorButton = (props: MoebiusSitePickColorButton) => {
     data-rel="${color}"
     data-color-name="${colorName}"
     id="${id}"
+    aria-label="Pick a ${id} color"
     style="background-color: ${color}; color: ${getA11yTextColor(color)}"
   ></button>`;
 };

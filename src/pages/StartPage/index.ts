@@ -1,13 +1,22 @@
 import chroma from 'chroma-js';
-import { Palettes } from 'components/Palettes';
-import { MoebiusSitePickColorItemType, PickColor } from 'components/PickColor';
+import {
+  MoebiusSitePickColorItemType,
+  PickColor
+} from 'pages/StartPage/components/PickColor';
 import { getOptions } from 'utils/get-options';
-import { addOnInput } from 'lib/spa';
+import { addOnAfterAppRender, addOnInput } from 'lib/spa';
 import { EventType } from 'lib/spa/types';
 import { initMoebius } from 'utils/init-moebius';
-import { updateCSSVars } from 'components/PickColor/utils/update-css-vars';
-import { Settings } from 'components/Settings';
+import { updateCSSVars } from 'pages/StartPage/components/PickColor/utils/update-css-vars';
+
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
+import { setOptions } from 'utils/set-options';
+import { MoebiusColorValueHexType } from '@phun-ky/moebius';
+import { copy } from 'utils/copy';
+import { Settings } from './components/Settings';
+import { Palettes } from './components/Palettes';
+import { onColorClick } from 'utils/on-color-click';
+import { SettingsColorBlind } from './components/Settings/SettingsColorBlind';
 
 const html = String.raw;
 
@@ -20,6 +29,19 @@ export const StartPage = async ({ params }) => {
   };
 
   updateCSSVars(options);
+
+  addOnAfterAppRender(() => {
+    const colorElements = document.querySelectorAll(
+      '[data-color-hex].ph.color, rect[data-color-hex]'
+    );
+
+    if (colorElements && colorElements.length !== 0) {
+      colorElements.forEach((element) => {
+        element.removeEventListener('click', onColorClick);
+        element.addEventListener('click', onColorClick);
+      });
+    }
+  });
 
   addOnInput('color-picker-range-primary-hue', (e: EventType<HTMLElement>) => {
     document.documentElement.style.setProperty(
@@ -112,68 +134,72 @@ export const StartPage = async ({ params }) => {
   });
 
   return html`<section class="ph section workspace">
-      <div class="ph container workspace">
-        <div class="ph color-picker">
-          <h2 class="ph">Choose colors</h2>
-          <div class="ph color-picker-inner">
-            ${(
-              [
-                {
-                  type: 'primary',
-                  title: 'Primary',
-                  color: options.baseColor
-                },
-                {
-                  type: 'secondary',
-                  title: 'Secondary',
-                  color: options.secondaryColor
-                },
-                {
-                  type: 'divergent',
-                  title: 'Divergent',
-                  color: options.divergentColor
-                }
-              ] as MoebiusSitePickColorItemType[]
+    <div class="ph container workspace">
+      <div class="ph color-picker">
+        <h2 class="ph">Choose colors</h2>
+        <div class="ph color-picker-inner">
+          ${(
+            [
+              {
+                type: 'primary',
+                title: 'Primary',
+                color: options.baseColor
+              },
+              {
+                type: 'secondary',
+                title: 'Secondary',
+                color: options.secondaryColor
+              },
+              {
+                type: 'divergent',
+                title: 'Divergent',
+                color: options.divergentColor
+              }
+            ] as MoebiusSitePickColorItemType[]
   )
     .map((item: MoebiusSitePickColorItemType) =>
       PickColor({ item, options })
     )
     .join('\n')}
-          </div>
-        </div>
-        ${await Palettes({ options })} ${Settings({ options })}
-      </div>
-    </section>
-    <section class="ph section workspace">
-      <div class="ph container">
-        <div class="ph color-picker-help message note">
-          <strong class="ph title">
-            <svg
-              class="ph icon"
-              viewBox="0 0 16 16"
-              width="16"
-              height="16"
-              aria-hidden="true"
-            >
-              <path
-                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-              ></path>
-            </svg>
-            How to pick colors
-            <!-- display: block -->
-          </strong>
-          <p class="ph">
-            Click on the color square to change colors, or input a hex code in
-            the input fields. You can also refresh to get a random color.
-          </p>
-          <p class="ph">
-            Click on any color displayed (except for the horizontal gradient) to
-            choose that color. When you click on a color, the color is chosen,
-            and it is also copied to your clipboard.
-          </p>
         </div>
       </div>
-    </section>`;
+      <div class="ph color-picker-help message note">
+        <strong class="ph title">
+          <svg
+            class="ph icon"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
+            <path
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
+            ></path>
+          </svg>
+          How to pick colors
+          <!-- display: block -->
+        </strong>
+        <p class="ph">
+          Click on the color square to change colors, or input a hex code in the
+          input fields. You can also refresh to get a random color.
+        </p>
+        <p class="ph">
+          Click on any color displayed (except for the horizontal gradient) to
+          choose that color. When you click on a color, the color is chosen, and
+          it is also copied to your clipboard.
+        </p>
+      </div>
+      ${Settings({ options })}
+      <form
+        class="ph color-settings color-blind-simulator"
+        onsubmit="javascript:return false;"
+      >
+        <h2 class="ph">Color blind simulator</h2>
+        ${SettingsColorBlind({ options })}
+      </form>
+      ${await Palettes({ options })}
+    </div>
+  </section>`;
 
   // const obj = {
   //   baseColor: primaryColor,

@@ -6,11 +6,12 @@ export type MoebiusSiteTextInputPropsType = {
   id: string;
   className?: string;
   value?: string;
+  label?: string;
   readonly?: boolean;
 };
 
 export const TextInput = (props: MoebiusSiteTextInputPropsType) => {
-  const { id, className, readonly, value, ...rest } = props;
+  const { id, className, readonly, value, label, ...rest } = props;
   const attrs = Object.entries(rest)
     .map((attr) => {
       const [property, value] = attr;
@@ -23,6 +24,7 @@ export const TextInput = (props: MoebiusSiteTextInputPropsType) => {
   return html`<input
     type="text"
     ${readonly ? ' readonly' : ''}
+    ${label ? ` aria-label="${label}"` : ''}
     class="${classNames}"
     ${attrs}
     id="${id}"

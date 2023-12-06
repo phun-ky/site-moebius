@@ -1,6 +1,6 @@
-import { Checkbox } from 'components/Input/Checkbox';
-import { Label } from 'components/Input/Label';
-import { Togglebox } from 'components/Input/Togglebox';
+import { Checkbox } from 'components/input-fields/Checkbox';
+import { Label } from 'components/input-fields/Label';
+import { Togglebox } from 'components/input-fields/Togglebox';
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
 
 const html = String.raw;
