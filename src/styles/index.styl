@@ -29,6 +29,8 @@
     --ph-color-well-background: #262831;
     --ph-color-well-background-transparent: rgba(159, 168, 173,0.1);
     --ph-color-code-block-background: var(--ph-color-background);
+    --moebius-box-spacing: var(--moebius-spacing-small);
+    --moebius-inner-spacing: var(--moebius-spacing-small);
   }
 
   :root.theme--light{
@@ -39,136 +41,43 @@
   }
 
   @media screen and (min-width: 425px){
-      :root{
-        --moebius-grid-gap: var(--moebius-spacing-small);
-      }
+    :root{
+      --moebius-box-spacing: var(--moebius-spacing-small);
+      --moebius-inner-spacing: var(--moebius-spacing-small);
     }
+  }
   @media screen and (min-width: 768px){
     :root{
-      --moebius-grid-gap: var(--moebius-spacing-default);
+      --moebius-box-spacing: var(--moebius-spacing-default);
+      --moebius-inner-spacing: var(--moebius-spacing-small);
     }
   }
   @media screen and (min-width: 1440px){
     :root{
-      --moebius-grid-gap: var(--moebius-spacing-large);
+      --moebius-box-spacing: var(--moebius-spacing-large);
+      --moebius-inner-spacing: var(--moebius-spacing-default);
+    }
+  }
+  @media screen and (min-width: 2048px){
+    :root{
+      --moebius-box-spacing: var(--moebius-spacing-larger);
+      --moebius-inner-spacing: var(--moebius-spacing-default);
     }
   }
 
 }
 
+@import '../components/input-fields/Form/styles/form.styl';
+
+h1.ph,
+h2.ph,
+h3.ph,
+h4.ph
+  margin 0
 
 
-.ph.tabs
-  & .ph.tabs-list
-    list-style: none
-    display: flex
-    flex-direction: column
-    padding: 0
-    margin: 0
-
-    @media screen and (min-width: 768px)
-      display: grid
-      grid-template-columns: repeat(2, 1fr)
-      grid-gap: 0
-
-    @media screen and (min-width: 1200px)
-      display: flex
-      flex-direction: row
-      flex-wrap: wrap
-      grid-gap: var(--moebius-spacing-smallest)
-      justify-content: flex-start
-      align-items: bottom
-
-.ph.tabs
-  & .ph.tabs-list
-    & .ph.tabs-list-action[aria-selected]
-      color: var(--ph-color-text-accent)
-      font-size: 1.75rem
-      background-color: var(--ph-color-well-background)
-      line-height: 100%
-      border: 0.125rem solid var(--ph-input-border-color)
-      border-bottom: none
-
-      &::before
-        @media screen and (min-width: 1200px)
-          content: ''
-          background-color: var(--ph-color-well-background)
-          height: 0.125rem
-          position: absolute
-          top: 100%
-          left: 0
-          width: 100%
-          display: block
-
-      &::after
-        content: '\0020⬅'
-        display: inline-block
-        margin-left: 1ch
-
-        @media screen and (min-width: 1200px)
-          content: none
-          margin-left: none
-          display: none
-
-.ph.tabs
-  & .ph.tabs-list
-    & .ph.tabs-list-action
-      transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1)
-      color: var(--ph-color-text)
-      text-decoration: none
-      font-size: 1rem
-      line-height: 100%
-      padding-bottom: 0.75rem
-      padding-left: 0.75rem
-      padding-right: 0.75rem
-      padding-top: 0.75rem
-      display: flex
-      align-items: center
-      justify-content: flex-start
-      border: 0.125rem solid var(--ph-color-well-background)
-      border-bottom: none
-      flex-grow: 1
-
-      @media screen and (min-width: 1200px)
-        display: inline-flex
-        align-items: flex-end
-        flex-grow: 0
-        background-color: rgba(38, 42, 59, 0.3)
-        border-top-left-radius: 12px
-        border-top-right-radius: 12px
-        border: none
-
-.ph.tabs
-  & .ph.tabs-list
-    & .ph.tabs-list-item
-      padding: 0
-      margin: 0
-      min-height: 4rem
-      display: flex
-      flex-direction: column
-
-      @media screen and (min-width: 1200px)
-        flex-direction: row
-        align-items: flex-end
-
-.ph.tabs
-  & section[id^='section'].ph
-    background-color: var(--ph-color-well-background)
-    border-bottom-right-radius: var(--moebius-radius-larger)
-    border-bottom-left-radius: var(--moebius-radius-larger)
-    padding: 2rem
-    border: 0.125rem solid var(--ph-well-border-color)
-
-    @media screen and (min-width: 1200px)
-      border-top-right-radius: var(--moebius-radius-larger)
-
-.ph.settings
-  grid-area: settings
 
 
-  & .ph.color-settings:last-of-type
-    @media screen and (min-width: 2048px)
-      margin-bottom: 0
 
 .ph.container
   max-width: 1440px
@@ -182,17 +91,13 @@
 
 .ph.section.workspace
   & > .ph.container.workspace
-    grid-gap 4rem 4rem
+    grid-gap var(--moebius-box-spacing)
     display flex
     flex-direction column
     @media screen and (min-width: 1440px)
       display: grid
-      grid-template-areas: 'color-picker color-picker help' 'settings settings settings' 'color-blind-simulator color-blind-simulator color-blind-simulator' 'palettes palettes palettes'
-      grid-template-columns: 1fr 1fr 1fr
-    @media screen and (min-width: 2048px)
-      display: grid
-      grid-template-areas: 'color-picker settings help' 'color-blind-simulator color-blind-simulator color-blind-simulator' 'palettes palettes palettes'
-      grid-template-columns: 1fr 1fr 1fr
+      grid-template-areas: 'color-picker settings' 'palettes palettes'
+      grid-template-columns: auto 1fr
 
 
 
@@ -215,73 +120,8 @@
   display: block
   grid-area: svg
 
-.ph.swatch
-  display: grid
-  grid-template-columns: 1fr 1fr
-  grid-area: swatch
-  margin-bottom: 4rem
-  grid-gap: 0 0
 
-  @media screen and (min-width: 425px)
-    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr))
 
-  @media screen and (min-width: 768px)
-    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr))
-
-  @media screen and (min-width: 1440px)
-    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr))
-
-  @media screen and (min-width: 2048px)
-    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr))
-
-  & .ph.color
-    transition all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
-    width: auto
-    aspect-ratio: 9 / 16
-    height: auto
-    text-transform: uppercase
-    @media screen and (min-width: 2048px)
-      max-width 12rem
-
-    &::before
-      text-transform: initial
-
-.ph.accents
-  display: grid
-  grid-template-columns: 1fr 1fr
-  grid-gap: 1rem
-  grid-area: accents
-  margin-bottom: 4rem
-
-  @media screen and (min-width: 425px)
-    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr))
-    grid-gap: 1.5rem
-
-  @media screen and (min-width: 768px)
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr))
-    grid-gap: 1.5rem
-
-  @media screen and (min-width: 1440px)
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr))
-    grid-gap: 2rem
-
-  & .ph.colors, & .ph.group
-    display: grid
-    justify-items: stretch
-    grid-gap: 0
-
-    & .ph.color
-      text-transform: uppercase
-      text-align: right
-      min-height: 2rem
-      font-weight: 500
-      font-size: 1.25rem
-      line-height: 2rem
-      padding: 0.5rem
-      font-family: var(--ph-font-family-code)
-
-      &::before
-        text-transform: initial
 
 .ph.gradient
   display: block
@@ -289,41 +129,30 @@
   height: 256px
   grid-area: gradient
 
-input.ph
-  font-family: var(--ph-font-family)
-  height: 3rem
-  font-size: 1rem
-  line-height: 1.3333
-  padding: 0 0.5rem
-  color: var(--ph-color-text-accent)
-  background-color: var(--ph-input-background-color)
-  border: 0.125rem solid var(--ph-input-border-color)
-  border-radius: 6px
-  font-weight: 500
 
 .ph.color-blind-warning
   grid-area: color-blind-warning
 
 .ph.palette
   display: grid
-  grid-gap: 2rem
-  grid-template-areas: 'color-blind-warning' 'swatch' 'wheel' 'mix' 'gradient'
+  grid-gap: var(--moebius-box-spacing)
+  grid-template-areas: 'color-blind-simulator' 'color-blind-warning' 'swatch' 'wheel' 'mix' 'gradient'
   grid-template-columns: 1fr
-  margin-bottom: 4rem
 
   @media screen and (min-width: 620px)
-    grid-template-areas: 'color-blind-warning color-blind-warning' 'swatch swatch' 'wheel mix' 'gradient gradient'
+    grid-template-areas: 'color-blind-simulator color-blind-simulator' 'color-blind-warning color-blind-warning' 'swatch swatch' 'wheel mix' 'gradient gradient'
     grid-template-columns: 1fr 1fr
 
   @media screen and (min-width: 768px)
-    grid-template-areas: 'color-blind-warning color-blind-warning' 'swatch swatch' 'wheel mix' 'gradient gradient'
+    grid-template-areas: 'color-blind-simulator color-blind-simulator' 'color-blind-warning color-blind-warning' 'swatch swatch' 'wheel mix' 'gradient gradient'
     grid-template-columns: 1fr 1fr
-    grid-gap: 2rem
 
   @media screen and (min-width: 1024px)
-    grid-template-areas: 'color-blind-warning color-blind-warning color-blind-warning' 'swatch swatch swatch' 'wheel mix gradient'
+    grid-template-areas: 'color-blind-simulator color-blind-simulator color-blind-simulator' 'color-blind-warning color-blind-warning color-blind-warning' 'swatch swatch swatch' 'wheel mix gradient'
     grid-template-columns: 255px 256px 1fr
-    grid-gap: 2rem
+
+  & > *
+    margin 0
 
   .ph.mix
     grid-area: mix
@@ -346,22 +175,17 @@ input.ph
     grid-area: gradient
     margin-bottom: 0
 
-  & .ph.swatch
-    grid-area: swatch
-    margin-bottom: 0
 
 .ph.color-picker-inner
   display: grid
   grid-template-columns: 1fr
   grid-template-areas: 'primary' 'secondary' 'divergent'
-  grid-gap: 1rem
+  grid-gap: var(--moebius-box-spacing)
   color: var(--ph-color-text)
   font-size: 0.875rem
   line-height: 1.5rem
   position: relative
 
-  & > h2:first-of-type
-    grid-area title
 
   @media screen and (min-width: 425px)
     display: grid
@@ -370,33 +194,29 @@ input.ph
 
   @media screen and (min-width: 768px)
     grid-template-columns: repeat(auto-fit, minmax(8rem, 12rem))
-    grid-gap: 1.5rem
     grid-template-areas: 'primary secondary divergent'
 
   @media screen and (min-width: 1024px)
     grid-template-columns: repeat(auto-fit, minmax(8rem, 12rem))
     grid-template-areas: 'primary secondary divergent'
-    grid-gap: 2rem
     font-size: 1rem
     line-height: 1.75rem
 
   @media screen and (min-width: 1200px)
-    grid-template-columns: repeat(auto-fit, minmax(8rem, 12rem))
+    grid-template-columns: 12rem 12rem 12rem
     grid-template-areas: 'primary secondary divergent'
-    grid-gap: 2rem
-    font-size: 1rem
-    line-height: 1.75rem
 
   @media screen and (min-width: 2048px)
-    grid-template-columns: repeat(auto-fit, minmax(8rem, 12rem))
-    grid-template-areas: 'title title title' 'primary secondary divergent'
-    grid-gap: 2rem
-    font-size: 1rem
-    line-height: 1.75rem
+    grid-template-columns: 12rem 12rem 12rem
+    grid-template-areas: 'primary secondary divergent'
 
 .ph.color-picker
   position: relative
   grid-area: color-picker
+  display flex
+  flex-direction column
+  grid-gap: var(--moebius-box-spacing)
+  padding-top var(--moebius-box-spacing)
 
 
 
@@ -405,10 +225,13 @@ input.ph
     flex-direction: column
     border: 0
     padding: 0
-    grid-gap: 1rem
+    grid-gap: var(--moebius-inner-spacing)
     width: 100%
     justify-content: flex-start
     align-items: flex-start
+
+    & > legend.ph
+      margin 0
 
     & .ph.color-picker-input
       display: flex
@@ -417,6 +240,7 @@ input.ph
       padding: 0
       border: none
       width: 100%
+      grid-gap: var(--moebius-inner-spacing)
 
     &.primary-color
       grid-area: primary
@@ -428,8 +252,7 @@ input.ph
       grid-area: divergent
 
     & input[type='text'].ph
-      margin-top: 1rem
-      font-size: 1.375rem
+      font-size: 1rem
       font-family: var(--ph-font-family-code)
       text-align: center
       width: 100%
@@ -467,27 +290,12 @@ form.ph.color-units
   background-color: transparent
   display: grid
   grid-template-columns: repeat(auto-fit, minmax(256px, 1fr))
-  grid-gap: 1rem
+  grid-gap: var(--moebius-box-spacing)
 
   & .ph.input-group
     position: relative
     margin: 0
 
-    & label.ph
-      transform: translate(1rem, 1rem)
-
-  & input.ph
-    font-family: var(--ph-font-family-code)
-    background-color: var(--ph-color-well-background-transparent)
-    font-size: 1.375rem
-    height: 3.5rem
-    padding-top: 0.5rem
-    width: 100%
-    border-radius: 6px
-    border: none
-    font-weight: 500
-    text-align: left
-    padding-left: 1rem
 
 legend.ph
   display: table
@@ -495,7 +303,7 @@ legend.ph
   margin: 0
   padding: 0
   width: 100%
-  font-size: 1.25rem
+  font-size: 1.125rem
   line-height: 1.3333333
   margin-bottom: 1rem
   font-weight: 500
@@ -662,124 +470,21 @@ details.ph
     background-color: transparent
     padding: 0
 
-form.ph.color-settings.color-blind-simulator
-  grid-area color-blind-simulator
-  width: 100%
-  display: flex
-  flex-direction: column
-  justify-content: space-between
-  background-color: var(--ph-color-well-background)
-  padding: 2rem
-  border-radius: 12px
-  grid-gap 1rem
-
-  @media screen and (min-width: 768px)
-    flex-direction: row
-    flex-wrap: wrap
-
 
   & > h2.ph
     margin 0
 
-form.ph.color-settings
-  width: 100%
-  display: flex
-  flex-direction: column
-  justify-content: space-between
-  background-color: var(--ph-color-well-background)
-  padding: 2rem
-  border-radius: 12px
-  grid-gap: 1rem
-  > h2.ph:first-of-type
-    @media screen and (min-width: 2048px)
-      margin-top: 0
-
-  @media screen and (min-width: 768px)
-    display: grid
-    grid-template-columns: 1fr 1fr
-    grid-gap: 1.5rem
-
-  @media screen and (min-width: 1024px)
-    grid-gap: 2rem
-    grid-template-columns: 1fr 1fr
-
-  @media screen and (min-width: 2048px)
-    grid-template-columns: 1fr 1fr
-
-  & .ph.color-extras
-    border: none
-    padding: 0
-    margin: 0
-
-    & .ph.color-extras-inner
-      display: flex
-      flex-direction: column
-      flex-wrap: nowrap
-      grid-gap: 1rem
-      justify-content: space-between
-
-      @media screen and (min-width: 768px)
-        justify-content: flex-start
 
 
-
-
-
-  & .ph.color-scale, & .ph.color-blind
-    border: none
-    padding: 0
-    margin: 0
-
-    & .ph.color-scale-inner, & .ph.color-blind-inner
-      display: flex
-      flex-direction: row
-      flex-wrap: nowrap
-      grid-gap: 1rem
-      justify-content: space-between
-      margin-bottom: 1rem
-      border: none
-
-      @media screen and (min-width: 768px)
-        grid-gap: 1.5rem
-        justify-content: flex-start
-        margin-bottom: 0
-
-      @media screen and (min-width: 1024px)
-        flex-wrap: wrap
-        grid-gap: 2rem 2rem
-
-      @media screen and (min-width: 2048px)
-        grid-gap: 2rem 2rem
-
-    & .ph.input-group
-      grid-gap: 0.5rem
-      align-items: center
-      justify-content: center
-      margin-bottom: 0
-
-      @media screen and (min-width: 2048px)
-        flex-shrink: 0
-        flex-grow: 0
-        align-items: flex-start
-
-
-
-input[readonly].ph
-  background-color: transparent
-  border-color: transparent
-  padding-left: 0
+.ph.color-units-modal
+  &  input[readonly].ph
+    background-color: transparent
+    border-color: transparent
+    text-align: center
+    font-family: var(--ph-font-family-code)
+    background-color: var(--ph-color-well-background-transparent)
 
 input.ph.color-range
-  position: relative
-  z-index: 1
-  appearance: none
-  background-color: transparent
-  border-radius: 1.5rem
-  height: 1.5rem
-  width: 100%
-  display: block
-  border: none
-  outline: none
   margin-top: 0.75rem
   transition: color 0.05s linear
   background-image: linear-gradient(to right, rgb(255, 0, 0), rgb(255, 255, 0), rgb(0, 255, 0), rgb(0, 255, 255), rgb(0, 0, 255), rgb(255, 0, 255), rgb(255, 0, 0))
@@ -790,55 +495,6 @@ input.ph.color-range
   &.chroma
     background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(217, 17, 240))
 
-  &:focus
-    outline: none
-
-  &:active, &:hover:active
-    cursor: grabbing
-
-  &::-moz-range-track
-    appearance: none
-    opacity: 0
-    outline: none !important
-
-  &::-ms-track
-    outline: none !important
-    appearance: none
-    opacity: 0
-
-  &::-webkit-slider-thumb
-    height: 1.5rem
-    width: 1.5rem
-    border-radius: 50%
-    appearance: none
-    background-color: var(--ph-color-background)
-    border: 0.5rem solid var(--ph-color-background)
-    outline: 0.25rem solid var(--ph-color-text-accent)
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1)
-    box-shadow: inset 0 0 var(--ph-color-link)
-
-    &:active, &:hover:active
-      box-shadow: inset 2rem 2rem var(--ph-color-link)
-
-    &:hover
-      box-shadow: inset 2rem 2rem var(--ph-color-link)
-
-  &::-moz-range-thumb
-    height: 1.5rem
-    width: 1.5rem
-    border-radius: 50%
-    appearance: none
-    background-color: var(--ph-color-background)
-    border: 0.5rem solid var(--ph-color-background)
-    outline: 0.25rem solid var(--ph-color-text-accent)
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1)
-    box-shadow: inset 0 0 var(--ph-color-link)
-
-    &:active, &:hover:active
-      box-shadow: inset 2rem 2rem var(--ph-color-link)
-
-    &:hover
-      box-shadow: inset 2rem 2rem var(--ph-color-link)
 
 .ph.hue-map
   width: 100%
@@ -930,38 +586,11 @@ dialog.ph
     &:hover
       color: var(--ph-color-text-accent)
 
-[id*=-accents].ph
-  & > .ph.group
-    display: grid
-    grid-template-columns: 1fr 1rem
-    grid-template-areas: 'colors gradient'
 
-    & .ph.colors
-      grid-area: colors
-
-    &::after
-      grid-area: gradient
-      transition all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
-      content: ''
-      height: 100%
-      width: 1rem
-
-groups = interpolate luminanceShift monochromatic 'complement' 'split' triad tetrad pentad hexad analogous
-
-accentGroupGradient()
-  for id in groups
-    for index in 1 .. 10
-      #{id}-accents.ph
-        & .ph.group:nth-child({index})
-          &::after
-            background-image: var(unquote('--moebius-accent-' + id + '-gradient-' + index))
-
-accentGroupGradient()
 
 .ph.button.color-unit-modal-toggle-button
   width 100%
   & .ph.icon
-    font-size: 1.5rem
     line-height: 100%
     margin-right: 0.5rem
 

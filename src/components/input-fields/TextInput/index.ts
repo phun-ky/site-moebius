@@ -1,5 +1,7 @@
 import { cx } from 'utils/cx';
 
+import './styles/textInput.styl';
+
 const html = String.raw;
 
 export type MoebiusSiteTextInputPropsType = {

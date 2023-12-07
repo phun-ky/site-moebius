@@ -1,3 +1,4 @@
+import { Togglebox } from 'components/input-fields/Togglebox';
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
 
 const html = String.raw;
@@ -13,20 +14,16 @@ export const SettingsLuminanceShift = (
   const { id, options } = props;
 
   return id === 'luminanceShift'
-    ? html`<form class="ph color-settings" onsubmit="javascript:return false;">
-        <fieldset class="ph color-extras">
+    ? html`<form class="ph" onsubmit="javascript:return false;">
+        <fieldset class="ph">
           <legend class="ph">Settings</legend>
-          <div class="ph color-extras-inner">
-            <div class="ph input-group">
-              <input
-                type="checkbox"
-                name="diverging"
-                id="luminanceShift-diverging"
-                ${options.diverging ? 'checked="checked"' : ''}
-                class="ph"
-              />
-              <label for="diverging" class="ph">diverging</label>
-            </div>
+          <div class="ph">
+            ${Togglebox({
+    checked: options.diverging,
+    name: 'diverging',
+    id: 'luminanceShift-diverging',
+    label: 'diverging'
+  })}
           </div>
         </fieldset>
       </form>`

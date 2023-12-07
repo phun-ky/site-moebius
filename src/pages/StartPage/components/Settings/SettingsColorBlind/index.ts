@@ -1,6 +1,9 @@
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
 import { RadioButton } from 'components/input-fields/RadioButton';
 import { Label } from 'components/input-fields/Label';
+import { uniqueID } from 'utils/unique-id';
+
+import './styles/settingsColorBlind.styl';
 
 const html = String.raw;
 
@@ -12,11 +15,16 @@ export const SettingsColorBlind = (
   props: MoebiusSiteSettingsColorBlindPropsType
 ) => {
   const { options } = props;
+  const id = uniqueID();
 
-  return html`<fieldset class="ph color-blind">
-    <legend class="ph">Type</legend>
-    <div class="ph color-blind-inner">
-      ${[
+  return html`<form
+    class="ph color-blind-simulator"
+    onsubmit="javascript:return false;"
+  >
+    <fieldset class="ph color-blind">
+      <legend class="ph">Color blind simulator</legend>
+      <div class="ph color-blind-inner">
+        ${[
     { id: 'normal', title: 'normal' },
     { id: 'protanomaly', title: 'protanomaly' },
     { id: 'protanopia', title: 'protanopia' },
@@ -29,19 +37,20 @@ export const SettingsColorBlind = (
   ]
     .map((setting) => {
       return html`<div class="ph input-group">
-            ${RadioButton({
+              ${RadioButton({
     checked: setting.id === options.colorBlindSim,
     value: setting.id,
-    id: `color-blind-sim-${setting.id}`,
+    id,
     name: 'color-blind-sim'
   })}
-            ${Label({
-    labelFor: `color-blind-sim-${setting.id}`,
+              ${Label({
+    labelFor: id,
     label: setting.title
   })}
-          </div>`;
+            </div>`;
     })
     .join('\n')}
-    </div>
-  </fieldset>`;
+      </div>
+    </fieldset>
+  </form>`;
 };

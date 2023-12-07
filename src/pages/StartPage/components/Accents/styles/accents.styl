@@ -1,0 +1,72 @@
+.ph.accents
+  display: grid
+  grid-template-columns: 1fr 1fr
+  grid-gap: var(--moebius-inner-spacing)
+  grid-area: accents
+
+  @media screen and (min-width: 425px)
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr))
+
+  @media screen and (min-width: 768px)
+    grid-template-columns: 1fr
+
+  @media screen and (min-width: 1024px)
+    grid-template-columns: 1fr
+
+  @media screen and (min-width: 1200px)
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr))
+
+  @media screen and (min-width: 1440px)
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr))
+
+  @media screen and (min-width: 2048px)
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr))
+
+  & .ph.colors, & .ph.group
+    display: grid
+    justify-items: stretch
+    grid-gap: 0
+
+    & .ph.color
+      text-transform: uppercase
+      text-align: right
+      min-height: 2rem
+      font-weight: 500
+      font-size: 1.125rem
+      line-height: 2rem
+      padding: 0.5rem
+      font-family: var(--ph-font-family-code)
+
+      &::before
+        text-transform: initial
+
+
+.ph.accents
+  & > .ph.group
+    display: grid
+    grid-template-columns: 1fr 1rem
+    grid-template-areas: 'colors gradient'
+
+    & .ph.colors
+      grid-area: colors
+
+    &::after
+      grid-area: gradient
+      transition all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+      content: ''
+      height: 100%
+      width: 1rem
+
+
+
+groups = interpolate luminanceShift monochromatic 'complement' 'split' triad tetrad pentad hexad analogous
+
+accentGroupGradient()
+  for id in groups
+    for index in 1 .. 10
+      #{id}-accents.ph
+        & .ph.group:nth-child({index})
+          &::after
+            background-image: var(unquote('--moebius-accent-' + id + '-gradient-' + index))
+
+accentGroupGradient()

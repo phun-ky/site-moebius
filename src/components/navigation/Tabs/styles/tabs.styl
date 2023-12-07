@@ -1,0 +1,104 @@
+
+.ph.tabs
+  & .ph.tabs-list
+    list-style: none
+    display: flex
+    flex-direction: column
+    padding: 0
+    margin: 0
+
+    @media screen and (min-width: 768px)
+      display: grid
+      grid-template-columns: repeat(2, 1fr)
+      grid-gap: 0
+
+    @media screen and (min-width: 1200px)
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+      grid-gap: var(--moebius-spacing-smallest)
+      justify-content: flex-start
+      align-items: bottom
+
+.ph.tabs
+  & .ph.tabs-list
+    & .ph.tabs-list-action[aria-selected]
+      color: var(--ph-color-text-accent)
+      font-size: 1.125rem
+      background-color: var(--ph-color-well-background)
+      line-height: 100%
+      border: 0.125rem solid var(--ph-input-border-color)
+      border-bottom: none
+
+      &::before
+        @media screen and (min-width: 1200px)
+          content: ''
+          background-color: var(--ph-color-well-background)
+          height: 0.125rem
+          position: absolute
+          top: 100%
+          left: 0
+          width: 100%
+          display: block
+
+      &::after
+        content: '\0020⬅'
+        display: inline-block
+        margin-left: 1ch
+
+        @media screen and (min-width: 1200px)
+          content: none
+          margin-left: none
+          display: none
+
+.ph.tabs
+  & .ph.tabs-list
+    & .ph.tabs-list-action
+      transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1)
+      color: var(--ph-color-text)
+      text-decoration: none
+      font-size: 1rem
+      line-height: 100%
+      padding-bottom: 0.75rem
+      padding-left: 0.75rem
+      padding-right: 0.75rem
+      padding-top: 0.75rem
+      display: flex
+      align-items: center
+      justify-content: flex-start
+      border: 0.125rem solid var(--ph-color-well-background)
+      border-bottom: none
+      flex-grow: 1
+
+      @media screen and (min-width: 1200px)
+        display: inline-flex
+        align-items: flex-end
+        flex-grow: 0
+        background-color: rgba(38, 42, 59, 0.3)
+        border-top-left-radius: 12px
+        border-top-right-radius: 12px
+        border: none
+
+.ph.tabs
+  & .ph.tabs-list
+    & .ph.tabs-list-item
+      padding: 0
+      margin: 0
+      min-height: 4rem
+      display: flex
+      flex-direction: column
+
+      @media screen and (min-width: 1200px)
+        flex-direction: row
+        align-items: flex-end
+
+.ph.tabs
+  & section[id^='section'].ph
+    background-color: var(--ph-color-well-background)
+    border-bottom-right-radius: var(--moebius-radius-larger)
+    border-bottom-left-radius: var(--moebius-radius-larger)
+    padding: 2rem
+    border: 0.125rem solid var(--ph-well-border-color)
+
+    @media screen and (min-width: 1200px)
+      border-top-right-radius: var(--moebius-radius-larger)

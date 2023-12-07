@@ -2,6 +2,8 @@ import { MoebiusColorValueHexType } from '@phun-ky/moebius';
 import { Color } from 'pages/StartPage/components/Swatch/components/Color';
 import { getA11yTextColor } from 'utils/get-a11y-text-color';
 
+import './styles/accents.styl';
+
 const html = String.raw;
 
 export type MoebiusSiteAccentsPropsType = {
