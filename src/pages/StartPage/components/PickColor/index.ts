@@ -1,7 +1,6 @@
 import { Dialog } from 'components/feedback/Dialog';
 import { TextInput } from 'components/input-fields/TextInput';
 import { PickColorButton } from './PickColorButton';
-import { Label } from 'components/input-fields/Label';
 import { MoebiusColorValueHexType } from '@phun-ky/moebius';
 import { addOnAfterAppRender, addOnChange, addOnClick } from 'lib/spa';
 import { handleHueMapClick } from './utils/handle-hue-map-click';
@@ -10,13 +9,14 @@ import { MouseEventType } from 'lib/spa/types';
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
 import { setOptions } from 'utils/set-options';
 import { MoebiusSiteEventType } from 'types';
+import { ColorPickerHueMap } from './ColorPickerHueMap';
 
 const html = String.raw;
 
 export type MoebiusSitePickColorItemType = {
   type: string;
   title: string;
-  color?: MoebiusColorValueHexType;
+  color: MoebiusColorValueHexType;
 };
 
 export type MoebiusSitePickColorPropsType = {
@@ -136,36 +136,6 @@ export const PickColor = (props: MoebiusSitePickColorPropsType) => {
     }
   });
 
-  const extraRangeElements =
-    type === 'divergent'
-      ? html`<div class="ph input-group">
-            ${Label({ labelFor: 'divergent-lightness', label: 'lightness' })}
-            <input
-              class="ph color-range lightness"
-              id="divergent-lightness"
-              type="range"
-              step="1"
-              min="80"
-              max="100"
-              defaultValue="${currentColor.lch.l.toFixed()}"
-              value="${currentColor.lch.l.toFixed()}"
-            />
-          </div>
-          <div class="ph input-group">
-            ${Label({ labelFor: 'divergent-chroma', label: 'chroma' })}
-            <input
-              class="ph color-range chroma"
-              id="divergent-chroma"
-              type="range"
-              step="1"
-              min="0"
-              max="50"
-              defaultValue="${currentColor.lch.c.toFixed()}"
-              value="${currentColor.lch.c.toFixed()}"
-            />
-          </div>`
-      : '';
-
   return html`<fieldset class="ph color-picker-input-container ${type}-color">
     <legend class="ph">${title}</legend>
     <div class="ph color-picker-input">
@@ -178,21 +148,7 @@ export const PickColor = (props: MoebiusSitePickColorPropsType) => {
       ${Dialog({
     id: `color-picker-modal-${type}`,
     className: `color-picker-modal ${type}`,
-    content: html`<div
-            id="color-picker-hue-map-${type}"
-            class="ph hue-map ${type}"
-          ></div>
-          <input
-            id="color-picker-range-${type}-hue"
-            class="ph color-range"
-            type="range"
-            step="1"
-            defaultValue="${currentColorHue.toFixed()}"
-            value="${currentColorHue.toFixed()}"
-            min="0"
-            max="359"
-          />
-          ${extraRangeElements}`
+    content: ColorPickerHueMap({ type, color })
   })}
       ${TextInput({
     id: `color-picker-input-${type}-text`,

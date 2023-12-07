@@ -1,0 +1,38 @@
+.ph.swatch
+  grid-area: swatch
+  margin-bottom: 0
+  display: grid
+  grid-template-columns: 1fr 1fr
+  grid-gap: var(--moebius-inner-spacing)
+  grid-area: swatch
+
+  @media screen and (min-width: 425px)
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr))
+
+  @media screen and (min-width: 768px)
+    grid-template-columns: 1fr
+
+  @media screen and (min-width: 1024px)
+    grid-template-columns: 1fr
+
+  @media screen and (min-width: 1200px)
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr))
+
+  @media screen and (min-width: 1440px)
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr))
+
+  @media screen and (min-width: 2048px)
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr))
+
+  & .ph.color
+    transition all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+    width: auto
+    aspect-ratio: 9 / 16
+    height: auto
+    text-transform: uppercase
+    @media screen and (min-width: 768px)
+      aspect-ratio: initial
+    @media screen and (min-width: 1200px)
+      aspect-ratio: 9 / 16
+    &::before
+      text-transform: initial

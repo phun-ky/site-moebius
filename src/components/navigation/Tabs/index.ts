@@ -1,6 +1,8 @@
 import { addOnClick, useState } from 'lib/spa';
 import { MoebiusSiteEventType } from 'types';
 
+import './styles/tabs.styl';
+
 const html = String.raw;
 
 export type MoebiusSiteTabItem = {

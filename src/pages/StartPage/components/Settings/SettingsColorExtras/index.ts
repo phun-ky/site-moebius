@@ -1,7 +1,10 @@
-import { Checkbox } from 'components/input-fields/Checkbox';
-import { Label } from 'components/input-fields/Label';
 import { Togglebox } from 'components/input-fields/Togglebox';
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
+import { addOnChange } from 'lib/spa';
+import { EventType } from 'lib/spa/types';
+import { setOptions } from 'utils/set-options';
+
+import './styles/settingsColorExtras.styl';
 
 const html = String.raw;
 
@@ -14,11 +17,24 @@ export const SettingsColorExtras = (
 ) => {
   const { options } = props;
 
-  return html`<fieldset class="ph color-extras">
-    <legend class="ph">Corrections</legend>
+  addOnChange(
+    '.ph.settings-color-extras input[type="checkbox"]',
+    (e: EventType<HTMLInputElement>) => {
+      options[e.target.id] = e.target.checked;
 
-    <div class="ph color-extras-inner">
-      ${[
+      setOptions(options);
+    }
+  );
+
+  return html`<form
+    class="ph settings-color-extras"
+    onsubmit="javascript:return false;"
+  >
+    <fieldset class="ph settings-color-extras-fieldset">
+      <legend class="ph">Corrections</legend>
+
+      <div class="ph settings-color-extras-inner">
+        ${[
     {
       id: 'bezier',
       title: 'bezier',
@@ -59,6 +75,7 @@ export const SettingsColorExtras = (
           */
     })
     .join('\n')}
-    </div>
-  </fieldset> `;
+      </div>
+    </fieldset>
+  </form>`;
 };

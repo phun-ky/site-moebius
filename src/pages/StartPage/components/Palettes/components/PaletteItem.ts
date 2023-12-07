@@ -11,6 +11,7 @@ import { Swatch } from '../../Swatch';
 import { SVGPixels } from './SVGPixels';
 import { colorBlindCheck } from 'features/color-blind/color-blind-check';
 import { ColorBlindWarning } from './ColorBlindWarning';
+import { SettingsColorBlind } from '../../Settings/SettingsColorBlind';
 
 const html = String.raw;
 
@@ -26,7 +27,8 @@ export const PaletteItem = (props: MoebiusSitePaletteItemPropsType) => {
   const colorBlindCheckResult = colorBlindCheck(moebius.colors[id]);
   const isColorBlindSafe = colorBlindCheckResult.length === 0;
 
-  return html`<div class="ph palette">
+  return html`<div class="ph palette ${id}">
+      ${SettingsColorBlind({ options })}
       ${!isColorBlindSafe ? ColorBlindWarning(colorBlindCheckResult) : ''}
       <svg
         xlmns="http://www.w3.org/2000/svg"

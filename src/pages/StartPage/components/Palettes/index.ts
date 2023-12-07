@@ -4,6 +4,9 @@ import { MoebiusSiteEventType } from 'types';
 import { generateAccentGradientCssVariables } from 'utils/generate-accent-gradients-css-variables';
 import { setOptions } from 'utils/set-options';
 import { PaletteItems } from './components/PaletteItems';
+import { EventType } from 'lib/spa/types';
+
+import './styles/palettes.styl';
 
 const html = String.raw;
 
@@ -58,6 +61,13 @@ export const Palettes = async (props: PalettesPropsType) => {
     '#monochromatic-random-offset',
     (e: MoebiusSiteEventType<HTMLInputElement>) => {
       setOptions({ randomOffset: e.target.checked });
+    }
+  );
+
+  addOnChange(
+    '.ph.color-blind-simulator input[type="radio"]',
+    (e: EventType<HTMLInputElement>) => {
+      setOptions({ colorBlindSim: e.target.value });
     }
   );
 
