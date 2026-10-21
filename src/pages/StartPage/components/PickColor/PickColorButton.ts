@@ -1,4 +1,5 @@
 import { cx } from 'utils/cx';
+import { escapeAttribute } from 'utils/escape';
 import { getA11yTextColor } from 'utils/get-a11y-text-color';
 
 const html = String.raw;
@@ -18,7 +19,7 @@ export const PickColorButton = (props: MoebiusSitePickColorButton) => {
     type="button"
     class="${classNames}"
     data-rel="${color}"
-    data-color-name="${colorName}"
+    data-color-name="${escapeAttribute(colorName)}"
     id="${id}"
     aria-label="Pick a ${id} color"
     style="background-color: ${color}; color: ${getA11yTextColor(color)}"

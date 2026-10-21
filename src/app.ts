@@ -1,6 +1,7 @@
 import { getParams } from './lib/spa/utils/get-params';
 import { RouterMatch } from './lib/spa/types';
 import { addOnAfterAppRender } from './lib/spa';
+import { readHashOptions } from './utils/sanitize-options';
 
 import { Header } from './components/page-section/Header';
 import { Footer } from './components/page-section/Footer';
@@ -25,13 +26,7 @@ const App = async (match: RouterMatch, params: unknown) => {
     }
 
     _params = getParams(match);
-    try {
-      const url = new URL(window.location.href);
-
-      _hashParams = JSON.parse(atob(url.hash.replace('#options=', '')));
-    } catch (e) {
-      _hashParams = {};
-    }
+    _hashParams = readHashOptions();
   }
 
   globalThis.activeElement = document.activeElement;
