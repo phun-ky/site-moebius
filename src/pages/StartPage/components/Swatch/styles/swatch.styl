@@ -2,7 +2,7 @@
   grid-area: swatch
   margin-bottom: 0
   display: grid
-  grid-template-columns: 1fr 1fr
+  grid-template-columns: repeat(2, minmax(0, 1fr))
   grid-gap: var(--moebius-inner-spacing)
   grid-area: swatch
 
@@ -10,10 +10,10 @@
     grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr))
 
   @media screen and (min-width: 768px)
-    grid-template-columns: 1fr
+    grid-template-columns: minmax(0, 1fr)
 
   @media screen and (min-width: 1024px)
-    grid-template-columns: 1fr
+    grid-template-columns: minmax(0, 1fr)
 
   @media screen and (min-width: 1200px)
     grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr))
