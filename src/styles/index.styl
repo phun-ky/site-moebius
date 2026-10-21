@@ -115,8 +115,10 @@ h4.ph
     padding-top: 0
 
 .ph.svg
-  height: 256px
+  height: auto
   width: 256px
+  max-width: 100%
+  aspect-ratio: 1
   display: block
   grid-area: svg
 
@@ -137,27 +139,31 @@ h4.ph
   display: grid
   grid-gap: var(--moebius-box-spacing)
   grid-template-areas: 'color-blind-simulator' 'color-blind-warning' 'swatch' 'wheel' 'mix' 'gradient'
-  grid-template-columns: 1fr
+  // minmax(0, 1fr): a plain 1fr track grows to its widest child's minimum
+  // width, which made the page scroll sideways on phones
+  grid-template-columns: minmax(0, 1fr)
 
   @media screen and (min-width: 620px)
     grid-template-areas: 'color-blind-simulator color-blind-simulator' 'color-blind-warning color-blind-warning' 'swatch swatch' 'wheel mix' 'gradient gradient'
-    grid-template-columns: 1fr 1fr
+    grid-template-columns: repeat(2, minmax(0, 1fr))
 
   @media screen and (min-width: 768px)
     grid-template-areas: 'color-blind-simulator color-blind-simulator' 'color-blind-warning color-blind-warning' 'swatch swatch' 'wheel mix' 'gradient gradient'
-    grid-template-columns: 1fr 1fr
+    grid-template-columns: repeat(2, minmax(0, 1fr))
 
   @media screen and (min-width: 1024px)
     grid-template-areas: 'color-blind-simulator color-blind-simulator color-blind-simulator' 'color-blind-warning color-blind-warning color-blind-warning' 'swatch swatch swatch' 'wheel mix gradient'
-    grid-template-columns: 255px 256px 1fr
+    grid-template-columns: 255px 256px minmax(0, 1fr)
 
   & > *
     margin 0
 
   .ph.mix
     grid-area: mix
-    height: 256px
+    height: auto
     width: 256px
+    max-width: 100%
+    aspect-ratio: 1
     background-color: var(--ph-color-well-background)
     margin: 0 auto
 
@@ -178,7 +184,7 @@ h4.ph
 
 .ph.color-picker-inner
   display: grid
-  grid-template-columns: 1fr
+  grid-template-columns: minmax(0, 1fr)
   grid-template-areas: 'primary' 'secondary' 'divergent'
   grid-gap: var(--moebius-box-spacing)
   color: var(--ph-color-text)
@@ -189,7 +195,7 @@ h4.ph
 
   @media screen and (min-width: 425px)
     display: grid
-    grid-template-columns: 1fr 1fr 1fr
+    grid-template-columns: repeat(3, minmax(0, 1fr))
     grid-template-areas: 'primary secondary divergent'
 
   @media screen and (min-width: 768px)
@@ -225,6 +231,8 @@ h4.ph
     flex-direction: column
     border: 0
     padding: 0
+    // A fieldset is at least as wide as its content by default
+    min-width: 0
     grid-gap: var(--moebius-inner-spacing)
     width: 100%
     justify-content: flex-start

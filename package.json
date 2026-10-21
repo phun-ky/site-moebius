@@ -14,6 +14,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext .ts",
     "test": "node --import tsx --enable-source-maps --test \"{src,scripts}/**/__tests__/*.test.{ts,mjs}\"",
+    "check:layout": "node scripts/check-layout.mjs",
     "commit": "npx git-cz",
     "dev": "npx browser-sync start -s \"dist\" --files \"dist/*.*\"  --single"
   },
@@ -52,6 +53,7 @@
     "fast-check": "^3.23.2",
     "git-cz": "^4.9.0",
     "network-information-types": "^0.1.1",
+    "playwright-core": "^1.63.0",
     "postcss": "^8.4.23",
     "postcss-cli": "^10.1.0",
     "prettier": "^2.4.1",

@@ -26,6 +26,7 @@ export const SVGPixels = (props: MoebiusSiteSVGPixelsPropsType) => {
     xlmns="http://www.w3.org/2000/svg"
     class="ph mix"
     id="${id}-mix"
+    viewBox="0 0 ${width} ${width}"
   >
     ${newArray.map((color, index) => {
     const mColor = new MoebiusColor(color);

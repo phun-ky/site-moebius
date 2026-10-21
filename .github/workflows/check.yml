@@ -39,6 +39,8 @@ jobs:
         run: npm run lint
       - name: Test
         run: npm test
+      - name: Check the layout # Headless Chrome (installed on the runner): no sideways scroll at any width
+        run: npm run check:layout
 
   notify:
     name: Notify failed check
