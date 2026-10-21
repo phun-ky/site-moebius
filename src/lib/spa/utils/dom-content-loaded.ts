@@ -31,5 +31,4 @@ export const DOMContentLoaded = async () => {
 
   // Reinitialisze the SPA
   await bootstrap(routeDetails);
-
 };
