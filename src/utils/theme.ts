@@ -1,6 +1,6 @@
 // The theme is the `theme--light` class on <html>; without it the site is
 // dark. A choice made with the theme button is saved under this key and wins;
-// without one, the system setting decides. src/assets/js/theme.js applies
+// without one, the system setting decides. public/js/theme.js applies
 // the same rule before the first paint.
 export const THEME_STORAGE_KEY = 'prefers-color-scheme';
 

@@ -24,11 +24,10 @@
               - '.eslintrc'
               - '.eslintignore'
               - '.browserslistrc'
-              - '.postcssrc.cjs'
               - '.stylintrc'
               - 'tsconfig*.json'
-              - 'tslint.json'
               - 'scripts/**'
+              - 'vite.config.ts'
 'experience: visual':
   - any:
       - changed-files:
@@ -36,7 +35,7 @@
               - '**/*.styl'
               - '**/*.css'
               - 'public/**'
-              - 'src/assets/**'
+              - 'index.html'
 'context: github':
   - any:
       - changed-files:
@@ -47,11 +46,6 @@
       - changed-files:
           - any-glob-to-any-file:
               - 'package.json'
-'context: rollup':
-  - any:
-      - changed-files:
-          - any-glob-to-any-file:
-              - 'rollup.config.mjs'
 'mindless: ✏️ docs':
   - any:
       - head-branch: ['^docs', 'docs']
