@@ -23,6 +23,7 @@
     "check:keyboard": "node scripts/check-keyboard.mjs",
     "check:csp": "node scripts/check-csp.mjs",
     "check:origins": "node scripts/check-origins.mjs",
+    "check:performance": "node scripts/check-performance.mjs",
     "check:routes": "node scripts/check-routes.mjs",
     "check:theme": "node scripts/check-theme.mjs"
   },
