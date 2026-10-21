@@ -41,8 +41,8 @@ jobs:
         run: npm run lint
       - name: Check formatting
         run: npm run format:check
-      - name: Test
-        run: npm test
+      - name: Test, with coverage # 80% of lines in utils, features, config and the SPA router and helpers
+        run: npm run test:coverage
       - name: Check the layout # Headless Chrome (installed on the runner): no sideways scroll at any width
         run: npm run check:layout
       - name: Check the routes # Served like GitHub Pages: every route 200, unknown paths 404

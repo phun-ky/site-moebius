@@ -1,0 +1,24 @@
+{
+  "all": true,
+  "src": ["src"],
+  "extension": [".ts"],
+  "include": [
+    "src/utils/**",
+    "src/features/**",
+    "src/config/**",
+    "src/lib/spa/router/**",
+    "src/lib/spa/utils/**"
+  ],
+  "exclude": [
+    "**/__tests__/**",
+    "**/*.d.ts",
+    "src/lib/spa/utils/bootstrap.ts",
+    "src/lib/spa/utils/dom-content-loaded.ts",
+    "src/lib/spa/utils/navigate-to.ts",
+    "src/lib/spa/utils/popstate.ts"
+  ],
+  "reporter": ["text", "lcov"],
+  "report-dir": "coverage",
+  "check-coverage": true,
+  "lines": 80
+}
