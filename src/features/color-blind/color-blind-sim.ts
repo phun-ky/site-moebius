@@ -14,5 +14,5 @@ export const colorBlindSim = (color, type) => {
   const hex = chroma(color).hex();
   const simulate = SIMULATORS.get(type);
 
-  return simulate ? simulate(hex) : hex;
+  return typeof simulate === 'function' ? simulate(hex) : hex;
 };
