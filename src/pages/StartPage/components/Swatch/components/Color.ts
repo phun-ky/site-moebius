@@ -17,6 +17,9 @@ export const Color = (props: ColorPropsType) => {
 
   return html`<div
     class="ph color${className ? ` ${className}` : ''}"
+    role="button"
+    tabindex="0"
+    aria-label="Copy ${escapeAttribute(color.hex)}, ${escapeAttribute(color.name)}, and use it as the primary color"
     style="background-color: ${backgroundColor}; color: ${foregroundColor}"
     data-rel="${color.hex}"
     data-color-hex="${color.hex}"

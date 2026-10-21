@@ -18,6 +18,34 @@ export type MoebiusSitePropsType = {
   items: MoebiusSiteTabItems;
 };
 
+// Arrow keys, Home and End move between tabs, as in the ARIA tabs pattern.
+// The tabs are re-rendered on every change, so one listener on the document
+// handles them all; moving to a tab clicks it, which selects it.
+const TAB_KEYS = ['ArrowLeft', 'ArrowRight', 'Home', 'End'];
+
+document.addEventListener('keydown', (event) => {
+  const tab = (event.target as Element | null)?.closest?.('[role="tab"]');
+
+  if (!tab || !TAB_KEYS.includes(event.key)) return;
+
+  const tabs = [
+    ...(tab
+      .closest('[role="tablist"]')
+      ?.querySelectorAll<HTMLElement>('[role="tab"]') ?? [])
+  ];
+  const index = tabs.indexOf(tab as HTMLElement);
+  const next = {
+    ArrowLeft: (index - 1 + tabs.length) % tabs.length,
+    ArrowRight: (index + 1) % tabs.length,
+    Home: 0,
+    End: tabs.length - 1
+  }[event.key as 'ArrowLeft' | 'ArrowRight' | 'Home' | 'End'];
+
+  event.preventDefault();
+  tabs[next].focus();
+  tabs[next].click();
+});
+
 export const Tabs = (props: MoebiusSitePropsType) => {
   const { id, items } = props;
   const [activeTab, setActiveTab] = useState('interpolate', 'palette-tabs');

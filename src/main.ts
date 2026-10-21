@@ -14,6 +14,15 @@ import './prism';
 // The theme button and the system setting
 initTheme();
 
+// The skip link moves focus to the content without changing the URL hash,
+// which holds the palette settings
+document.addEventListener('click', (event) => {
+  if (!(event.target as Element | null)?.closest?.('.ph.skip-link')) return;
+
+  event.preventDefault();
+  document.getElementById('content')?.focus();
+});
+
 // The settings forms have nothing to submit to; this replaces inline
 // onsubmit handlers, which the Content Security Policy blocks
 document.addEventListener('submit', (event) => event.preventDefault());

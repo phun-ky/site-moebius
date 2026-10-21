@@ -59,7 +59,7 @@ const App = async (match: RouterMatch, params: unknown) => {
   }
 
   return html`${Header()}
-    <main class="ph main">${content}</main>
+    <main class="ph main" id="content" tabindex="-1">${content}</main>
     ${Footer()}`;
 };
 

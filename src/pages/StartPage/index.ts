@@ -10,7 +10,7 @@ import {
 import { updateCSSVars } from 'pages/StartPage/components/PickColor/utils/update-css-vars';
 import { getOptions } from 'utils/get-options';
 import { initMoebius } from 'utils/init-moebius';
-import { onColorClick } from 'utils/on-color-click';
+import { onColorClick, onColorKeydown } from 'utils/on-color-click';
 
 import { Palettes } from './components/Palettes';
 import { Settings } from './components/Settings';
@@ -40,6 +40,8 @@ export const StartPage = async ({
       colorElements.forEach((element) => {
         element.removeEventListener('click', onColorClick);
         element.addEventListener('click', onColorClick);
+        element.removeEventListener('keydown', onColorKeydown);
+        element.addEventListener('keydown', onColorKeydown);
       });
     }
   });
@@ -134,7 +136,10 @@ export const StartPage = async ({
     );
   });
 
-  return html`<section class="ph section workspace">
+  return html`<h1 class="ph visually-hidden">
+      moebius, a color palette generator
+    </h1>
+    <section class="ph section workspace">
       <div class="ph container workspace">
         <div class="ph color-picker">
           <h2 class="ph">Choose colors</h2>
