@@ -33,6 +33,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Check what the build ships # No source maps in dist, JavaScript minified
+        run: npm run check:dist
       - name: Type-check
         run: npm run typecheck
       - name: Lint
