@@ -1,43 +1,53 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Checks
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: ['main']
+  # No path filter: `check` is a required status check, so it has to report
+  # on every PR or the PR cannot merge
   pull_request:
-    branches: [ "main" ]
-    types: [opened, synchronize] # Workflow triggering events
+    branches: ['main']
+    types: [opened, synchronize, reopened]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# Read-only by default; jobs ask for what they need
+permissions:
+  contents: read
+
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  check:
+    runs-on: ubuntu-24.04
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          fetch-depth: 0 # Checkout all branches and tags
+          persist-credentials: false
       - name: Setup Node.js environment
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 18
+          node-version: 24
+          cache: npm
       - name: Install dependencies
-        run: | # Install and link dependencies
-          npm i
-        env:
-          GH_TOKEN: ${{secrets.GH_TOKEN}}
-      - name: Build # Build all packages
+        run: npm ci
+      - name: Build
         run: npm run build
+      - name: Type-check
+        run: npm run typecheck
+      - name: Lint
+        run: npm run lint
 
-
+  notify:
+    name: Notify failed check
+    needs: check
+    # Only for main; a failing pull request already shows its failed check
+    if: failure() && github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    permissions:
+      issues: write
+    steps:
+      - uses: drivendataorg/failed-build-issue-action@940568ce50eeef3f31a920614cefcc6102d2f930 # v1.3.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          label-name: 'problems: 💔 build failed'
