@@ -26,10 +26,7 @@ export const SettingsColorExtras = (
     }
   );
 
-  return html`<form
-    class="ph settings-color-extras"
-    onsubmit="javascript:return false;"
-  >
+  return html`<form class="ph settings-color-extras">
     <fieldset class="ph settings-color-extras-fieldset">
       <legend class="ph">Corrections</legend>
 

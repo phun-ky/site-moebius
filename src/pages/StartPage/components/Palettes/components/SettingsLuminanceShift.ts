@@ -14,7 +14,7 @@ export const SettingsLuminanceShift = (
   const { id, options } = props;
 
   return id === 'luminanceShift'
-    ? html`<form class="ph" onsubmit="javascript:return false;">
+    ? html`<form class="ph">
         <fieldset class="ph">
           <legend class="ph">Settings</legend>
           <div class="ph">

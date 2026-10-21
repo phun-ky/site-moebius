@@ -253,7 +253,7 @@ export const StartPage = async ({
   //         </div>
   //         <aside class="ph  settings">
   //           <h2 class="ph">Color blind simulator</h2>
-  //           <form class="ph color-settings color-blind-simulator" onsubmit="javascript:return false;">
+  //           <form class="ph color-settings color-blind-simulator">
   //             <fieldset class="ph color-blind">
   //               <legend class="ph">Type</legend>
   //               <div class="ph color-blind-inner">
@@ -297,7 +297,7 @@ export const StartPage = async ({
   //             </fieldset>
   //           </form>
   //           <h2 class="ph">Settings</h2>
-  //           <form class="ph color-settings" onsubmit="javascript:return false;">
+  //           <form class="ph color-settings">
   //             <fieldset class="ph color-scale">
   //               <legend class="ph">Color scale method</legend>
   //               <div class="ph color-scale-inner">
