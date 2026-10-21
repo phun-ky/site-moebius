@@ -10,6 +10,7 @@
     "build": "rollup -c rollup.config.mjs",
     "postbuild": "bash -c 'mv -f ./dist/*.{js,map} ./dist/js'",
     "build:watch": "rollup -c rollup.config.mjs -w",
+    "prepare": "git config core.hooksPath .githooks || true",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext .ts",
     "test": "node --import tsx --enable-source-maps --test \"src/**/__tests__/*.test.ts\"",
