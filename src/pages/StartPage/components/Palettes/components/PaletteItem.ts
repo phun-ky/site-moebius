@@ -58,15 +58,15 @@ export const PaletteItem = (props: MoebiusSitePaletteItemPropsType) => {
       </summary>
       <h4 class="ph">CSS Variables</h4>
       ${CodeBlock({
-    id,
-    language: 'css',
-    content: css(moebius.colors[id], moebius.accents[id])
-  })}
+        id,
+        language: 'css',
+        content: css(moebius.colors[id], moebius.accents[id]),
+      })}
       <h4 class="ph">JavaScript</h4>
       ${CodeBlock({
-    id,
-    language: 'js',
-    content: js(moebius.colors[id], moebius.accents[id])
-  })}
+        id,
+        language: 'js',
+        content: js(moebius.colors[id], moebius.accents[id]),
+      })}
     </details>`;
 };

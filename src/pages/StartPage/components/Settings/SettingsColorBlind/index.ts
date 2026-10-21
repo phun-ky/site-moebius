@@ -25,31 +25,31 @@ export const SettingsColorBlind = (
       <legend class="ph">Color blind simulator</legend>
       <div class="ph color-blind-inner">
         ${[
-    { id: 'normal', title: 'normal' },
-    { id: 'protanomaly', title: 'protanomaly' },
-    { id: 'protanopia', title: 'protanopia' },
-    { id: 'deuteranomaly', title: 'deuteranomaly' },
-    { id: 'deuteranopia', title: 'deuteranopia' },
-    { id: 'tritanomaly', title: 'tritanomaly' },
-    { id: 'tritanopia', title: 'tritanopia' },
-    { id: 'achromatomaly', title: 'achromatomaly' },
-    { id: 'achromatopsia', title: 'achromatopsia' }
-  ]
-    .map((setting) => {
-      return html`<div class="ph input-group">
+          { id: 'normal', title: 'normal' },
+          { id: 'protanomaly', title: 'protanomaly' },
+          { id: 'protanopia', title: 'protanopia' },
+          { id: 'deuteranomaly', title: 'deuteranomaly' },
+          { id: 'deuteranopia', title: 'deuteranopia' },
+          { id: 'tritanomaly', title: 'tritanomaly' },
+          { id: 'tritanopia', title: 'tritanopia' },
+          { id: 'achromatomaly', title: 'achromatomaly' },
+          { id: 'achromatopsia', title: 'achromatopsia' },
+        ]
+          .map((setting) => {
+            return html`<div class="ph input-group">
               ${RadioButton({
-    checked: setting.id === options.colorBlindSim,
-    value: setting.id,
-    id,
-    name: 'color-blind-sim'
-  })}
+                checked: setting.id === options.colorBlindSim,
+                value: setting.id,
+                id,
+                name: 'color-blind-sim',
+              })}
               ${Label({
-    labelFor: id,
-    label: setting.title
-  })}
+                labelFor: id,
+                label: setting.title,
+              })}
             </div>`;
-    })
-    .join('\n')}
+          })
+          .join('\n')}
       </div>
     </fieldset>
   </form>`;

@@ -7,7 +7,7 @@ import { getRouterMatch } from './utils/get-router-match';
 import { routes } from './routes';
 
 let previousPage: RouterMatch = {
-  route: { name: 'none' }
+  route: { name: 'none' },
 };
 let previousParams = {};
 
@@ -29,8 +29,8 @@ export const router = () => {
           cancelable: true,
           detail: {
             previousParams,
-            currentParams
-          }
+            currentParams,
+          },
         })
       );
     }
@@ -48,7 +48,7 @@ export const router = () => {
     previousParams,
     currentParams,
     paramsChanged,
-    routeChanged
+    routeChanged,
   };
 
   if (routeChanged) {
@@ -57,8 +57,8 @@ export const router = () => {
         bubbles: true,
         cancelable: true,
         detail: {
-          routeDetails
-        }
+          routeDetails,
+        },
       })
     );
   }

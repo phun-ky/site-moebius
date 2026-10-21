@@ -17,7 +17,7 @@ export const RadioButton = (props: MoebiusSiteRadioButtonPropsType) => {
     value,
     name,
     id = uniqueID(),
-    className = 'ph'
+    className = 'ph',
   } = props;
   const checkedAttribute = checked ? 'checked="checked"' : '';
 

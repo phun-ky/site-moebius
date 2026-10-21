@@ -48,11 +48,11 @@ export const Accents = (props: MoebiusSiteAccentsPropsType) => {
                 color: mColor,
                 text: mColor.hex,
                 backgroundColor,
-                foregroundColor
+                foregroundColor,
               });
             })
-            .join('\n')
-        })
+            .join('\n'),
+        }),
       })
     )
     .join('\n');

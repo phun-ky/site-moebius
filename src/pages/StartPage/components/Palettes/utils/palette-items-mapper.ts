@@ -43,6 +43,6 @@ export const paletteItemsMapper = (
   return {
     id,
     name: id,
-    content: PaletteItem({ id, moebius, options })
+    content: PaletteItem({ id, moebius, options }),
   };
 };

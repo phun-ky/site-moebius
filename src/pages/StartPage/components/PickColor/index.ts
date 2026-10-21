@@ -49,15 +49,15 @@ export const PickColor = (props: MoebiusSitePickColorPropsType) => {
     (e: MoebiusSiteEventType<HTMLInputElement>) => {
       if (type === 'primary') {
         setOptions({
-          baseColor: e.target.value as MoebiusColorValueHexType
+          baseColor: e.target.value as MoebiusColorValueHexType,
         });
       } else if (type === 'secondary') {
         setOptions({
-          secondaryColor: e.target.value as MoebiusColorValueHexType
+          secondaryColor: e.target.value as MoebiusColorValueHexType,
         });
       } else if (type === 'divergent') {
         setOptions({
-          divergentColor: e.target.value as MoebiusColorValueHexType
+          divergentColor: e.target.value as MoebiusColorValueHexType,
         });
       }
     }
@@ -140,21 +140,21 @@ export const PickColor = (props: MoebiusSitePickColorPropsType) => {
     <legend class="ph">${title}</legend>
     <div class="ph color-picker-input">
       ${PickColorButton({
-    id: `color-picker-input-${type}-color`,
-    color: currentColor.hex,
-    colorName: currentColor.name,
-    className: 'color-picker-button color'
-  })}
+        id: `color-picker-input-${type}-color`,
+        color: currentColor.hex,
+        colorName: currentColor.name,
+        className: 'color-picker-button color',
+      })}
       ${Dialog({
-    id: `color-picker-modal-${type}`,
-    className: `color-picker-modal ${type}`,
-    content: ColorPickerHueMap({ type, color })
-  })}
+        id: `color-picker-modal-${type}`,
+        className: `color-picker-modal ${type}`,
+        content: ColorPickerHueMap({ type, color }),
+      })}
       ${TextInput({
-    id: `color-picker-input-${type}-text`,
-    label: 'Hex code',
-    value: currentColor.hex.toUpperCase()
-  })}
+        id: `color-picker-input-${type}-text`,
+        label: 'Hex code',
+        value: currentColor.hex.toUpperCase(),
+      })}
     </div>
 
     <button
@@ -165,9 +165,9 @@ export const PickColor = (props: MoebiusSitePickColorPropsType) => {
     </button>
 
     ${Dialog({
-    id: `color-units-${type}-modal`,
-    className: 'color-units-modal',
-    content: ColorUnitsForm({ color: color as MoebiusColorValueHexType })
-  })}
+      id: `color-units-${type}-modal`,
+      className: 'color-units-modal',
+      content: ColorUnitsForm({ color: color as MoebiusColorValueHexType }),
+    })}
   </fieldset>`;
 };

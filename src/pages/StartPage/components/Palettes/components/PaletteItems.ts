@@ -19,7 +19,7 @@ export const PaletteItems = (props: MoebiusSitePaletteItemsPropsType) => {
     'tetradic',
     'pentadic',
     'hexadic',
-    'analogous'
+    'analogous',
   ];
   const paletteTabItems = outputIdArray.map((id) =>
     paletteItemsMapper({ id, moebius, options })

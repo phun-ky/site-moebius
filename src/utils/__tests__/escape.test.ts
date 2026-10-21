@@ -53,7 +53,12 @@ describe('escapeAttribute', () => {
   });
 
   it('keeps ordinary colour names as they are', () => {
-    for (const name of ['Maniac Mansion', 'The Count’s Black', 'Pink \'n\' Blue', 'Black & White']) {
+    for (const name of [
+      'Maniac Mansion',
+      'The Count’s Black',
+      "Pink 'n' Blue",
+      'Black & White',
+    ]) {
       const [div] = parse(
         `<div data-color-name="${escapeAttribute(name)}"></div>`
       ).childNodes;
@@ -65,10 +70,14 @@ describe('escapeAttribute', () => {
   it('gives exactly one attribute and no child nodes, for any string', () => {
     fc.assert(
       fc.property(fc.string(), (value) => {
-        const html = `<div data-color-name="${escapeAttribute(value)}"></div><p>after</p>`;
+        const html = `<div data-color-name="${escapeAttribute(
+          value
+        )}"></div><p>after</p>`;
         const [div, p] = parse(html).childNodes;
 
-        assert.deepEqual(Object.keys(div.attributes ?? {}), ['data-color-name']);
+        assert.deepEqual(Object.keys(div.attributes ?? {}), [
+          'data-color-name',
+        ]);
         assert.equal(div.childNodes?.length ?? 0, 0);
         assert.equal(p?.nodeName, 'P');
       }),

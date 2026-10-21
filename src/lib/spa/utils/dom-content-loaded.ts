@@ -8,23 +8,21 @@ import { navigateTo } from './navigate-to';
 // When DOM is loaded
 export const DOMContentLoaded = async () => {
   // If any navigation is fired through a custom event
-  document.addEventListener('navigateTo', (e: NavigateToEvent) => {
-    const { to } = e.detail;
+  document.addEventListener('navigateTo', (event: Event) => {
+    const { to } = (event as NavigateToEvent).detail;
 
     navigateTo(to);
   });
   // If a user clicks a link that should change the popstate, instead of hard routing
-  document.body.addEventListener(
-    'click',
-    async (e: EventType<HTMLElement>) => {
-      const el = eventMatches(e, '[data-link]') as HTMLAnchorElement;
+  document.body.addEventListener('click', async (event: Event) => {
+    const e = event as EventType<HTMLElement>;
+    const el = eventMatches(e, '[data-link]') as HTMLAnchorElement;
 
-      if (el) {
-        e.preventDefault();
-        await navigateTo(el.href);
-      }
+    if (el) {
+      e.preventDefault();
+      await navigateTo(el.href);
     }
-  );
+  });
 
   // Get current route
   const routeDetails = router();

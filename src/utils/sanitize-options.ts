@@ -11,7 +11,7 @@ export const COLOR_BLIND_SIM_TYPES = [
   'tritanomaly',
   'tritanopia',
   'achromatomaly',
-  'achromatopsia'
+  'achromatopsia',
 ];
 
 export const MIN_NUMBER_OF_COLORS = 2;
@@ -26,7 +26,7 @@ const BOOLEAN_KEYS = [
   'reverseDirection',
   'randomOffset',
   'correctLightness',
-  'noDuplicates'
+  'noDuplicates',
 ];
 
 /**

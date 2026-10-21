@@ -19,11 +19,11 @@ export const SettingsLuminanceShift = (
           <legend class="ph">Settings</legend>
           <div class="ph">
             ${Togglebox({
-    checked: options.diverging,
-    name: 'diverging',
-    id: 'luminanceShift-diverging',
-    label: 'diverging'
-  })}
+              checked: options.diverging,
+              name: 'diverging',
+              id: 'luminanceShift-diverging',
+              label: 'diverging',
+            })}
           </div>
         </fieldset>
       </form>`

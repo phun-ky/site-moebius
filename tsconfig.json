@@ -13,15 +13,12 @@
       "vite/client"
     ],
     "noEmit": true,
-    "strict": false,
+    "strict": true,
     "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "strictNullChecks": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "allowImportingTsExtensions": false,
     "paths": {
       "components": [
         "./src/components"

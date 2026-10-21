@@ -27,5 +27,5 @@ export const DEFAULT_OPTIONS: MoebiusSiteDefaultOptionsType = {
   noDuplicates: false,
   colorScaleMode: 'rgb',
   numberOfColors: 7,
-  colorBlindSim: 'normal'
+  colorBlindSim: 'normal',
 };

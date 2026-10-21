@@ -1,14 +1,15 @@
 /* eslint no-console:0 */
 import {
   FunctionType,
-  EventArray,
+  RouterMatch,
+  TemplateCallback,
   EventDataAction,
   EventDataId,
   RouteDetails,
   EventType,
   StateContext,
   UseStateValue,
-  UseStateReturn
+  UseStateReturn,
 } from './types';
 
 import { waitFor } from './utils/wait-for';
@@ -30,20 +31,20 @@ export const spa = (() => {
   }
 
   const stateHooks: Record<string, StateContext> = {};
-  const effectHooks: unknown[] = [];
+  const effectHooks: unknown[][] = [];
 
-  let _templateCallback;
-  let _page;
-  let clickEventArray: EventArray<EventDataId> = [];
-  let inputEventArray: EventArray<EventDataId> = [];
-  let changeEventArray: EventArray<EventDataId> = [];
-  let onRouteChangeEventArray: EventArray<EventDataId> = [];
-  let onAfterAppRenderEventArray: EventArray<EventDataId> = [];
+  let _templateCallback: TemplateCallback | undefined;
+  let _page: RouterMatch | undefined;
+  let clickEventArray: EventDataId[] = [];
+  let inputEventArray: EventDataId[] = [];
+  let changeEventArray: EventDataId[] = [];
+  let onRouteChangeEventArray: FunctionType[] = [];
+  let onAfterAppRenderEventArray: FunctionType[] = [];
   let effectIndex = 0;
 
   const init = async (
     // eslint-disable-next-line no-unused-vars
-    templateCallback: FunctionType,
+    templateCallback: TemplateCallback,
     routeDetails: RouteDetails
   ) => {
     if (!templateCallback) {
@@ -90,7 +91,7 @@ export const spa = (() => {
     document.dispatchEvent(
       new CustomEvent('eventBeforeAppRender', {
         bubbles: true,
-        cancelable: true
+        cancelable: true,
       })
     );
 
@@ -98,15 +99,15 @@ export const spa = (() => {
     let error = false;
 
     try {
-      _html = await _templateCallback(page);
+      _html = (await _templateCallback?.(page)) as string;
     } catch (e) {
-      if (e.message.indexOf('404') !== -1) {
+      if (e instanceof Error && e.message.includes('404')) {
         setTitle('404, page not found');
         _html = '<h1>404, page not found</h1>';
       } else {
-        _html = await _templateCallback('ErrorPage', {
-          error: e
-        });
+        _html = (await _templateCallback?.('ErrorPage', {
+          error: e,
+        })) as string;
 
         error = true;
         console.error(e);
@@ -134,26 +135,19 @@ export const spa = (() => {
           bubbles: true,
           cancelable: true,
           detail: {
-            routeDetails
-          }
+            routeDetails,
+          },
         })
       );
     }
 
     const onRender = () => {
-      if (
-        page &&
-        page.route &&
-        page.route.page.onRender &&
-        typeof page.route.page.onRender === 'function'
-      ) {
-        page.route.page.onRender();
-      }
+      if (!page) return;
 
       document.dispatchEvent(
         new CustomEvent(`eventAfterPage${page.route.name}Render`, {
           bubbles: true,
-          cancelable: true
+          cancelable: true,
         })
       );
 
@@ -168,7 +162,7 @@ export const spa = (() => {
       document.dispatchEvent(
         new CustomEvent('eventAfterAppRender', {
           bubbles: true,
-          cancelable: true
+          cancelable: true,
         })
       );
     };
@@ -199,16 +193,20 @@ export const spa = (() => {
     });
   };
   const handleOnRouteChangedListener = () => {
-    onRouteChangeEventArray.forEach((action: EventDataId) => action.callback());
+    onRouteChangeEventArray.forEach((callback) => callback());
   };
-  const handleClickListeners = (e: EventType<HTMLElement>) => {
+  const handleClickListeners = (event: Event) => {
+    const e = event as EventType<HTMLElement>;
+
     clickEventArray.forEach((target: EventDataId) => {
       if (e.target.id === target.id || e.target.matches(target.id)) {
         target.callback(e);
       }
     });
   };
-  const handleInputListeners = (e: EventType<HTMLElement>) => {
+  const handleInputListeners = (event: Event) => {
+    const e = event as EventType<HTMLElement>;
+
     inputEventArray.forEach((target: EventDataId) => {
       if (e.target.id === target.id || e.target.matches(target.id)) {
         e.preventDefault();
@@ -216,7 +214,9 @@ export const spa = (() => {
       }
     });
   };
-  const handleChangeListeners = (e: EventType<HTMLElement>) => {
+  const handleChangeListeners = (event: Event) => {
+    const e = event as EventType<HTMLElement>;
+
     changeEventArray.forEach((target: EventDataId) => {
       if (e.target.id === target.id || e.target.matches(target.id)) {
         e.preventDefault();
@@ -316,7 +316,7 @@ export const spa = (() => {
     useEffect,
     useState,
     init,
-    render
+    render,
   };
 })();
 
@@ -329,7 +329,7 @@ export const {
   useEffect,
   useState,
   init,
-  render
+  render,
 } = spa;
 
 export default spa;

@@ -35,63 +35,63 @@ export const Tabs = (props: MoebiusSitePropsType) => {
   return html`<div class="ph tabs" id="tabs-${id}">
     <ul class="ph tabs-list" role="tablist">
       ${items
-    .map((item) => {
-      const { id, name } = item;
-      const attributes = {
-        tabIndex: id === activeTab ? 0 : -1,
+        .map((item) => {
+          const { id, name } = item;
+          const attributes: Record<string, string | number | boolean> = {
+            tabIndex: id === activeTab ? 0 : -1,
 
-        id: `tab-${id}`,
-        role: 'tab',
-        'data-rel': id
-      };
+            id: `tab-${id}`,
+            role: 'tab',
+            'data-rel': id,
+          };
 
-      if (id === activeTab) {
-        attributes['aria-selected'] = true;
-      }
+          if (id === activeTab) {
+            attributes['aria-selected'] = true;
+          }
 
-      const attrs = Object.entries(attributes)
-        .map((attr) => {
-          const [property, value] = attr;
+          const attrs = Object.entries(attributes)
+            .map((attr) => {
+              const [property, value] = attr;
 
-          return ` ${property}="${value}"`;
-        })
-        .join(' ');
+              return ` ${property}="${value}"`;
+            })
+            .join(' ');
 
-      return html`<li class="ph tabs-list-item" role="presentation">
+          return html`<li class="ph tabs-list-item" role="presentation">
             <a class="ph tabs-list-action" ${attrs} href="#section-${id}">
               ${name}
             </a>
           </li>`;
-    })
-    .join('\n')}
+        })
+        .join('\n')}
     </ul>
     ${items
-    .map((item) => {
-      const { id, content } = item;
-      const attributes = {
-        'aria-labelledby': `tab-${id}`,
-        id: `panel-${id}`,
-        'data-rel': id,
-        tabIndex: -1,
-        role: 'tabpanel'
-      };
+      .map((item) => {
+        const { id, content } = item;
+        const attributes: Record<string, string | number | boolean> = {
+          'aria-labelledby': `tab-${id}`,
+          id: `panel-${id}`,
+          'data-rel': id,
+          tabIndex: -1,
+          role: 'tabpanel',
+        };
 
-      if (id !== activeTab) {
-        attributes['hidden'] = true;
-      }
+        if (id !== activeTab) {
+          attributes['hidden'] = true;
+        }
 
-      const attrs = Object.entries(attributes)
-        .map((attr) => {
-          const [property, value] = attr;
+        const attrs = Object.entries(attributes)
+          .map((attr) => {
+            const [property, value] = attr;
 
-          return ` ${property}="${value}"`;
-        })
-        .join(' ');
+            return ` ${property}="${value}"`;
+          })
+          .join(' ');
 
-      return html`<section class="ph" ${attrs} id="section-${id}">
+        return html`<section class="ph" ${attrs} id="section-${id}">
           ${content}
         </section>`;
-    })
-    .join('\n')}
+      })
+      .join('\n')}
   </div>`;
 };

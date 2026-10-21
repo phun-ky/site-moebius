@@ -26,7 +26,7 @@ export const ColorUnitsForm = (props: MoebiusSiteColorUnitsFormPropsType) => {
     { unit: 'lab', title: 'lab', value: mColor['lab'] },
     { unit: 'oklab', title: 'oklab', value: mColor['oklab'] },
     { unit: 'cmyk', title: 'cmyk', value: mColor['cmyk'] },
-    { unit: 'xyz', title: 'xyz', value: mColor['xyz'] }
+    { unit: 'xyz', title: 'xyz', value: mColor['xyz'] },
   ];
 
   return html`<form class="ph color-units" onsubmit="javascript: return false;">

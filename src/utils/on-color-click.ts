@@ -3,14 +3,14 @@ import { MoebiusSiteEventType } from 'types';
 import { copy } from './copy';
 import { setOptions } from './set-options';
 
-export const onColorClick = async (e: MoebiusSiteEventType<HTMLElement>) => {
-  const element = e.target;
+export const onColorClick = async (event: Event) => {
+  const element = (event as MoebiusSiteEventType<HTMLElement>).target;
   const hex = element.getAttribute(
     'data-color-hex'
   ) as MoebiusColorValueHexType;
 
   await copy(hex);
   setOptions({
-    baseColor: hex
+    baseColor: hex,
   });
 };

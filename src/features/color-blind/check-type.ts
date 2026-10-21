@@ -1,7 +1,6 @@
 import chroma from 'chroma-js';
-import blinder from 'lib/blinder';
-// import blinder from 'https://codepen.io/phun-ky/pen/BaMJLyP/2c4b533049234d5746cdb816eb6227ef.js'
-import { difference } from './difference.js';
+import { difference } from './difference';
+import { simulate } from './simulate';
 
 export const checkType = (colors: string[], type: string): boolean => {
   // let ok = 0;
@@ -25,8 +24,8 @@ export const checkType = (colors: string[], type: string): boolean => {
 
       if (distanceNorm < smallestPerceivableDistance) continue;
 
-      const aSim = blinder[type](colorA.hex());
-      const bSim = blinder[type](colorB.hex());
+      const aSim = simulate(colorA.hex(), type);
+      const bSim = simulate(colorB.hex(), type);
       const distanceSim = difference(aSim, bSim);
       const isNotOk =
         distanceNorm / distanceSim > ratioThreshold &&

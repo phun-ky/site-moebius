@@ -1,4 +1,6 @@
-export const updateCSSVars = (options) => {
+import { MoebiusSiteDefaultOptionsType } from 'config/constants';
+
+export const updateCSSVars = (options: MoebiusSiteDefaultOptionsType) => {
   const { MoebiusColor } = window;
   const primaryColor = new MoebiusColor(options.baseColor);
   const secondaryColor = new MoebiusColor(options.secondaryColor);

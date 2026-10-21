@@ -20,7 +20,7 @@ export const SettingsColorExtras = (
   addOnChange(
     '.ph.settings-color-extras input[type="checkbox"]',
     (e: EventType<HTMLInputElement>) => {
-      options[e.target.id] = e.target.checked;
+      (options as Record<string, unknown>)[e.target.id] = e.target.checked;
 
       setOptions(options);
     }
@@ -35,35 +35,35 @@ export const SettingsColorExtras = (
 
       <div class="ph settings-color-extras-inner">
         ${[
-    {
-      id: 'bezier',
-      title: 'bezier',
-      value: options.bezier
-    },
-    {
-      id: 'correctLightness',
-      title: 'correct lightness',
-      value: options.correctLightness
-    },
-    {
-      id: 'noDuplicates',
-      title: 'no duplicates',
-      value: options.noDuplicates
-    },
-    {
-      id: 'reverseDirection',
-      title: 'reverse direction',
-      value: options.reverseDirection
-    }
-  ]
-    .map((setting) => {
-      return Togglebox({
-        checked: setting.value,
-        name: setting.id,
-        id: setting.id,
-        label: setting.title
-      });
-      /*return html`<div class="ph input-group">
+          {
+            id: 'bezier',
+            title: 'bezier',
+            value: options.bezier,
+          },
+          {
+            id: 'correctLightness',
+            title: 'correct lightness',
+            value: options.correctLightness,
+          },
+          {
+            id: 'noDuplicates',
+            title: 'no duplicates',
+            value: options.noDuplicates,
+          },
+          {
+            id: 'reverseDirection',
+            title: 'reverse direction',
+            value: options.reverseDirection,
+          },
+        ]
+          .map((setting) => {
+            return Togglebox({
+              checked: setting.value,
+              name: setting.id,
+              id: setting.id,
+              label: setting.title,
+            });
+            /*return html`<div class="ph input-group">
             ${Checkbox({
     checked: setting.value,
     name: setting.id,
@@ -73,8 +73,8 @@ export const SettingsColorExtras = (
           </div>`;
 
           */
-    })
-    .join('\n')}
+          })
+          .join('\n')}
       </div>
     </fieldset>
   </form>`;

@@ -51,7 +51,7 @@ const App = async (match: RouterMatch, params: unknown) => {
   } else if (_page === 'ErrorPage') {
     const { ErrorPage: currentPage } = await import('./pages/ErrorPage');
 
-    content = currentPage({ params: _params });
+    content = currentPage({ params: _params as { error?: unknown } });
   } else {
     const { PageNotFoundPage: currentPage } = await import(
       './pages/PageNotFoundPage'

@@ -1,7 +1,7 @@
 import { updateCSSVars } from 'pages/StartPage/components/PickColor/utils/update-css-vars';
 import {
   DEFAULT_OPTIONS,
-  MoebiusSiteDefaultOptionsType
+  MoebiusSiteDefaultOptionsType,
 } from 'config/constants';
 import { readHashOptions } from 'utils/sanitize-options';
 
@@ -9,7 +9,7 @@ export const setOptions = (opts: MoebiusSiteDefaultOptionsType) => {
   const options = {
     ...DEFAULT_OPTIONS,
     ...readHashOptions(),
-    ...opts
+    ...opts,
   };
 
   updateCSSVars(options);

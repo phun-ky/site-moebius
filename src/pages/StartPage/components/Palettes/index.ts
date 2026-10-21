@@ -27,7 +27,7 @@ export const Palettes = async (props: PalettesPropsType) => {
     correctLightness,
     noDuplicates,
     colorScaleMode,
-    numberOfColors
+    numberOfColors,
   } = options;
   const { MoebiusColor, MoebiusPalettes } = window;
   const moebius = new MoebiusPalettes({
@@ -41,7 +41,7 @@ export const Palettes = async (props: PalettesPropsType) => {
     correctLightness,
     noDuplicates,
     colorScaleMode,
-    numberOfColors
+    numberOfColors,
   });
 
   addOnAfterAppRender(() => {

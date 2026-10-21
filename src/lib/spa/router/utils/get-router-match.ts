@@ -3,12 +3,11 @@ import { potentialMatchesMapper } from './potential-matches-mapper';
 
 export const getRouterMatch = (routes: Routes): RouterMatch => {
   // Test each route for a potential match.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const potentialMatches = routes.map(potentialMatchesMapper as any);
+  const potentialMatches = routes.map(potentialMatchesMapper);
 
   let match = potentialMatches.find(
-    (potentialMatch: RouterMatch) => potentialMatch.result !== null
-  ) as RouterMatch;
+    (potentialMatch) => potentialMatch.result !== null
+  );
 
   if (!match) {
     // javascript, i'm looking at you!!
@@ -16,7 +15,7 @@ export const getRouterMatch = (routes: Routes): RouterMatch => {
 
     match = {
       route: { path: '/404', page: 'PageNotFoundPage', name: 'Page not found' },
-      result: [pathName]
+      result: [pathName],
     };
   }
 

@@ -1,7 +1,7 @@
 import chroma from 'chroma-js';
 import {
   MoebiusSitePickColorItemType,
-  PickColor
+  PickColor,
 } from 'pages/StartPage/components/PickColor';
 import { getOptions } from 'utils/get-options';
 import { addOnAfterAppRender, addOnInput } from 'lib/spa';
@@ -20,12 +20,16 @@ import { SettingsColorBlind } from './components/Settings/SettingsColorBlind';
 
 const html = String.raw;
 
-export const StartPage = async ({ params }) => {
+export const StartPage = async ({
+  params,
+}: {
+  params: MoebiusSiteDefaultOptionsType;
+}) => {
   await initMoebius();
 
   const options = {
     ...(getOptions() as MoebiusSiteDefaultOptionsType),
-    ...params
+    ...params,
   };
 
   updateCSSVars(options);
@@ -143,24 +147,24 @@ export const StartPage = async ({ params }) => {
                 {
                   type: 'primary',
                   title: 'Primary',
-                  color: options.baseColor
+                  color: options.baseColor,
                 },
                 {
                   type: 'secondary',
                   title: 'Secondary',
-                  color: options.secondaryColor
+                  color: options.secondaryColor,
                 },
                 {
                   type: 'divergent',
                   title: 'Divergent',
-                  color: options.divergentColor
-                }
+                  color: options.divergentColor,
+                },
               ] as MoebiusSitePickColorItemType[]
-  )
-    .map((item: MoebiusSitePickColorItemType) =>
-      PickColor({ item, options })
-    )
-    .join('\n')}
+            )
+              .map((item: MoebiusSitePickColorItemType) =>
+                PickColor({ item, options })
+              )
+              .join('\n')}
           </div>
         </div>
         ${Settings({ options })} ${await Palettes({ options })}
