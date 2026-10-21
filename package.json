@@ -1,11 +1,8 @@
 {
   "name": "moebius-site",
-  "version": "0.0.1",
+  "private": true,
   "description": "asd",
   "type": "module",
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
     "clean": "rm -rf dist/*",
     "assets": "mkdir -p dist && cp -a ./public/. ./dist/ && cp -a ./src/assets/. ./dist/",
@@ -13,6 +10,8 @@
     "build": "rollup -c rollup.config.mjs",
     "postbuild": "bash -c 'mv -f ./dist/*.{js,map} ./dist/js'",
     "build:watch": "rollup -c rollup.config.mjs -w",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
     "commit": "npx git-cz",
     "dev": "npx browser-sync start -s \"dist\" --files \"dist/*.*\"  --single"
   },
