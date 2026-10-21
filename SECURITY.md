@@ -55,18 +55,14 @@ What you can rely on:
   values the site supports, and anything else is ignored (see
   [`sanitize-options.ts`](src/utils/sanitize-options.ts)). Values rendered into
   the page are escaped first.
+- **Nothing is loaded from other hosts.** Scripts, styles, code highlighting and
+  colour names are all served from moebius.wtf, so no other host sees your
+  visit. [`check-origins.mjs`](scripts/check-origins.mjs) loads every page in CI
+  and fails on any request to another host.
 - **Deploys are traceable.** The site is built and deployed only by
   [`deploy.yml`](.github/workflows/deploy.yml) in GitHub Actions, from `main`.
 
 What you can't rely on yet:
-
-- **The site loads files from other hosts.** Each request shows your IP address
-  to that host. Removing them is planned:
-
-  | Host          | What                         | Issue                                                    |
-  | ------------- | ---------------------------- | -------------------------------------------------------- |
-  | `unpkg.com`   | Prism, for code highlighting | [#34](https://github.com/phun-ky/site-moebius/issues/34) |
-  | `phun-ky.net` | Shared stylesheets           | [#34](https://github.com/phun-ky/site-moebius/issues/34) |
 
 - **No Content Security Policy yet.** GitHub Pages can't send security headers,
   so a `<meta>` policy is planned in
@@ -78,10 +74,11 @@ What you can't rely on yet:
 
 ## Dependencies
 
-**Choosing them.** The site bundles three runtime libraries (`@phun-ky/moebius`,
-`chroma-js` and `diff-dom`); everything else is a development dependency. A new
-runtime dependency is discussed in an issue first, and must be widely used,
-actively maintained and under an OSI-approved licence compatible with MIT.
+**Choosing them.** The site bundles four runtime libraries (`@phun-ky/moebius`,
+`chroma-js`, `diff-dom` and `prismjs`); everything else is a development
+dependency. A new runtime dependency is discussed in an issue first, and must be
+widely used, actively maintained and under an OSI-approved licence compatible
+with MIT.
 
 **Obtaining them.** Packages come only from the npm registry, with exact
 versions locked in `package-lock.json` and installed with `npm ci` in CI. GitHub

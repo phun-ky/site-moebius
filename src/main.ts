@@ -4,8 +4,11 @@ import { eventAfterAppRender } from './lib/spa/utils/event-after-app-render';
 import { popstate } from './lib/spa/utils/popstate';
 import { initTheme } from './utils/theme';
 
-// Styles
+// Styles, in the order the page used to load them: the shared phun-ky.net
+// styles, the site's own, then code highlighting
+import './styles/vendor/phun-ky/ph.css';
 import './styles/index.css';
+import './prism';
 
 // The theme button and the system setting
 initTheme();
