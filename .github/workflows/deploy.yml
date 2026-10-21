@@ -38,6 +38,12 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Keep the source maps # Moved out of dist by the build, not deployed
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: sourcemaps-${{ github.sha }}
+          path: sourcemaps
+          retention-days: 90
       - name: Upload artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
