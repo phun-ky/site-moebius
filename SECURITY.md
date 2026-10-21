@@ -64,18 +64,19 @@ What you can't rely on yet:
 - **The site loads files from other hosts.** Each request shows your IP address
   to that host. Removing them is planned:
 
-  | Host                        | What                                    | Issue                                                    |
-  | --------------------------- | --------------------------------------- | -------------------------------------------------------- |
-  | `color-names.herokuapp.com` | The colour name list (2.3 MB per visit) | [#31](https://github.com/phun-ky/site-moebius/issues/31) |
-  | `unpkg.com`                 | Prism, for code highlighting            | [#34](https://github.com/phun-ky/site-moebius/issues/34) |
-  | `phun-ky.net`               | Shared stylesheets                      | [#34](https://github.com/phun-ky/site-moebius/issues/34) |
-  | `i.creativecommons.org`     | A licence badge                         | [#30](https://github.com/phun-ky/site-moebius/issues/30) |
+  | Host                    | What                         | Issue                                                    |
+  | ----------------------- | ---------------------------- | -------------------------------------------------------- |
+  | `unpkg.com`             | Prism, for code highlighting | [#34](https://github.com/phun-ky/site-moebius/issues/34) |
+  | `phun-ky.net`           | Shared stylesheets           | [#34](https://github.com/phun-ky/site-moebius/issues/34) |
+  | `i.creativecommons.org` | A licence badge              | [#30](https://github.com/phun-ky/site-moebius/issues/30) |
 
 - **No Content Security Policy yet.** GitHub Pages can't send security
   headers, so a `<meta>` policy is planned in
   [#35](https://github.com/phun-ky/site-moebius/issues/35).
-- **Colour names are trusted as text.** Names from the colour name list are
-  escaped before they are rendered, but their wording is shown as it comes.
+- **Colour names are trusted as text.** Names come from
+  [color-name-list](https://github.com/meodai/color-names) (MIT), are built into
+  `/data/colornames.json` and served from this site. They are escaped before
+  they are rendered, but their wording is shown as it comes.
 
 ## Dependencies
 

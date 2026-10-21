@@ -3,7 +3,9 @@ import Moebius from '@phun-ky/moebius';
 export const initMoebius = async () => {
   if (window.MoebiusColor) return;
 
-  const m = await Moebius();
+  // Served from this site, built from color-name-list by
+  // scripts/build-color-names.mjs, instead of fetched from a third party
+  const m = await Moebius({ colorNames: '/data/colornames.json' });
 
   setTimeout(() => {
     const loadingElement = document.querySelector('.ph.loading');
