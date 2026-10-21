@@ -57,13 +57,16 @@ export const ColorPickerHueMap = (
       id="color-picker-hue-map-${type}"
       class="ph hue-map ${type}"
     ></div>
-    ${RangeInput({
-      id: `color-picker-range-${type}-hue`,
-      className: 'color-range',
-      step: 1,
-      value: currentColorHue.toFixed(),
-      min: 0,
-      max: 359
-    })}
+    <div class="ph input-group">
+      ${Label({ labelFor: `color-picker-range-${type}-hue`, label: 'hue' })}
+      ${RangeInput({
+        id: `color-picker-range-${type}-hue`,
+        className: 'color-range',
+        step: 1,
+        value: currentColorHue.toFixed(),
+        min: 0,
+        max: 359
+      })}
+    </div>
     ${extraRangeElements}`;
 };

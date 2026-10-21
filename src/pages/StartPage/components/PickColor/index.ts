@@ -145,6 +145,7 @@ export const PickColor = (props: MoebiusSitePickColorPropsType) => {
         id: `color-picker-input-${type}-color`,
         color: currentColor.hex,
         colorName: currentColor.name,
+        label: `Change the ${title.toLowerCase()} color, now ${currentColor.name}`,
         className: 'color-picker-button color'
       })}
       ${Dialog({

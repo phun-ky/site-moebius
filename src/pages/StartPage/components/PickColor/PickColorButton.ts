@@ -9,10 +9,11 @@ export type MoebiusSitePickColorButton = {
   color: string;
   className?: string;
   colorName?: string;
+  label: string;
 };
 
 export const PickColorButton = (props: MoebiusSitePickColorButton) => {
-  const { id, color, className, colorName } = props;
+  const { id, color, className, colorName, label } = props;
   const classNames = cx(`ph ${className}`);
 
   return html`<button
@@ -21,7 +22,7 @@ export const PickColorButton = (props: MoebiusSitePickColorButton) => {
     data-rel="${color}"
     data-color-name="${escapeAttribute(colorName)}"
     id="${id}"
-    aria-label="Pick a ${id} color"
+    aria-label="${escapeAttribute(label)}"
     style="background-color: ${color}; color: ${getA11yTextColor(color)}"
   ></button>`;
 };

@@ -46,22 +46,20 @@ describe('getA11yTextColor', () => {
     assert.equal(getA11yTextColor('#ffffff'), '#000000');
   });
 
-  it('always picks the text colour with the better contrast', () => {
+  it('picks white for #267e6b, where black falls below 4.5:1', () => {
+    assert.equal(getA11yTextColor('#267e6b'), '#ffffff');
+  });
+
+  it('always picks the text colour with the higher contrast', () => {
     fc.assert(
       fc.property(fc.integer({ min: 0, max: 0xffffff }), (n) => {
         const color = `#${n.toString(16).padStart(6, '0')}`;
         const text = getA11yTextColor(color);
         const other = text === '#ffffff' ? '#000000' : '#ffffff';
 
-        // White is preferred until its contrast drops below 5:1
-        if (text === '#000000') {
-          assert.ok(chroma.contrast(color, '#ffffff') < 5);
-        } else {
-          assert.ok(
-            chroma.contrast(color, text) >= 5 ||
-              chroma.contrast(color, other) < 5
-          );
-        }
+        assert.ok(
+          chroma.contrast(color, text) >= chroma.contrast(color, other)
+        );
       })
     );
   });

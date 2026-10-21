@@ -32,7 +32,8 @@ export const PaletteItem = (props: MoebiusSitePaletteItemPropsType) => {
       ${SettingsColorBlind({ options })}
       ${!isColorBlindSafe ? ColorBlindWarning(colorBlindCheckResult) : ''}
       <svg
-        xlmns="http://www.w3.org/2000/svg"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
         class="ph svg"
         id="${id}-svg"
         viewBox="0 0 256 256"

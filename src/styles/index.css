@@ -630,7 +630,8 @@ dialog.ph .ph.close:hover {
   color: var(--ph-color-text-accent);
 }
 .ph.button.color-unit-modal-toggle-button {
-  color: #000 !important;
+  /* Black in the light theme, light grey in the dark theme */
+  color: var(--ph-color-text-accent);
   width: 100%;
 }
 .ph.button.color-unit-modal-toggle-button .ph.icon {
