@@ -2,17 +2,9 @@ import {
   DEFAULT_OPTIONS,
   MoebiusSiteDefaultOptionsType
 } from 'config/constants';
+import { readHashOptions } from 'utils/sanitize-options';
 
-export const getOptions = (): MoebiusSiteDefaultOptionsType => {
-  let options = {};
-
-  try {
-    const url = new URL(window.location.href);
-
-    options = JSON.parse(atob(url.hash.replace('#options=', '')));
-  } catch (e) {
-    options = {};
-  }
-
-  return { ...DEFAULT_OPTIONS, ...options };
-};
+export const getOptions = (): MoebiusSiteDefaultOptionsType => ({
+  ...DEFAULT_OPTIONS,
+  ...readHashOptions()
+});

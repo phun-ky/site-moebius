@@ -1,4 +1,5 @@
 import { MoebiusColorInterface } from '@phun-ky/moebius';
+import { escapeAttribute } from 'utils/escape';
 
 const html = String.raw;
 
@@ -18,7 +19,7 @@ export const Color = (props: ColorPropsType) => {
     style="background-color: ${backgroundColor}; color: ${foregroundColor}"
     data-rel="${color.hex}"
     data-color-hex="${color.hex}"
-    data-color-name="${color.name}"
+    data-color-name="${escapeAttribute(color.name)}"
     data-color-rgb="${color.rgb}"
     data-color-hsl="${color.hsl}"
   >

@@ -1,3 +1,5 @@
+import { escapeText } from 'utils/escape';
+
 const html = String.raw;
 
 export type MoebiusSiteCodeBlockPropsType = {
@@ -17,6 +19,6 @@ export const CodeBlock = (props: MoebiusSiteCodeBlockPropsType) => {
     <pre
       class="ph language-${language}"
       language="${language}"
-    ><code class="ph language-${language} ${language}" id="${id}-code-${language}">${content}</code></pre>
+    ><code class="ph language-${language} ${language}" id="${id}-code-${language}">${escapeText(content)}</code></pre>
   </div>`;
 };
