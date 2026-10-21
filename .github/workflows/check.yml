@@ -49,6 +49,10 @@ jobs:
         run: npm run check:origins
       - name: Check the Content Security Policy
         run: npm run check:csp
+      - name: Check accessibility with axe # WCAG 2.2 A and AA, every page, both themes, phone and desktop
+        run: npm run check:a11y
+      - name: Check keyboard use and reduced motion
+        run: npm run check:keyboard
       - name: Check the routes # Served like GitHub Pages: every route 200, unknown paths 404
         run: npm run check:routes
       - name: Check the theme # Follows the system, saved choice wins, toggles once per click
