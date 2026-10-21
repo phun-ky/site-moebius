@@ -1,11 +1,38 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
-
 version: 2
 updates:
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: 'npm'
+    directory: '/'
+    # Major updates are not grouped, so each one gets its own PR to test and merge
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        update-types:
+          - 'minor'
+          - 'patch'
+    ignore:
+      # Keep @types/node on the Node major used by CI (24)
+      - dependency-name: '@types/node'
+        update-types:
+          - 'version-update:semver-major'
     schedule:
-      interval: "weekly"
+      interval: 'weekly'
+    labels:
+      - 'mindless: 📦 dependencies'
+    commit-message:
+      prefix: 'chore: 🤖 '
+    open-pull-requests-limit: 5
+
+  # Actions are pinned to commit SHAs; this keeps the pins and their version
+  # comments up to date
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    groups:
+      actions:
+        patterns:
+          - '*'
+    schedule:
+      interval: 'weekly'
+    labels:
+      - 'mindless: 📦 dependencies'
+    commit-message:
+      prefix: 'ci: 🎡 '
