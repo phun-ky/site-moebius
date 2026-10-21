@@ -2,6 +2,10 @@
 export {};
 
 declare global {
+  // The element that had focus before a render, restored after it
+
+  var activeElement: Element | null;
+
   interface Window {
     Prism: any;
     MoebiusColor: any;

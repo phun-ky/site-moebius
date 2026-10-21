@@ -1,4 +1,5 @@
 import { MoebiusColorValueHexType } from '@phun-ky/moebius';
+
 import { Label } from 'components/input-fields/Label';
 import { RangeInput } from 'components/input-fields/RangeInput';
 
@@ -57,12 +58,12 @@ export const ColorPickerHueMap = (
       class="ph hue-map ${type}"
     ></div>
     ${RangeInput({
-    id: `color-picker-range-${type}-hue`,
-    className: 'color-range',
-    step: 1,
-    value: currentColorHue.toFixed(),
-    min: 0,
-    max: 359
-  })}
+      id: `color-picker-range-${type}-hue`,
+      className: 'color-range',
+      step: 1,
+      value: currentColorHue.toFixed(),
+      min: 0,
+      max: 359
+    })}
     ${extraRangeElements}`;
 };

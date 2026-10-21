@@ -1,4 +1,5 @@
 import { MoebiusColorValueHexType } from '@phun-ky/moebius';
+
 import { shuffleArray } from 'utils/shuffle-array';
 
 const html = String.raw;
@@ -29,19 +30,19 @@ export const SVGPixels = (props: MoebiusSiteSVGPixelsPropsType) => {
     viewBox="0 0 ${width} ${width}"
   >
     ${newArray.map((color, index) => {
-    const mColor = new MoebiusColor(color);
+      const mColor = new MoebiusColor(color);
 
-    if (index !== 0) {
-      x += square;
-    }
+      if (index !== 0) {
+        x += square;
+      }
 
-    if (x >= squareItems * square - square / 2) {
-      x = 0;
-      y += square;
-      // yInterval++;
-    }
+      if (x >= squareItems * square - square / 2) {
+        x = 0;
+        y += square;
+        // yInterval++;
+      }
 
-    return `<rect height="${square}" width="${square}" fill="${mColor.hex}" data-color-hex="${mColor.hex}" x="${x}" y="${y}"/>`;
-  })}
+      return `<rect height="${square}" width="${square}" fill="${mColor.hex}" data-color-hex="${mColor.hex}" x="${x}" y="${y}"/>`;
+    })}
   </svg>`;
 };

@@ -111,7 +111,7 @@ export const readHashOptions = (): MoebiusSiteDefaultOptionsType => {
     const url = new URL(window.location.href);
 
     return sanitizeOptions(JSON.parse(atob(url.hash.replace('#options=', ''))));
-  } catch (e) {
+  } catch {
     return {};
   }
 };

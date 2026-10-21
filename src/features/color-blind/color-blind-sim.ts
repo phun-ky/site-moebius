@@ -1,18 +1,11 @@
-import chroma from 'chroma-js';
-import blinder from 'lib/blinder';
-import { COLOR_BLIND_SIM_TYPES } from 'utils/sanitize-options';
+import { simulate } from './simulate';
 
-// `type` can come from the URL: look it up in a Map of the known simulation
-// types instead of as a property of the simulator
-const SIMULATORS = new Map(
-  COLOR_BLIND_SIM_TYPES.filter(
-    (type) => typeof blinder[type] === 'function'
-  ).map((type) => [type, blinder[type]] as const)
-);
-
-export const colorBlindSim = (color, type) => {
-  const hex = chroma(color).hex();
-  const simulate = SIMULATORS.get(type);
-
-  return typeof simulate === 'function' ? simulate(hex) : hex;
-};
+/**
+ * Simulate a colour for the colour-blind simulator setting.
+ * @param {string} color - The colour.
+ * @param {string} type - The simulation type; unknown types, including values
+ *   from the URL that are not simulation types, return the colour unchanged.
+ * @returns {string} The simulated colour as hex.
+ */
+export const colorBlindSim = (color: string, type: string): string =>
+  simulate(color, type);

@@ -1,15 +1,17 @@
+import { MoebiusColorValueHexType } from '@phun-ky/moebius';
+
 import { Dialog } from 'components/feedback/Dialog';
 import { TextInput } from 'components/input-fields/TextInput';
-import { PickColorButton } from './PickColorButton';
-import { MoebiusColorValueHexType } from '@phun-ky/moebius';
-import { addOnAfterAppRender, addOnChange, addOnClick } from 'lib/spa';
-import { handleHueMapClick } from './utils/handle-hue-map-click';
-import { ColorUnitsForm } from './ColorUnitsForm';
-import { MouseEventType } from 'lib/spa/types';
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
-import { setOptions } from 'utils/set-options';
+import { addOnAfterAppRender, addOnChange, addOnClick } from 'lib/spa';
+import { MouseEventType } from 'lib/spa/types';
 import { MoebiusSiteEventType } from 'types';
+import { setOptions } from 'utils/set-options';
+
 import { ColorPickerHueMap } from './ColorPickerHueMap';
+import { ColorUnitsForm } from './ColorUnitsForm';
+import { PickColorButton } from './PickColorButton';
+import { handleHueMapClick } from './utils/handle-hue-map-click';
 
 const html = String.raw;
 
@@ -140,21 +142,21 @@ export const PickColor = (props: MoebiusSitePickColorPropsType) => {
     <legend class="ph">${title}</legend>
     <div class="ph color-picker-input">
       ${PickColorButton({
-    id: `color-picker-input-${type}-color`,
-    color: currentColor.hex,
-    colorName: currentColor.name,
-    className: 'color-picker-button color'
-  })}
+        id: `color-picker-input-${type}-color`,
+        color: currentColor.hex,
+        colorName: currentColor.name,
+        className: 'color-picker-button color'
+      })}
       ${Dialog({
-    id: `color-picker-modal-${type}`,
-    className: `color-picker-modal ${type}`,
-    content: ColorPickerHueMap({ type, color })
-  })}
+        id: `color-picker-modal-${type}`,
+        className: `color-picker-modal ${type}`,
+        content: ColorPickerHueMap({ type, color })
+      })}
       ${TextInput({
-    id: `color-picker-input-${type}-text`,
-    label: 'Hex code',
-    value: currentColor.hex.toUpperCase()
-  })}
+        id: `color-picker-input-${type}-text`,
+        label: 'Hex code',
+        value: currentColor.hex.toUpperCase()
+      })}
     </div>
 
     <button
@@ -165,9 +167,9 @@ export const PickColor = (props: MoebiusSitePickColorPropsType) => {
     </button>
 
     ${Dialog({
-    id: `color-units-${type}-modal`,
-    className: 'color-units-modal',
-    content: ColorUnitsForm({ color: color as MoebiusColorValueHexType })
-  })}
+      id: `color-units-${type}-modal`,
+      className: 'color-units-modal',
+      content: ColorUnitsForm({ color: color as MoebiusColorValueHexType })
+    })}
   </fieldset>`;
 };

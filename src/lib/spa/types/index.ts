@@ -1,34 +1,25 @@
-// eslint-disable-next-line no-unused-vars
-export type FunctionType = (...args: unknown[]) => void;
+// Handlers are registered with their own parameter types and called with
+// whatever the event delivers, so the registries store them loosely
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type FunctionType = (...args: any[]) => unknown;
+
+export type EventDataAction = FunctionType;
+
+export type TemplateCallback = FunctionType & { onRender?: FunctionType };
 
 export type EventDataId = {
   id: string;
-  // eslint-disable-next-line no-unused-vars
   callback: EventDataAction;
 };
-
-// eslint-disable-next-line no-unused-vars
-export type EventDataAction = (...args: unknown[]) => void;
 
 export type EventDataSelector = {
   selector: string;
-  // eslint-disable-next-line no-unused-vars
   callback: EventDataAction;
 };
 
-// eslint-disable-next-line no-unused-vars
-export type EventDataUnion<T> = FunctionType | T;
-
-export type EventArray<T> = EventDataUnion<T>[];
-
 export type UseStateValue =
-  | boolean
-  | string
-  | number
-  | unknown[]
-  | Record<string, unknown>;
+  boolean | string | number | unknown[] | Record<string, unknown>;
 
-// eslint-disable-next-line no-unused-vars
 export type UseStateReturn = [UseStateValue, FunctionType];
 
 export type StateContext = {

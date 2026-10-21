@@ -4,23 +4,21 @@
 // toggles exactly once, however often the page has re-rendered. Run after
 // `npm run build`, or pass a built site's directory. Uses the installed
 // Google Chrome; set CHROME_PATH to use another binary.
+import { chromium } from 'playwright-core';
+
 import { existsSync } from 'node:fs';
 import { join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
-
-import { chromium } from 'playwright-core';
 
 import { serve } from './lib/serve.mjs';
 
 const DIST = process.argv[2]
   ? normalize(process.argv[2])
   : fileURLToPath(new URL('../dist', import.meta.url));
-
 const isLight = (page) =>
   page.evaluate(() =>
     document.documentElement.classList.contains('theme--light')
   );
-
 const main = async () => {
   if (!existsSync(join(DIST, 'index.html'))) {
     throw new Error(
@@ -54,7 +52,7 @@ const main = async () => {
       await page.goto(url);
       await page.waitForSelector('[data-color-name]', {
         state: 'attached',
-        timeout: 30_000,
+        timeout: 30_000
       });
       await page.waitForFunction(
         () => !document.querySelector('.ph.loading.is-loading')
@@ -106,7 +104,7 @@ const main = async () => {
         for (const id of [
           'color-scale-lab',
           'color-scale-hsl',
-          'color-scale-lch',
+          'color-scale-lch'
         ]) {
           await page.click(`label[for="${id}"]`);
           await page.waitForFunction(

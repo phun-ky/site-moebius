@@ -3,11 +3,11 @@
 // path answers 404 with the site's own not-found page (#28). Run after
 // `npm run build`, or pass a built site's directory. Uses the installed
 // Google Chrome; set CHROME_PATH to use another binary.
+import { chromium } from 'playwright-core';
+
 import { existsSync, readFileSync } from 'node:fs';
 import { join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
-
-import { chromium } from 'playwright-core';
 
 import { parseRoutePaths } from './build-routes.mjs';
 import { serve } from './lib/serve.mjs';
@@ -21,7 +21,6 @@ const ROUTES = fileURLToPath(
 // What each route must show once the app has rendered it
 const EXPECTED = { '/': '[data-color-name]', '/about': 'main h1' };
 const UNKNOWN = '/this-page-does-not-exist';
-
 const main = async () => {
   if (!existsSync(join(DIST, 'index.html'))) {
     throw new Error(

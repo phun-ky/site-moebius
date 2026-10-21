@@ -2,6 +2,7 @@ export const eventAfterAppRender = () => {
   // Preserve focus state on render
   if (
     document.activeElement &&
+    globalThis.activeElement &&
     !document.activeElement.isEqualNode(globalThis.activeElement)
   ) {
     const { id } = globalThis.activeElement;

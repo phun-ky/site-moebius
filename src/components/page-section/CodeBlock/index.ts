@@ -19,6 +19,8 @@ export const CodeBlock = (props: MoebiusSiteCodeBlockPropsType) => {
     <pre
       class="ph language-${language}"
       language="${language}"
-    ><code class="ph language-${language} ${language}" id="${id}-code-${language}">${escapeText(content)}</code></pre>
+    ><code class="ph language-${language} ${language}" id="${id}-code-${language}">${escapeText(
+      content
+    )}</code></pre>
   </div>`;
 };

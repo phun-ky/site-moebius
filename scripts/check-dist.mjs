@@ -1,11 +1,11 @@
 // Check what the build ships in dist (#29): no source maps or references to
 // them, no leftover test files, and minified JavaScript. Run after `npm run
 // build`, or pass a built site's directory.
+import { minify } from 'terser';
+
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, normalize, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
-
-import { minify } from 'terser';
 
 const DIST = process.argv[2]
   ? normalize(process.argv[2])
@@ -13,7 +13,6 @@ const DIST = process.argv[2]
 // Minifying an already minified file again saves almost nothing (under 1%);
 // an unminified chunk shrinks to about half its size or less
 const MAX_REMINIFY_SAVING = 0.1;
-
 const walk = (dir) =>
   readdirSync(dir).flatMap((name) => {
     const path = join(dir, name);

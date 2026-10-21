@@ -1,10 +1,8 @@
+import { Route, RouterMatch } from '../types';
 import { getParams } from '../utils/get-params';
 
-import { Route, RouterMatch } from '../types';
-
-import { getRouterMatch } from './utils/get-router-match';
-
 import { routes } from './routes';
+import { getRouterMatch } from './utils/get-router-match';
 
 let previousPage: RouterMatch = {
   route: { name: 'none' }

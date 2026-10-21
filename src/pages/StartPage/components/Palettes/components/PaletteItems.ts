@@ -1,5 +1,6 @@
 import { Tabs } from 'components/navigation/Tabs';
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
+
 import { paletteItemsMapper } from '../utils/palette-items-mapper';
 
 export type MoebiusSitePaletteItemsPropsType = {

@@ -1,6 +1,6 @@
 const html = String.raw;
 
-import './styles/rangeInput.styl';
+import './styles/rangeInput.css';
 
 export type MoebiusSiteRangeInputPropsType = {
   id: string;

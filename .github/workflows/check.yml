@@ -39,6 +39,8 @@ jobs:
         run: npm run typecheck
       - name: Lint
         run: npm run lint
+      - name: Check formatting
+        run: npm run format:check
       - name: Test
         run: npm test
       - name: Check the layout # Headless Chrome (installed on the runner): no sideways scroll at any width

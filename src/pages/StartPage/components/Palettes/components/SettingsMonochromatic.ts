@@ -19,11 +19,11 @@ export const SettingsMonochromatic = (
           <legend class="ph">Settings</legend>
           <div class="ph">
             ${Togglebox({
-    checked: options.randomOffset,
-    name: 'random-offset',
-    id: 'monochromatic-random-offset',
-    label: 'random offset'
-  })}
+              checked: options.randomOffset,
+              name: 'random-offset',
+              id: 'monochromatic-random-offset',
+              label: 'random offset'
+            })}
           </div>
         </fieldset>
       </form>`

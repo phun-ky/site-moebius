@@ -8,8 +8,8 @@ export const generateAccentGradientCssVariables = (
 ): void => {
   const { MoebiusColor } = window;
 
-  Object.keys(accents).forEach((id: string) => {
-    const groups = accents[id];
+  Object.keys(accents).forEach((id) => {
+    const groups = accents[id as keyof MoebiusPaletteAccentColorsInterface];
 
     groups.forEach((colors: MoebiusColorValueHexType[], index: number) => {
       // Calculate start percentages for each color in the gradient.

@@ -1,11 +1,11 @@
-import { MoebiusSiteDefaultOptionsType } from 'config/constants';
-import { RadioButton } from 'components/input-fields/RadioButton';
 import { Label } from 'components/input-fields/Label';
+import { RadioButton } from 'components/input-fields/RadioButton';
+import { MoebiusSiteDefaultOptionsType } from 'config/constants';
 import { addOnChange } from 'lib/spa';
 import { EventType } from 'lib/spa/types';
 import { setOptions } from 'utils/set-options';
 
-import './styles/settingsColorScale.styl';
+import './styles/settingsColorScale.css';
 
 const html = String.raw;
 
@@ -33,27 +33,27 @@ export const SettingsColorScale = (
       <legend class="ph">Color scale method</legend>
       <div class="ph settings-color-scale-inner">
         ${[
-    { id: 'rgb', title: 'rgb' },
-    { id: 'lab', title: 'lab' },
-    { id: 'lrgb', title: 'lrgb' },
-    { id: 'hsl', title: 'hsl' },
-    { id: 'lch', title: 'lch' }
-  ]
-    .map((setting) => {
-      return html`<div class="ph input-group">
+          { id: 'rgb', title: 'rgb' },
+          { id: 'lab', title: 'lab' },
+          { id: 'lrgb', title: 'lrgb' },
+          { id: 'hsl', title: 'hsl' },
+          { id: 'lch', title: 'lch' }
+        ]
+          .map((setting) => {
+            return html`<div class="ph input-group">
               ${RadioButton({
-    checked: setting.id === options.colorScaleMode,
-    value: setting.id,
-    id: `color-scale-${setting.id}`,
-    name: 'color-scale'
-  })}
+                checked: setting.id === options.colorScaleMode,
+                value: setting.id,
+                id: `color-scale-${setting.id}`,
+                name: 'color-scale'
+              })}
               ${Label({
-    labelFor: `color-scale-${setting.id}`,
-    label: setting.title
-  })}
+                labelFor: `color-scale-${setting.id}`,
+                label: setting.title
+              })}
             </div>`;
-    })
-    .join('\n')}
+          })
+          .join('\n')}
       </div>
     </fieldset>
   </form>`;

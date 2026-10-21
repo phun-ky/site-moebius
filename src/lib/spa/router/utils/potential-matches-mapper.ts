@@ -1,8 +1,6 @@
 import { RouterMatch, Route } from '../../types';
 
-export const potentialMatchesMapper = (
-  route: Route
-): RouterMatch => {
+export const potentialMatchesMapper = (route: Route): RouterMatch => {
   // javascript, i'm looking at you!!
   const pathName = decodeURI(location.pathname) + '';
 

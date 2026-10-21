@@ -1,16 +1,15 @@
-import { getParams } from './lib/spa/utils/get-params';
-import { RouterMatch } from './lib/spa/types';
+import { Footer } from './components/page-section/Footer';
+import { Header } from './components/page-section/Header';
 import { addOnAfterAppRender } from './lib/spa';
+import { RouterMatch } from './lib/spa/types';
+import { getParams } from './lib/spa/utils/get-params';
 import { hideLoading } from './utils/hide-loading';
 import { readHashOptions } from './utils/sanitize-options';
-
-import { Header } from './components/page-section/Header';
-import { Footer } from './components/page-section/Footer';
 
 const html = String.raw;
 const App = async (match: RouterMatch, params: unknown) => {
   let _page: string;
-  let _params = params;
+  let _params: unknown;
   let _hashParams = {};
 
   if (typeof match === 'string') {
@@ -38,7 +37,7 @@ const App = async (match: RouterMatch, params: unknown) => {
     addOnAfterAppRender(hideLoading);
   }
 
-  let content = '';
+  let content: string;
 
   if (_page === 'StartPage') {
     const { StartPage: currentPage } = await import('./pages/StartPage');
@@ -51,11 +50,10 @@ const App = async (match: RouterMatch, params: unknown) => {
   } else if (_page === 'ErrorPage') {
     const { ErrorPage: currentPage } = await import('./pages/ErrorPage');
 
-    content = currentPage({ params: _params });
+    content = currentPage({ params: _params as { error?: unknown } });
   } else {
-    const { PageNotFoundPage: currentPage } = await import(
-      './pages/PageNotFoundPage'
-    );
+    const { PageNotFoundPage: currentPage } =
+      await import('./pages/PageNotFoundPage');
 
     content = currentPage();
   }

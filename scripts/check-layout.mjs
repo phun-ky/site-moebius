@@ -2,15 +2,16 @@
 // in the dark and light theme, and fail if the page scrolls sideways (#27).
 // Run after `npm run build`, or pass a built site's directory. Uses the installed Google Chrome; set
 // CHROME_PATH to use another binary.
+import { chromium } from 'playwright-core';
+
 import { existsSync } from 'node:fs';
 import { join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { chromium } from 'playwright-core';
-
 import { serve } from './lib/serve.mjs';
 
 export const WIDTHS = [320, 360, 390, 425, 768, 1024, 1440];
+
 export const THEMES = ['dark', 'light'];
 
 // The built site; pass another directory as the first argument to check it
@@ -41,7 +42,7 @@ const main = async () => {
           isMobile: phone,
           hasTouch: phone,
           // The site follows the system setting while no theme is saved
-          colorScheme: theme,
+          colorScheme: theme
         });
 
         try {
@@ -50,7 +51,7 @@ const main = async () => {
           await page.goto(url);
           await page.waitForSelector('[data-color-name]', {
             state: 'attached',
-            timeout: 30_000,
+            timeout: 30_000
           });
 
           const light = await page.evaluate(() =>
@@ -63,7 +64,7 @@ const main = async () => {
 
           const { clientWidth, scrollWidth } = await page.evaluate(() => ({
             clientWidth: document.documentElement.clientWidth,
-            scrollWidth: document.documentElement.scrollWidth,
+            scrollWidth: document.documentElement.scrollWidth
           }));
           const ok = clientWidth === width && scrollWidth <= clientWidth;
 

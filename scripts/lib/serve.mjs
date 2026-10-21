@@ -14,9 +14,8 @@ const TYPES = {
   '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon',
   '.txt': 'text/plain',
-  '.webmanifest': 'application/manifest+json',
+  '.webmanifest': 'application/manifest+json'
 };
-
 const isFile = (file) => existsSync(file) && statSync(file).isFile();
 
 /**
@@ -51,7 +50,7 @@ export const serve = (root) =>
 
       res.writeHead(file ? 200 : 404, {
         'content-type':
-          TYPES[extname(file ?? notFound)] ?? 'application/octet-stream',
+          TYPES[extname(file ?? notFound)] ?? 'application/octet-stream'
       });
       createReadStream(file ?? notFound).pipe(res);
     });

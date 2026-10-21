@@ -1,9 +1,9 @@
-import { MoebiusSiteDefaultOptionsType } from 'config/constants';
-import { RadioButton } from 'components/input-fields/RadioButton';
 import { Label } from 'components/input-fields/Label';
+import { RadioButton } from 'components/input-fields/RadioButton';
+import { MoebiusSiteDefaultOptionsType } from 'config/constants';
 import { uniqueID } from 'utils/unique-id';
 
-import './styles/settingsColorBlind.styl';
+import './styles/settingsColorBlind.css';
 
 const html = String.raw;
 
@@ -25,31 +25,31 @@ export const SettingsColorBlind = (
       <legend class="ph">Color blind simulator</legend>
       <div class="ph color-blind-inner">
         ${[
-    { id: 'normal', title: 'normal' },
-    { id: 'protanomaly', title: 'protanomaly' },
-    { id: 'protanopia', title: 'protanopia' },
-    { id: 'deuteranomaly', title: 'deuteranomaly' },
-    { id: 'deuteranopia', title: 'deuteranopia' },
-    { id: 'tritanomaly', title: 'tritanomaly' },
-    { id: 'tritanopia', title: 'tritanopia' },
-    { id: 'achromatomaly', title: 'achromatomaly' },
-    { id: 'achromatopsia', title: 'achromatopsia' }
-  ]
-    .map((setting) => {
-      return html`<div class="ph input-group">
+          { id: 'normal', title: 'normal' },
+          { id: 'protanomaly', title: 'protanomaly' },
+          { id: 'protanopia', title: 'protanopia' },
+          { id: 'deuteranomaly', title: 'deuteranomaly' },
+          { id: 'deuteranopia', title: 'deuteranopia' },
+          { id: 'tritanomaly', title: 'tritanomaly' },
+          { id: 'tritanopia', title: 'tritanopia' },
+          { id: 'achromatomaly', title: 'achromatomaly' },
+          { id: 'achromatopsia', title: 'achromatopsia' }
+        ]
+          .map((setting) => {
+            return html`<div class="ph input-group">
               ${RadioButton({
-    checked: setting.id === options.colorBlindSim,
-    value: setting.id,
-    id,
-    name: 'color-blind-sim'
-  })}
+                checked: setting.id === options.colorBlindSim,
+                value: setting.id,
+                id,
+                name: 'color-blind-sim'
+              })}
               ${Label({
-    labelFor: id,
-    label: setting.title
-  })}
+                labelFor: id,
+                label: setting.title
+              })}
             </div>`;
-    })
-    .join('\n')}
+          })
+          .join('\n')}
       </div>
     </fieldset>
   </form>`;

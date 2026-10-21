@@ -1,6 +1,6 @@
 import { cx } from 'utils/cx';
 
-import './styles/textInput.styl';
+import './styles/textInput.css';
 
 const html = String.raw;
 

@@ -8,10 +8,10 @@ import fc from 'fast-check';
 import { resolveTheme } from '../theme';
 
 const THEME_SCRIPT = readFileSync(
-  new URL('../../assets/js/theme.js', import.meta.url),
+  new URL('../../../public/js/theme.js', import.meta.url),
   'utf8'
 );
-// Run src/assets/js/theme.js against fake browser globals and report the
+// Run public/js/theme.js against fake browser globals and report the
 // theme it set
 const runThemeScript = (
   stored: string | null,

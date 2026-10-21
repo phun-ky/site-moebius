@@ -56,7 +56,7 @@ const main = async () => {
   );
   const files = [
     ...parseRoutePaths(source).map(routeFile).filter(Boolean),
-    '404.html',
+    '404.html'
   ];
 
   for (const file of files) {

@@ -40,7 +40,7 @@ describe('routeFile', () => {
       '/about/',
       '/a b',
       '/a?b',
-      '/:id',
+      '/:id'
     ]) {
       assert.throws(() => routeFile(path), TypeError, path);
     }

@@ -1,12 +1,13 @@
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
 import { addOnAfterAppRender, addOnChange } from 'lib/spa';
+import { EventType } from 'lib/spa/types';
 import { MoebiusSiteEventType } from 'types';
 import { generateAccentGradientCssVariables } from 'utils/generate-accent-gradients-css-variables';
 import { setOptions } from 'utils/set-options';
-import { PaletteItems } from './components/PaletteItems';
-import { EventType } from 'lib/spa/types';
 
-import './styles/palettes.styl';
+import { PaletteItems } from './components/PaletteItems';
+
+import './styles/palettes.css';
 
 const html = String.raw;
 

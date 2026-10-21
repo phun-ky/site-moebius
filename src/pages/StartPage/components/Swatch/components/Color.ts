@@ -1,4 +1,5 @@
 import { MoebiusColorInterface } from '@phun-ky/moebius';
+
 import { escapeAttribute } from 'utils/escape';
 
 const html = String.raw;

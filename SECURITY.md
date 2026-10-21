@@ -6,8 +6,8 @@ server, no account and no database.
 
 ## Supported Versions
 
-Only the live site is supported. There are no releases or versions to upgrade:
-a fix is live as soon as it is merged and the deploy has finished.
+Only the live site is supported. There are no releases or versions to upgrade: a
+fix is live as soon as it is merged and the deploy has finished.
 
 | Deployment                                    | Supported |
 | --------------------------------------------- | --------- |
@@ -28,8 +28,8 @@ security problem.
 2. **Assessment:** the maintainer reproduces the issue on the live site and
    judges its severity, and may ask you for details.
 3. **Fix:** a fix is developed against a draft GitHub security advisory, merged
-   and deployed. The aim is a fix within 30 days for serious issues, and
-   sooner when the problem can be exploited through a link.
+   and deployed. The aim is a fix within 30 days for serious issues, and sooner
+   when the problem can be exploited through a link.
 4. **Disclosure:** the advisory is published once the fix is deployed and
    checked on the live site. There is normally no CVE, since there is nothing
    for anyone else to update. Please keep the issue private until then.
@@ -46,14 +46,13 @@ Published advisories:
 
 What you can rely on:
 
-- **No accounts and nothing stored on a server.** The site has no backend and
-  no forms that send data anywhere.
+- **No accounts and nothing stored on a server.** The site has no backend and no
+  forms that send data anywhere.
 - **Your settings stay in your browser.** Palette settings live in the
-  `#options=` part of the URL, which browsers never send to a server. The
-  light or dark theme choice is kept in `localStorage`. Nothing else is
-  stored.
-- **Links can't run code.** Every option read from a URL is checked against
-  the values the site supports, and anything else is ignored (see
+  `#options=` part of the URL, which browsers never send to a server. The light
+  or dark theme choice is kept in `localStorage`. Nothing else is stored.
+- **Links can't run code.** Every option read from a URL is checked against the
+  values the site supports, and anything else is ignored (see
   [`sanitize-options.ts`](src/utils/sanitize-options.ts)). Values rendered into
   the page are escaped first.
 - **Deploys are traceable.** The site is built and deployed only by
@@ -69,8 +68,8 @@ What you can't rely on yet:
   | `unpkg.com`   | Prism, for code highlighting | [#34](https://github.com/phun-ky/site-moebius/issues/34) |
   | `phun-ky.net` | Shared stylesheets           | [#34](https://github.com/phun-ky/site-moebius/issues/34) |
 
-- **No Content Security Policy yet.** GitHub Pages can't send security
-  headers, so a `<meta>` policy is planned in
+- **No Content Security Policy yet.** GitHub Pages can't send security headers,
+  so a `<meta>` policy is planned in
   [#35](https://github.com/phun-ky/site-moebius/issues/35).
 - **Colour names are trusted as text.** Names come from
   [color-name-list](https://github.com/meodai/color-names) (MIT), are built into
@@ -85,8 +84,8 @@ runtime dependency is discussed in an issue first, and must be widely used,
 actively maintained and under an OSI-approved licence compatible with MIT.
 
 **Obtaining them.** Packages come only from the npm registry, with exact
-versions locked in `package-lock.json` and installed with `npm ci` in CI.
-GitHub Actions are pinned to commit SHAs.
+versions locked in `package-lock.json` and installed with `npm ci` in CI. GitHub
+Actions are pinned to commit SHAs.
 
 **Tracking them.** Dependabot proposes version updates weekly and security
 updates as soon as an advisory is published. Every pull request runs
@@ -104,9 +103,9 @@ Advisory Database:
 
 ## Code Scanning
 
-CodeQL analyses every pull request and every push to `main`, for the
-TypeScript code and the GitHub Actions workflows. OpenSSF Scorecard runs on
-every push to `main` and weekly:
+CodeQL analyses every pull request and every push to `main`, for the TypeScript
+code and the GitHub Actions workflows. OpenSSF Scorecard runs on every push to
+`main` and weekly:
 [scorecard.dev](https://scorecard.dev/viewer/?uri=github.com/phun-ky/site-moebius).
 
 ## Secrets

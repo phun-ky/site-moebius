@@ -1,9 +1,9 @@
 const html = String.raw;
 
-import './styles/header.styl';
+import './styles/header.css';
 
-import logoSvg from '../../../assets/img/logo.svg';
-import logoTextSvg from '../../../assets/img/logo-text.svg';
+import logoTextSvg from './logo-text.svg?raw';
+import logoSvg from './logo.svg?raw';
 
 export const Header = () => {
   return html`<header class="ph header">
