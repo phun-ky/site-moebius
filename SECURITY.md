@@ -64,11 +64,10 @@ What you can't rely on yet:
 - **The site loads files from other hosts.** Each request shows your IP address
   to that host. Removing them is planned:
 
-  | Host                    | What                         | Issue                                                    |
-  | ----------------------- | ---------------------------- | -------------------------------------------------------- |
-  | `unpkg.com`             | Prism, for code highlighting | [#34](https://github.com/phun-ky/site-moebius/issues/34) |
-  | `phun-ky.net`           | Shared stylesheets           | [#34](https://github.com/phun-ky/site-moebius/issues/34) |
-  | `i.creativecommons.org` | A licence badge              | [#30](https://github.com/phun-ky/site-moebius/issues/30) |
+  | Host          | What                         | Issue                                                    |
+  | ------------- | ---------------------------- | -------------------------------------------------------- |
+  | `unpkg.com`   | Prism, for code highlighting | [#34](https://github.com/phun-ky/site-moebius/issues/34) |
+  | `phun-ky.net` | Shared stylesheets           | [#34](https://github.com/phun-ky/site-moebius/issues/34) |
 
 - **No Content Security Policy yet.** GitHub Pages can't send security
   headers, so a `<meta>` policy is planned in
