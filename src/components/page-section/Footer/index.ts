@@ -1,4 +1,8 @@
 const html = String.raw;
+// Keep each link on one line: diff-dom, which renders these templates, does
+// not close a tag written as `</a` + newline + `>`
+const COLOR_NAME_LIST = 'https://github.com/meodai/color-names';
+const COLOR_NAME_LICENSE = '/data/colornames.LICENSE.txt';
 
 export const Footer = () => {
   return html`<footer class="ph">
@@ -44,6 +48,12 @@ export const Footer = () => {
           International License
         </a>
         .
+      </p>
+      <p class="ph">
+        Color names from
+        <a class="ph" href="${COLOR_NAME_LIST}">color-name-list</a>
+        by David Aerne, under the
+        <a class="ph" href="${COLOR_NAME_LICENSE}">MIT License</a>.
       </p>
     </div>
   </footer>`;
