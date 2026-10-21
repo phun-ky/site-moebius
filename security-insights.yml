@@ -1,0 +1,121 @@
+header:
+  schema-version: 2.2.0
+  last-updated: '2026-10-21'
+  last-reviewed: '2026-10-21'
+  url: https://raw.githubusercontent.com/phun-ky/site-moebius/main/security-insights.yml
+  comment: |
+    Security information for the moebius website, in the OpenSSF Security
+    Insights format. Keep it in step with SECURITY.md.
+
+project:
+  name: moebius
+  homepage: https://moebius.wtf
+  roadmap: https://github.com/phun-ky/site-moebius/milestones
+  funding: https://github.com/sponsors/phun-ky
+  administrators:
+    - name: Alexander Vassbotn Røyne-Helgesen
+      social: https://github.com/phun-ky
+      primary: true
+  documentation:
+    support-policy: https://github.com/phun-ky/site-moebius/blob/main/SECURITY.md#supported-versions
+  repositories:
+    - name: site-moebius
+      url: https://github.com/phun-ky/site-moebius
+      comment: |
+        The website's source, built and deployed to https://moebius.wtf on
+        every merge to main.
+  vulnerability-reporting:
+    reports-accepted: true
+    bug-bounty-available: false
+    policy: https://github.com/phun-ky/site-moebius/blob/main/SECURITY.md
+    comment: |
+      Report privately with GitHub's private vulnerability reporting
+      (https://github.com/phun-ky/site-moebius/security/advisories/new)
+      or by email to the contact below.
+    contact:
+      name: moebius security contact
+      email: security@phun-ky.net
+      primary: true
+
+repository:
+  url: https://github.com/phun-ky/site-moebius
+  status: active
+  accepts-change-request: true
+  accepts-automated-change-request: true
+  no-third-party-packages: false
+  core-team:
+    - name: Alexander Vassbotn Røyne-Helgesen
+      social: https://github.com/phun-ky
+      primary: true
+  documentation:
+    security-policy: https://github.com/phun-ky/site-moebius/blob/main/SECURITY.md
+    dependency-management-policy: https://github.com/phun-ky/site-moebius/blob/main/SECURITY.md#dependencies
+  license:
+    url: https://github.com/phun-ky/site-moebius/blob/main/LICENSE
+    expression: MIT
+  release:
+    automated-pipeline: true
+    distribution-points:
+      - uri: https://moebius.wtf
+        comment: |
+          The website, deployed to GitHub Pages by .github/workflows/deploy.yml
+          on every merge to main. There are no versioned releases.
+  security:
+    assessments:
+      self:
+        evidence: https://github.com/phun-ky/site-moebius/blob/main/SECURITY.md#security-expectations
+        date: '2026-10-21'
+        comment: |
+          The security expectations in SECURITY.md list what the site
+          guarantees and the known gaps, each linked to the issue that
+          closes it.
+    tools:
+      - name: CodeQL
+        type: SAST
+        rulesets:
+          - default
+        integration:
+          adhoc: false
+          ci: true
+          release: false
+        results: {}
+        comment: |
+          GitHub default setup, scanning JavaScript/TypeScript and the GitHub
+          Actions workflows on every push to main and every pull request.
+      - name: Dependabot
+        type: SCA
+        rulesets:
+          - default
+        integration:
+          adhoc: true
+          ci: false
+          release: false
+        results: {}
+        comment: |
+          Weekly checks of the npm dependencies and GitHub Actions, with
+          update pull requests, and security updates when an advisory is
+          published.
+      - name: Dependency Review
+        type: SCA
+        rulesets:
+          - default
+        integration:
+          adhoc: false
+          ci: true
+          release: false
+        results: {}
+        comment: |
+          Fails pull requests that add a dependency with a known high or
+          critical vulnerability.
+      - name: OpenSSF Scorecard
+        type: other
+        rulesets:
+          - default
+        integration:
+          adhoc: false
+          ci: true
+          release: false
+        results: {}
+        comment: |
+          Runs on every push to main and weekly; results at
+          https://scorecard.dev/viewer/?uri=github.com/phun-ky/site-moebius
