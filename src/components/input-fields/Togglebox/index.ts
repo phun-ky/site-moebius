@@ -2,7 +2,7 @@ const html = String.raw;
 
 import { Checkbox } from '../Checkbox';
 import { Label } from '../Label';
-import './styles/togglebox.styl';
+import './styles/togglebox.css';
 
 export type MoebiusSiteToggleboxPropsType = {
   checked?: boolean;

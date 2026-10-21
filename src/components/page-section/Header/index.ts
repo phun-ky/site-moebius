@@ -1,6 +1,6 @@
 const html = String.raw;
 
-import './styles/header.styl';
+import './styles/header.css';
 
 import logoTextSvg from './logo-text.svg?raw';
 import logoSvg from './logo.svg?raw';

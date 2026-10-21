@@ -3,7 +3,7 @@ import { RadioButton } from 'components/input-fields/RadioButton';
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
 import { uniqueID } from 'utils/unique-id';
 
-import './styles/settingsColorBlind.styl';
+import './styles/settingsColorBlind.css';
 
 const html = String.raw;
 

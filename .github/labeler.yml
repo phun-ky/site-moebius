@@ -24,7 +24,6 @@
               - '.eslintrc'
               - '.eslintignore'
               - '.browserslistrc'
-              - '.stylintrc'
               - 'tsconfig*.json'
               - 'scripts/**'
               - 'vite.config.ts'
@@ -32,7 +31,6 @@
   - any:
       - changed-files:
           - any-glob-to-any-file:
-              - '**/*.styl'
               - '**/*.css'
               - 'public/**'
               - 'index.html'

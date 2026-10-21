@@ -1,7 +1,7 @@
 const html = String.raw;
 
 import { uniqueID } from 'utils/unique-id';
-import './styles/radioButton.styl';
+import './styles/radioButton.css';
 
 export type MoebiusSiteRadioButtonPropsType = {
   checked?: boolean;

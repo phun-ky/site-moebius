@@ -1,4 +1,4 @@
-import './styles/checkbox.styl';
+import './styles/checkbox.css';
 
 const html = String.raw;
 

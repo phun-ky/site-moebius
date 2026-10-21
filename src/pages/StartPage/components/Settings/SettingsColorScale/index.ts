@@ -5,7 +5,7 @@ import { addOnChange } from 'lib/spa';
 import { EventType } from 'lib/spa/types';
 import { setOptions } from 'utils/set-options';
 
-import './styles/settingsColorScale.styl';
+import './styles/settingsColorScale.css';
 
 const html = String.raw;
 

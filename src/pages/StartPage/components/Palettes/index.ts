@@ -7,7 +7,7 @@ import { setOptions } from 'utils/set-options';
 
 import { PaletteItems } from './components/PaletteItems';
 
-import './styles/palettes.styl';
+import './styles/palettes.css';
 
 const html = String.raw;
 

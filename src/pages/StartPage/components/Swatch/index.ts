@@ -4,7 +4,7 @@ import { getA11yTextColor } from 'utils/get-a11y-text-color';
 
 import { Color } from './components/Color';
 
-import './styles/swatch.styl';
+import './styles/swatch.css';
 
 export const Swatch = (
   colors: string[],

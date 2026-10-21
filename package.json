@@ -42,7 +42,6 @@
     "globals": "^17.13.0",
     "playwright-core": "^1.63.0",
     "prettier": "^3.9.9",
-    "stylus": "^0.60.0",
     "terser": "^5.24.0",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",

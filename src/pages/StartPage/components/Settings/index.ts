@@ -3,7 +3,7 @@ import { MoebiusSiteDefaultOptionsType } from 'config/constants';
 import { SettingsColorExtras } from './SettingsColorExtras';
 import { SettingsColorScale } from './SettingsColorScale';
 
-import './styles/settings.styl';
+import './styles/settings.css';
 
 const html = String.raw;
 
