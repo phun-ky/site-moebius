@@ -25,7 +25,10 @@ export const Header = () => {
       >
         sponsor me!
       </a>
-      <button class="ph darkmode-button">
+      <button
+        class="ph darkmode-button"
+        aria-label="Switch between light and dark theme"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           aria-label="Sun Icon"

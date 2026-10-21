@@ -17,6 +17,7 @@
     "check:layout": "node scripts/check-layout.mjs",
     "check:routes": "node scripts/check-routes.mjs",
     "check:dist": "node scripts/check-dist.mjs",
+    "check:theme": "node scripts/check-theme.mjs",
     "commit": "npx git-cz",
     "dev": "npx browser-sync start -s \"dist\" --files \"dist/*.*\"  --single"
   },
