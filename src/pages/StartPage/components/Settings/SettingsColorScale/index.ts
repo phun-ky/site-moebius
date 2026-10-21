@@ -25,10 +25,7 @@ export const SettingsColorScale = (
     }
   );
 
-  return html` <form
-    class="ph settings-color-scale"
-    onsubmit="javascript:return false;"
-  >
+  return html` <form class="ph settings-color-scale">
     <fieldset class="ph settings-color-scale-fieldset">
       <legend class="ph">Color scale method</legend>
       <div class="ph settings-color-scale-inner">

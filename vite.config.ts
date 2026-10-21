@@ -50,9 +50,50 @@ const colorNames = (): Plugin => ({
     );
   }
 });
+// Content Security Policy for the built site (#35). GitHub Pages can't send
+// headers, so it goes into a <meta> tag, which can't use frame-ancestors or
+// reporting. Only the build gets it: the dev server injects inline styles
+// and a websocket. Style attributes stay allowed, because the templates and
+// Prism's inline-color plugin write them; <style> elements and all inline
+// scripts are blocked.
+// Source keywords such as 'self' are quoted in a policy
+const keyword = (name: string) => `'${name}'`;
+
+export const CONTENT_SECURITY_POLICY = [
+  `default-src ${keyword('self')}`,
+  `script-src ${keyword('self')}`,
+  `style-src ${keyword('self')}`,
+  `style-src-attr ${keyword('unsafe-inline')}`,
+  `img-src ${keyword('self')} data:`,
+  `font-src ${keyword('self')}`,
+  `connect-src ${keyword('self')}`,
+  `object-src ${keyword('none')}`,
+  `base-uri ${keyword('self')}`,
+  `form-action ${keyword('none')}`,
+  'upgrade-insecure-requests'
+].join('; ');
+
+const CHARSET = '<meta charset="utf-8" />';
+const securityMeta = (): Plugin => ({
+  name: 'moebius-security-meta',
+  apply: 'build',
+  // Right after the charset, before any script or stylesheet
+  transformIndexHtml(html) {
+    if (!html.includes(CHARSET)) {
+      throw new Error(`index.html must start its <head> with ${CHARSET}`);
+    }
+
+    return html.replace(
+      CHARSET,
+      `${CHARSET}
+    <meta http-equiv="Content-Security-Policy" content="${CONTENT_SECURITY_POLICY}" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />`
+    );
+  }
+});
 
 export default defineConfig({
-  plugins: [colorNames()],
+  plugins: [colorNames(), securityMeta()],
   resolve: { alias },
   build: {
     target: 'es2024',

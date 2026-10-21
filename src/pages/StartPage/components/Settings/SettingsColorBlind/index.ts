@@ -17,10 +17,7 @@ export const SettingsColorBlind = (
   const { options } = props;
   const id = uniqueID();
 
-  return html`<form
-    class="ph color-blind-simulator"
-    onsubmit="javascript:return false;"
-  >
+  return html`<form class="ph color-blind-simulator">
     <fieldset class="ph color-blind">
       <legend class="ph">Color blind simulator</legend>
       <div class="ph color-blind-inner">

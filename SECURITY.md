@@ -55,6 +55,12 @@ What you can rely on:
   values the site supports, and anything else is ignored (see
   [`sanitize-options.ts`](src/utils/sanitize-options.ts)). Values rendered into
   the page are escaped first.
+- **A Content Security Policy.** Every page carries a `<meta>` policy that only
+  allows scripts, styles, images, fonts and requests from moebius.wtf, with no
+  inline scripts, no `eval` and no `<style>` elements, plus a
+  `strict-origin-when-cross-origin` referrer policy (see `vite.config.ts`).
+  [`check-csp.mjs`](scripts/check-csp.mjs) checks the built pages and fails CI
+  on any violation while the site is used.
 - **Nothing is loaded from other hosts.** Scripts, styles, code highlighting and
   colour names are all served from moebius.wtf, so no other host sees your
   visit. [`check-origins.mjs`](scripts/check-origins.mjs) loads every page in CI
@@ -64,9 +70,13 @@ What you can rely on:
 
 What you can't rely on yet:
 
-- **No Content Security Policy yet.** GitHub Pages can't send security headers,
-  so a `<meta>` policy is planned in
-  [#35](https://github.com/phun-ky/site-moebius/issues/35).
+- **Some security headers can't be set.** GitHub Pages can't send response
+  headers, so `Permissions-Policy`, `X-Content-Type-Options` and the CSP's
+  `frame-ancestors` (protection against being framed) are missing.
+- **Inline style attributes are allowed.** The page's templates and the code
+  highlighting set colours with `style` attributes, so the policy allows them
+  (`style-src-attr 'unsafe-inline'`). They can change how the page looks, not
+  run code.
 - **Colour names are trusted as text.** Names come from
   [color-name-list](https://github.com/meodai/color-names) (MIT), are built into
   `/data/colornames.json` and served from this site. They are escaped before

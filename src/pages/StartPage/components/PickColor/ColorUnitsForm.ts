@@ -30,7 +30,7 @@ export const ColorUnitsForm = (props: MoebiusSiteColorUnitsFormPropsType) => {
     { unit: 'xyz', title: 'xyz', value: mColor['xyz'] }
   ];
 
-  return html`<form class="ph color-units" onsubmit="javascript: return false;">
+  return html`<form class="ph color-units">
     ${items.map((item) => UnitItem({ item })).join('\n')}
   </form>`;
 };
