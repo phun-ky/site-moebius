@@ -1,0 +1,142 @@
+/* Copied from https://phun-ky.net/css/prism.css on 2026-10-22, so the site loads nothing from other hosts (#34) */
+
+code[class*='language-'] .namespace,
+pre[class*='language-'] .namespace {
+  opacity: 0.7;
+}
+code[class*='language-'] .token.comment,
+code[class*='language-'] .token.prolog,
+code[class*='language-'] .token.doctype,
+code[class*='language-'] .token.cdata,
+pre[class*='language-'] .token.comment,
+pre[class*='language-'] .token.prolog,
+pre[class*='language-'] .token.doctype,
+pre[class*='language-'] .token.cdata {
+  color: var(--ph-color-code-color-1);
+}
+code[class*='language-'] .token.null,
+code[class*='language-'] .token.operator,
+code[class*='language-'] .token.boolean,
+code[class*='language-'] .token.number,
+pre[class*='language-'] .token.null,
+pre[class*='language-'] .token.operator,
+pre[class*='language-'] .token.boolean,
+pre[class*='language-'] .token.number {
+  color: var(--ph-color-code-color-2);
+}
+code[class*='language-'] .token.attr-name,
+code[class*='language-'] .token.string,
+pre[class*='language-'] .token.attr-name,
+pre[class*='language-'] .token.string {
+  color: var(--ph-color-code-color-3);
+}
+code[class*='language-'] .token.entity,
+code[class*='language-'] .token.url,
+.language-css code[class*='language-'] .token.string,
+.style code[class*='language-'] .token.string,
+pre[class*='language-'] .token.entity,
+pre[class*='language-'] .token.url,
+.language-css pre[class*='language-'] .token.string,
+.style pre[class*='language-'] .token.string {
+  color: var(--ph-color-code-color-3);
+}
+code[class*='language-'] .token.selector,
+pre[class*='language-'] .token.selector {
+  color: var(--ph-color-code-block);
+}
+code[class*='language-'] .token.atrule,
+code[class*='language-'] .token.attr-value,
+code[class*='language-'] .token.keyword,
+code[class*='language-'] .token.control,
+code[class*='language-'] .token.directive,
+code[class*='language-'] .token.important,
+code[class*='language-'] .token.unit,
+pre[class*='language-'] .token.atrule,
+pre[class*='language-'] .token.attr-value,
+pre[class*='language-'] .token.keyword,
+pre[class*='language-'] .token.control,
+pre[class*='language-'] .token.directive,
+pre[class*='language-'] .token.important,
+pre[class*='language-'] .token.unit {
+  color: var(--ph-color-code-color-4);
+}
+code[class*='language-'] .token.regex,
+code[class*='language-'] .token.statement,
+pre[class*='language-'] .token.regex,
+pre[class*='language-'] .token.statement {
+  color: var(--ph-color-code-color-3);
+}
+code[class*='language-'] .token.placeholder,
+code[class*='language-'] .token.variable,
+pre[class*='language-'] .token.placeholder,
+pre[class*='language-'] .token.variable {
+  color: var(--ph-color-code-color-4);
+}
+code[class*='language-'] .token.property,
+code[class*='language-'] .token.tag,
+pre[class*='language-'] .token.property,
+pre[class*='language-'] .token.tag {
+  font-style: italic;
+}
+code[class*='language-'] .token.important,
+code[class*='language-'] .token.statement,
+pre[class*='language-'] .token.important,
+pre[class*='language-'] .token.statement {
+  font-weight: bold;
+}
+code[class*='language-'] .token.punctuation,
+pre[class*='language-'] .token.punctuation {
+  color: var(--ph-color-code-color-5);
+}
+code[class*='language-'] .token.entity,
+pre[class*='language-'] .token.entity {
+  cursor: help;
+}
+code[class*='language-'] .token.debug,
+pre[class*='language-'] .token.debug {
+  color: var(--ph-color-code-color-8);
+}
+
+pre,
+pre.ph {
+  background-color: var(--ph-color-code-block-background);
+  border-radius: 0.375rem;
+  color: var(--ph-color-code-block);
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  max-height: 80vh;
+  overflow-x: auto;
+  padding: 0.75rem 1rem;
+}
+
+@media screen and (min-width: 1024px) {
+  pre,
+  pre.ph {
+    font-size: 1rem;
+    line-height: 1.75rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    padding: 1rem 1.5rem;
+  }
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--ph-font-family-code);
+}
+
+.ph span.inline-color-wrapper {
+  border-radius: 50%;
+  border: 1pt solid white;
+  background-clip: padding-box;
+  outline: none;
+  margin: 0 0.5ch 0 0.333ch;
+}
+
+.theme--light .ph span.inline-color-wrapper {
+  border: 1pt solid black;
+}

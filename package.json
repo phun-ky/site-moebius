@@ -19,6 +19,7 @@
     "test:coverage": "c8 npm test",
     "check:dist": "node scripts/check-dist.mjs",
     "check:layout": "node scripts/check-layout.mjs",
+    "check:origins": "node scripts/check-origins.mjs",
     "check:routes": "node scripts/check-routes.mjs",
     "check:theme": "node scripts/check-theme.mjs"
   },
@@ -36,6 +37,7 @@
     "@eslint/markdown": "^8.0.3",
     "@types/chroma-js": "^2.4.5",
     "@types/node": "^24.19.1",
+    "@types/prismjs": "^1.26.6",
     "c8": "^12.0.0",
     "color-name-list": "^14.51.0",
     "eslint": "^10.12.0",
@@ -55,6 +57,7 @@
   "dependencies": {
     "@phun-ky/moebius": "^2.1.0",
     "chroma-js": "^2.4.2",
-    "diff-dom": "^5.0.4"
+    "diff-dom": "^5.0.4",
+    "prismjs": "^1.30.0"
   }
 }
