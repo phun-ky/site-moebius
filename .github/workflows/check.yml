@@ -41,6 +41,8 @@ jobs:
         run: npm test
       - name: Check the layout # Headless Chrome (installed on the runner): no sideways scroll at any width
         run: npm run check:layout
+      - name: Check the routes # Served like GitHub Pages: every route 200, unknown paths 404
+        run: npm run check:routes
 
   notify:
     name: Notify failed check

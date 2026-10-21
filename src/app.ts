@@ -1,6 +1,7 @@
 import { getParams } from './lib/spa/utils/get-params';
 import { RouterMatch } from './lib/spa/types';
 import { addOnAfterAppRender } from './lib/spa';
+import { hideLoading } from './utils/hide-loading';
 import { readHashOptions } from './utils/sanitize-options';
 
 import { Header } from './components/page-section/Header';
@@ -30,6 +31,12 @@ const App = async (match: RouterMatch, params: unknown) => {
   }
 
   globalThis.activeElement = document.activeElement;
+
+  // The start page hides the loading overlay once moebius is ready; every
+  // other page has nothing to wait for
+  if (_page !== 'StartPage') {
+    addOnAfterAppRender(hideLoading);
+  }
 
   let content = '';
 
