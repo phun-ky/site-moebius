@@ -8,7 +8,7 @@ import {
   COLOR_SCALE_MODES,
   MAX_NUMBER_OF_COLORS,
   MIN_NUMBER_OF_COLORS,
-  sanitizeOptions,
+  sanitizeOptions
 } from '../sanitize-options';
 
 const PAYLOAD = '"><img src=x onerror="alert(1)">';
@@ -27,7 +27,7 @@ describe('sanitizeOptions', () => {
       noDuplicates: false,
       colorScaleMode: 'lch',
       numberOfColors: 9,
-      colorBlindSim: 'tritanopia',
+      colorBlindSim: 'tritanopia'
     };
 
     assert.deepEqual(sanitizeOptions(valid), valid);
@@ -39,7 +39,7 @@ describe('sanitizeOptions', () => {
       'secondaryColor',
       'divergentColor',
       'colorScaleMode',
-      'colorBlindSim',
+      'colorBlindSim'
     ]) {
       assert.deepEqual(sanitizeOptions({ [key]: PAYLOAD }), {}, key);
     }
@@ -50,7 +50,7 @@ describe('sanitizeOptions', () => {
       '__proto__',
       'constructor',
       'toString',
-      'hasOwnProperty',
+      'hasOwnProperty'
     ]) {
       assert.deepEqual(sanitizeOptions({ colorBlindSim }), {}, colorBlindSim);
     }
@@ -71,7 +71,7 @@ describe('sanitizeOptions', () => {
       7.5,
       Number.NaN,
       Infinity,
-      '7',
+      '7'
     ]) {
       assert.deepEqual(sanitizeOptions({ numberOfColors }), {});
     }

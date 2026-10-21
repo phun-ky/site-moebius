@@ -57,7 +57,7 @@ describe('escapeAttribute', () => {
       'Maniac Mansion',
       'The Count’s Black',
       "Pink 'n' Blue",
-      'Black & White',
+      'Black & White'
     ]) {
       const [div] = parse(
         `<div data-color-name="${escapeAttribute(name)}"></div>`
@@ -76,7 +76,7 @@ describe('escapeAttribute', () => {
         const [div, p] = parse(html).childNodes;
 
         assert.deepEqual(Object.keys(div.attributes ?? {}), [
-          'data-color-name',
+          'data-color-name'
         ]);
         assert.equal(div.childNodes?.length ?? 0, 0);
         assert.equal(p?.nodeName, 'P');

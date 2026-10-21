@@ -6,7 +6,7 @@
 
   try {
     stored = localStorage.getItem('prefers-color-scheme');
-  } catch (error) {
+  } catch {
     // Storage blocked: fall back to the system setting
   }
 

@@ -17,7 +17,7 @@ const EXPECTED: Record<string, Record<string, string>> = {
     '#ff9900': '#b9a300',
     '#ffffff': '#ffffff',
     '#000000': '#000000',
-    '#808080': '#808080',
+    '#808080': '#808080'
   },
   protanomaly: {
     '#ff0000': '#a75900',
@@ -27,7 +27,7 @@ const EXPECTED: Record<string, Record<string, string>> = {
     '#ff9900': '#d0a300',
     '#ffffff': '#ffffff',
     '#000000': '#000000',
-    '#808080': '#808080',
+    '#808080': '#808080'
   },
   deuteranopia: {
     '#ff0000': '#a39000',
@@ -37,7 +37,7 @@ const EXPECTED: Record<string, Record<string, string>> = {
     '#ff9900': '#d2bb06',
     '#ffffff': '#ffffff',
     '#000000': '#000000',
-    '#808080': '#808080',
+    '#808080': '#808080'
   },
   deuteranomaly: {
     '#ff0000': '#bb7d00',
@@ -47,7 +47,7 @@ const EXPECTED: Record<string, Record<string, string>> = {
     '#ff9900': '#dcb200',
     '#ffffff': '#ffffff',
     '#000000': '#000000',
-    '#808080': '#808080',
+    '#808080': '#808080'
   },
   tritanopia: {
     '#ff0000': '#ff000f',
@@ -57,7 +57,7 @@ const EXPECTED: Record<string, Record<string, string>> = {
     '#ff9900': '#ff8182',
     '#ffffff': '#ffffff',
     '#000000': '#000000',
-    '#808080': '#808080',
+    '#808080': '#808080'
   },
   tritanomaly: {
     '#ff0000': '#ff0004',
@@ -67,7 +67,7 @@ const EXPECTED: Record<string, Record<string, string>> = {
     '#ff9900': '#ff905a',
     '#ffffff': '#ffffff',
     '#000000': '#000000',
-    '#808080': '#808080',
+    '#808080': '#808080'
   },
   achromatopsia: {
     '#ff0000': '#7f7f7f',
@@ -77,7 +77,7 @@ const EXPECTED: Record<string, Record<string, string>> = {
     '#ff9900': '#b1b1b1',
     '#ffffff': '#ffffff',
     '#000000': '#000000',
-    '#808080': '#808080',
+    '#808080': '#808080'
   },
   achromatomaly: {
     '#ff0000': '#c06464',
@@ -87,8 +87,8 @@ const EXPECTED: Record<string, Record<string, string>> = {
     '#ff9900': '#d5a88c',
     '#ffffff': '#ffffff',
     '#000000': '#000000',
-    '#808080': '#808080',
-  },
+    '#808080': '#808080'
+  }
 };
 
 const hex = fc

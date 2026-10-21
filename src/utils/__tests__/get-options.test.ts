@@ -9,7 +9,7 @@ const withHash = (options: unknown) => {
   const hash = Buffer.from(JSON.stringify(options)).toString('base64');
 
   globalThis.window = {
-    location: { href: `https://moebius.wtf/#options=${hash}` },
+    location: { href: `https://moebius.wtf/#options=${hash}` }
   } as unknown as Window & typeof globalThis;
 };
 

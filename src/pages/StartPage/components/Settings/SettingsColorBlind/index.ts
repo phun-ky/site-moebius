@@ -1,6 +1,6 @@
-import { MoebiusSiteDefaultOptionsType } from 'config/constants';
-import { RadioButton } from 'components/input-fields/RadioButton';
 import { Label } from 'components/input-fields/Label';
+import { RadioButton } from 'components/input-fields/RadioButton';
+import { MoebiusSiteDefaultOptionsType } from 'config/constants';
 import { uniqueID } from 'utils/unique-id';
 
 import './styles/settingsColorBlind.styl';
@@ -33,7 +33,7 @@ export const SettingsColorBlind = (
           { id: 'tritanomaly', title: 'tritanomaly' },
           { id: 'tritanopia', title: 'tritanopia' },
           { id: 'achromatomaly', title: 'achromatomaly' },
-          { id: 'achromatopsia', title: 'achromatopsia' },
+          { id: 'achromatopsia', title: 'achromatopsia' }
         ]
           .map((setting) => {
             return html`<div class="ph input-group">
@@ -41,11 +41,11 @@ export const SettingsColorBlind = (
                 checked: setting.id === options.colorBlindSim,
                 value: setting.id,
                 id,
-                name: 'color-blind-sim',
+                name: 'color-blind-sim'
               })}
               ${Label({
                 labelFor: id,
-                label: setting.title,
+                label: setting.title
               })}
             </div>`;
           })

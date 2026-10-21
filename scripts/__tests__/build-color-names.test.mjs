@@ -12,8 +12,8 @@ describe('toColorNameMap', () => {
       {
         ...toColorNameMap([
           { name: 'Orange', hex: '#FF9900' },
-          { name: 'Deep Sea', hex: '#003f5c' },
-        ]),
+          { name: 'Deep Sea', hex: '#003f5c' }
+        ])
       },
       { Orange: '#ff9900', 'Deep Sea': '#003f5c' }
     );
@@ -22,7 +22,7 @@ describe('toColorNameMap', () => {
   it('keeps Object.prototype names as plain keys', () => {
     const map = toColorNameMap([
       { name: '__proto__', hex: '#000000' },
-      { name: 'constructor', hex: '#ffffff' },
+      { name: 'constructor', hex: '#ffffff' }
     ]);
 
     assert.equal(Object.getPrototypeOf(map), null);
@@ -37,7 +37,7 @@ describe('toColorNameMap', () => {
       [{ name: 'A' }],
       [{ name: 'A', hex: 'red' }],
       [{ name: '', hex: '#000000' }],
-      [{ name: 'A', hex: '#fff' }],
+      [{ name: 'A', hex: '#fff' }]
     ]) {
       assert.throws(
         () => toColorNameMap(data),
@@ -52,7 +52,7 @@ describe('toColorNameMap', () => {
       () =>
         toColorNameMap([
           { name: 'A', hex: '#000000' },
-          { name: 'A', hex: '#ffffff' },
+          { name: 'A', hex: '#ffffff' }
         ]),
       RangeError
     );
@@ -65,7 +65,7 @@ describe('toColorNameMap', () => {
         fc.uniqueArray(
           fc.record({
             name: fc.string({ minLength: 1 }),
-            hex: fc.stringMatching(/^#[0-9a-fA-F]{6}$/),
+            hex: fc.stringMatching(/^#[0-9a-fA-F]{6}$/)
           }),
           { selector: (entry) => entry.name, minLength: 1 }
         ),

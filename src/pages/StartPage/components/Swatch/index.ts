@@ -1,6 +1,5 @@
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
 import { colorBlindSim } from 'features/color-blind/color-blind-sim';
-
 import { getA11yTextColor } from 'utils/get-a11y-text-color';
 
 import { Color } from './components/Color';
@@ -19,9 +18,6 @@ export const Swatch = (
   const { numberOfColors = 7, colorBlindSim: colorBlindSimType = 'normal' } =
     options;
   const { MoebiusColor } = window;
-
-  let diff = 0;
-
   const ColorElements = colors.map((color) => {
     const mColor = new MoebiusColor(color);
 
@@ -39,15 +35,14 @@ export const Swatch = (
       color: mColor,
       text: mColor.hex,
       backgroundColor,
-      foregroundColor,
+      foregroundColor
     });
   });
 
   let diffColorElements: string[] = [];
 
   if (colors.length < numberOfColors) {
-    diff = numberOfColors - colors.length;
-
+    const diff = numberOfColors - colors.length;
     const lastColor: string = colors[colors.length - 1];
 
     diffColorElements = [...new Array(diff)].map(() => {
@@ -58,7 +53,7 @@ export const Swatch = (
         className: 'no-color',
         text: 'No color',
         backgroundColor: lastColor,
-        foregroundColor: getA11yTextColor(lastColor),
+        foregroundColor: getA11yTextColor(lastColor)
       });
     });
   }

@@ -1,4 +1,5 @@
 import { MoebiusColorValueHexType } from '@phun-ky/moebius';
+
 import { Label } from 'components/input-fields/Label';
 import { RangeInput } from 'components/input-fields/RangeInput';
 
@@ -62,7 +63,7 @@ export const ColorPickerHueMap = (
       step: 1,
       value: currentColorHue.toFixed(),
       min: 0,
-      max: 359,
+      max: 359
     })}
     ${extraRangeElements}`;
 };

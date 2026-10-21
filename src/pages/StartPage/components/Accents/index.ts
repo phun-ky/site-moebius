@@ -1,4 +1,5 @@
 import { MoebiusColorValueHexType } from '@phun-ky/moebius';
+
 import { Color } from 'pages/StartPage/components/Swatch/components/Color';
 import { getA11yTextColor } from 'utils/get-a11y-text-color';
 
@@ -48,11 +49,11 @@ export const Accents = (props: MoebiusSiteAccentsPropsType) => {
                 color: mColor,
                 text: mColor.hex,
                 backgroundColor,
-                foregroundColor,
+                foregroundColor
               });
             })
-            .join('\n'),
-        }),
+            .join('\n')
+        })
       })
     )
     .join('\n');

@@ -12,6 +12,6 @@ export const normalizeHSV = (
   return {
     h,
     s,
-    v,
+    v
   };
 };

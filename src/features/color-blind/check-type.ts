@@ -1,4 +1,5 @@
 import chroma from 'chroma-js';
+
 import { difference } from './difference';
 import { simulate } from './simulate';
 

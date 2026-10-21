@@ -1,6 +1,6 @@
+import { router } from '../router';
 import { NavigateToEvent, EventType } from '../types';
 
-import { router } from '../router';
 import { bootstrap } from './bootstrap';
 import { eventMatches } from './event-matches';
 import { navigateTo } from './navigate-to';

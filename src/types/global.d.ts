@@ -3,7 +3,7 @@ export {};
 
 declare global {
   // The element that had focus before a render, restored after it
-  // eslint-disable-next-line no-var
+
   var activeElement: Element | null;
 
   interface Window {

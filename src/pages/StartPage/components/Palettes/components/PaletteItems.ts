@@ -1,5 +1,6 @@
 import { Tabs } from 'components/navigation/Tabs';
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
+
 import { paletteItemsMapper } from '../utils/palette-items-mapper';
 
 export type MoebiusSitePaletteItemsPropsType = {
@@ -19,7 +20,7 @@ export const PaletteItems = (props: MoebiusSitePaletteItemsPropsType) => {
     'tetradic',
     'pentadic',
     'hexadic',
-    'analogous',
+    'analogous'
   ];
   const paletteTabItems = outputIdArray.map((id) =>
     paletteItemsMapper({ id, moebius, options })

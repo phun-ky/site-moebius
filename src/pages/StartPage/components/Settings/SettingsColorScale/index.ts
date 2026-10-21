@@ -1,6 +1,6 @@
-import { MoebiusSiteDefaultOptionsType } from 'config/constants';
-import { RadioButton } from 'components/input-fields/RadioButton';
 import { Label } from 'components/input-fields/Label';
+import { RadioButton } from 'components/input-fields/RadioButton';
+import { MoebiusSiteDefaultOptionsType } from 'config/constants';
 import { addOnChange } from 'lib/spa';
 import { EventType } from 'lib/spa/types';
 import { setOptions } from 'utils/set-options';
@@ -37,7 +37,7 @@ export const SettingsColorScale = (
           { id: 'lab', title: 'lab' },
           { id: 'lrgb', title: 'lrgb' },
           { id: 'hsl', title: 'hsl' },
-          { id: 'lch', title: 'lch' },
+          { id: 'lch', title: 'lch' }
         ]
           .map((setting) => {
             return html`<div class="ph input-group">
@@ -45,11 +45,11 @@ export const SettingsColorScale = (
                 checked: setting.id === options.colorScaleMode,
                 value: setting.id,
                 id: `color-scale-${setting.id}`,
-                name: 'color-scale',
+                name: 'color-scale'
               })}
               ${Label({
                 labelFor: `color-scale-${setting.id}`,
-                label: setting.title,
+                label: setting.title
               })}
             </div>`;
           })

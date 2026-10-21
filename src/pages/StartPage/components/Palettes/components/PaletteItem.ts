@@ -1,17 +1,18 @@
-import { Accents } from 'pages/StartPage/components/Accents';
 import { CodeBlock } from 'components/page-section/CodeBlock';
-
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
+import { colorBlindCheck } from 'features/color-blind/color-blind-check';
+import { Accents } from 'pages/StartPage/components/Accents';
 import { css } from 'utils/export/css';
 import { js } from 'utils/export/js';
 import { getGradientStyle } from 'utils/get-gradient-style';
+
+import { SettingsColorBlind } from '../../Settings/SettingsColorBlind';
+import { Swatch } from '../../Swatch';
+
+import { ColorBlindWarning } from './ColorBlindWarning';
 import { SettingsLuminanceShift } from './SettingsLuminanceShift';
 import { SettingsMonochromatic } from './SettingsMonochromatic';
-import { Swatch } from '../../Swatch';
 import { SVGPixels } from './SVGPixels';
-import { colorBlindCheck } from 'features/color-blind/color-blind-check';
-import { ColorBlindWarning } from './ColorBlindWarning';
-import { SettingsColorBlind } from '../../Settings/SettingsColorBlind';
 
 const html = String.raw;
 
@@ -60,13 +61,13 @@ export const PaletteItem = (props: MoebiusSitePaletteItemPropsType) => {
       ${CodeBlock({
         id,
         language: 'css',
-        content: css(moebius.colors[id], moebius.accents[id]),
+        content: css(moebius.colors[id], moebius.accents[id])
       })}
       <h4 class="ph">JavaScript</h4>
       ${CodeBlock({
         id,
         language: 'js',
-        content: js(moebius.colors[id], moebius.accents[id]),
+        content: js(moebius.colors[id], moebius.accents[id])
       })}
     </details>`;
 };

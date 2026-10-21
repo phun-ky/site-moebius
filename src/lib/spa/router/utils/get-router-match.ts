@@ -1,4 +1,5 @@
 import { RouterMatch, Routes } from '../../types';
+
 import { potentialMatchesMapper } from './potential-matches-mapper';
 
 export const getRouterMatch = (routes: Routes): RouterMatch => {
@@ -15,7 +16,7 @@ export const getRouterMatch = (routes: Routes): RouterMatch => {
 
     match = {
       route: { path: '/404', page: 'PageNotFoundPage', name: 'Page not found' },
-      result: [pathName],
+      result: [pathName]
     };
   }
 

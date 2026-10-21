@@ -1,6 +1,6 @@
 import {
   MoebiusColorValueHexType,
-  MoebiusPaletteAccentColorsInterface,
+  MoebiusPaletteAccentColorsInterface
 } from '@phun-ky/moebius';
 
 export const generateAccentGradientCssVariables = (

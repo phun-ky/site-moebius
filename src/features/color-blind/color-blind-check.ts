@@ -9,7 +9,7 @@ export const colorBlindCheck = (colors: string[]): string[] => {
     'tritanomaly',
     'tritanopia',
     'achromatomaly',
-    'achromatopsia',
+    'achromatopsia'
   ];
   const invalid: string[] = [];
 

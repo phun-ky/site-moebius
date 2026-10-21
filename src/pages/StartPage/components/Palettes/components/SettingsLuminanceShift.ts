@@ -22,7 +22,7 @@ export const SettingsLuminanceShift = (
               checked: options.diverging,
               name: 'diverging',
               id: 'luminanceShift-diverging',
-              label: 'diverging',
+              label: 'diverging'
             })}
           </div>
         </fieldset>

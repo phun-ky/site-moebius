@@ -9,12 +9,11 @@ import {
   EventType,
   StateContext,
   UseStateValue,
-  UseStateReturn,
+  UseStateReturn
 } from './types';
-
-import { waitFor } from './utils/wait-for';
 import { setTitle } from './utils/set-title';
 import { updateNodes } from './utils/update-nodes';
+import { waitFor } from './utils/wait-for';
 
 /**
  * The main functionality that is to be replaced if a framework is to be used
@@ -43,7 +42,6 @@ export const spa = (() => {
   let effectIndex = 0;
 
   const init = async (
-    // eslint-disable-next-line no-unused-vars
     templateCallback: TemplateCallback,
     routeDetails: RouteDetails
   ) => {
@@ -91,12 +89,11 @@ export const spa = (() => {
     document.dispatchEvent(
       new CustomEvent('eventBeforeAppRender', {
         bubbles: true,
-        cancelable: true,
+        cancelable: true
       })
     );
 
-    let _html = '';
-    let error = false;
+    let _html: string;
 
     try {
       _html = (await _templateCallback?.(page)) as string;
@@ -106,10 +103,9 @@ export const spa = (() => {
         _html = '<h1>404, page not found</h1>';
       } else {
         _html = (await _templateCallback?.('ErrorPage', {
-          error: e,
+          error: e
         })) as string;
 
-        error = true;
         console.error(e);
         console.info(
           `failed to render "${page?.route?.name}", rendering error page`
@@ -135,8 +131,8 @@ export const spa = (() => {
           bubbles: true,
           cancelable: true,
           detail: {
-            routeDetails,
-          },
+            routeDetails
+          }
         })
       );
     }
@@ -147,7 +143,7 @@ export const spa = (() => {
       document.dispatchEvent(
         new CustomEvent(`eventAfterPage${page.route.name}Render`, {
           bubbles: true,
-          cancelable: true,
+          cancelable: true
         })
       );
 
@@ -162,7 +158,7 @@ export const spa = (() => {
       document.dispatchEvent(
         new CustomEvent('eventAfterAppRender', {
           bubbles: true,
-          cancelable: true,
+          cancelable: true
         })
       );
     };
@@ -232,15 +228,12 @@ export const spa = (() => {
    * @param {string} id The id used for the event
    * @param {Function} callback The callback to use on the event
    */
-  // eslint-disable-next-line no-unused-vars
   const addOnClick = (id: string, callback: FunctionType) => {
     clickEventArray.push({ id, callback });
   };
-  // eslint-disable-next-line no-unused-vars
   const addOnInput = (id: string, callback: FunctionType) => {
     inputEventArray.push({ id, callback });
   };
-  // eslint-disable-next-line no-unused-vars
   const addOnChange = (id: string, callback: FunctionType) => {
     changeEventArray.push({ id, callback });
   };
@@ -316,7 +309,7 @@ export const spa = (() => {
     useEffect,
     useState,
     init,
-    render,
+    render
   };
 })();
 
@@ -329,7 +322,7 @@ export const {
   useEffect,
   useState,
   init,
-  render,
+  render
 } = spa;
 
 export default spa;

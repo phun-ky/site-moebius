@@ -22,7 +22,7 @@ export const SettingsMonochromatic = (
               checked: options.randomOffset,
               name: 'random-offset',
               id: 'monochromatic-random-offset',
-              label: 'random offset',
+              label: 'random offset'
             })}
           </div>
         </fieldset>

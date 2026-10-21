@@ -1,27 +1,24 @@
 import chroma from 'chroma-js';
-import {
-  MoebiusSitePickColorItemType,
-  PickColor,
-} from 'pages/StartPage/components/PickColor';
-import { getOptions } from 'utils/get-options';
-import { addOnAfterAppRender, addOnInput } from 'lib/spa';
-import { EventType } from 'lib/spa/types';
-import { initMoebius } from 'utils/init-moebius';
-import { updateCSSVars } from 'pages/StartPage/components/PickColor/utils/update-css-vars';
 
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
-import { setOptions } from 'utils/set-options';
-import { MoebiusColorValueHexType } from '@phun-ky/moebius';
-import { copy } from 'utils/copy';
-import { Settings } from './components/Settings';
-import { Palettes } from './components/Palettes';
+import { addOnAfterAppRender, addOnInput } from 'lib/spa';
+import { EventType } from 'lib/spa/types';
+import {
+  MoebiusSitePickColorItemType,
+  PickColor
+} from 'pages/StartPage/components/PickColor';
+import { updateCSSVars } from 'pages/StartPage/components/PickColor/utils/update-css-vars';
+import { getOptions } from 'utils/get-options';
+import { initMoebius } from 'utils/init-moebius';
 import { onColorClick } from 'utils/on-color-click';
-import { SettingsColorBlind } from './components/Settings/SettingsColorBlind';
+
+import { Palettes } from './components/Palettes';
+import { Settings } from './components/Settings';
 
 const html = String.raw;
 
 export const StartPage = async ({
-  params,
+  params
 }: {
   params: MoebiusSiteDefaultOptionsType;
 }) => {
@@ -29,7 +26,7 @@ export const StartPage = async ({
 
   const options = {
     ...(getOptions() as MoebiusSiteDefaultOptionsType),
-    ...params,
+    ...params
   };
 
   updateCSSVars(options);
@@ -87,7 +84,7 @@ export const StartPage = async ({
     )
       return;
 
-    // eslint-disable-next-line no-unused-vars, prefer-const, @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line prefer-const, @typescript-eslint/no-unused-vars
     let [h, s, l] = chroma
       .lch(
         Number(e.target.value),
@@ -119,7 +116,7 @@ export const StartPage = async ({
     )
       return;
 
-    // eslint-disable-next-line no-unused-vars, prefer-const, @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line prefer-const, @typescript-eslint/no-unused-vars
     let [h, s, l] = chroma
       .lch(
         Number(
@@ -147,18 +144,18 @@ export const StartPage = async ({
                 {
                   type: 'primary',
                   title: 'Primary',
-                  color: options.baseColor,
+                  color: options.baseColor
                 },
                 {
                   type: 'secondary',
                   title: 'Secondary',
-                  color: options.secondaryColor,
+                  color: options.secondaryColor
                 },
                 {
                   type: 'divergent',
                   title: 'Divergent',
-                  color: options.divergentColor,
-                },
+                  color: options.divergentColor
+                }
               ] as MoebiusSitePickColorItemType[]
             )
               .map((item: MoebiusSitePickColorItemType) =>

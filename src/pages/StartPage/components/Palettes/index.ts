@@ -1,10 +1,11 @@
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
 import { addOnAfterAppRender, addOnChange } from 'lib/spa';
+import { EventType } from 'lib/spa/types';
 import { MoebiusSiteEventType } from 'types';
 import { generateAccentGradientCssVariables } from 'utils/generate-accent-gradients-css-variables';
 import { setOptions } from 'utils/set-options';
+
 import { PaletteItems } from './components/PaletteItems';
-import { EventType } from 'lib/spa/types';
 
 import './styles/palettes.styl';
 
@@ -27,7 +28,7 @@ export const Palettes = async (props: PalettesPropsType) => {
     correctLightness,
     noDuplicates,
     colorScaleMode,
-    numberOfColors,
+    numberOfColors
   } = options;
   const { MoebiusColor, MoebiusPalettes } = window;
   const moebius = new MoebiusPalettes({
@@ -41,7 +42,7 @@ export const Palettes = async (props: PalettesPropsType) => {
     correctLightness,
     noDuplicates,
     colorScaleMode,
-    numberOfColors,
+    numberOfColors
   });
 
   addOnAfterAppRender(() => {

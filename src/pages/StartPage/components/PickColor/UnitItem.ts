@@ -27,7 +27,7 @@ export const UnitItem = (props: MoebiusSiteUnitItemPropsType) => {
                 (unit) => (item.value as Record<string, string | number>)[unit]
               )
               .join(', ')
-          : item.value,
+          : item.value
     })}
   </div>`;
 };

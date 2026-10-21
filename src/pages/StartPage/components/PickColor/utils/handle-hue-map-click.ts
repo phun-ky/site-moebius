@@ -1,10 +1,12 @@
-import chroma from 'chroma-js';
 import { MoebiusColorValueHexType } from '@phun-ky/moebius';
-import { setOptions } from 'utils/set-options';
-import { getOptions } from 'utils/get-options';
+import chroma from 'chroma-js';
+
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
-import { normalizeHSV } from './normalize-hsv';
 import { MouseEventType } from 'lib/spa/types';
+import { getOptions } from 'utils/get-options';
+import { setOptions } from 'utils/set-options';
+
+import { normalizeHSV } from './normalize-hsv';
 
 export const handleHueMapClick = (
   e: MouseEventType<HTMLElement>,
@@ -16,7 +18,7 @@ export const handleHueMapClick = (
 ) => {
   const options = {
     ...(getOptions() as MoebiusSiteDefaultOptionsType),
-    ...opts,
+    ...opts
   };
 
   let { baseColor: primaryColor, secondaryColor, divergentColor } = options;
@@ -104,6 +106,6 @@ export const handleHueMapClick = (
   setOptions({
     baseColor: primaryColor as MoebiusColorValueHexType,
     secondaryColor,
-    divergentColor,
+    divergentColor
   });
 };

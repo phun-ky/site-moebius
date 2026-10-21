@@ -38,30 +38,30 @@ export const SettingsColorExtras = (
           {
             id: 'bezier',
             title: 'bezier',
-            value: options.bezier,
+            value: options.bezier
           },
           {
             id: 'correctLightness',
             title: 'correct lightness',
-            value: options.correctLightness,
+            value: options.correctLightness
           },
           {
             id: 'noDuplicates',
             title: 'no duplicates',
-            value: options.noDuplicates,
+            value: options.noDuplicates
           },
           {
             id: 'reverseDirection',
             title: 'reverse direction',
-            value: options.reverseDirection,
-          },
+            value: options.reverseDirection
+          }
         ]
           .map((setting) => {
             return Togglebox({
               checked: setting.value,
               name: setting.id,
               id: setting.id,
-              label: setting.title,
+              label: setting.title
             });
             /*return html`<div class="ph input-group">
             ${Checkbox({

@@ -1,12 +1,11 @@
+import { defineConfig, type Plugin } from 'vite';
+
 import { readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-
-import { defineConfig, type Plugin } from 'vite';
 
 import { colorNameFiles } from './scripts/build-color-names.mjs';
 
 const src = fileURLToPath(new URL('./src', import.meta.url));
-
 // Code imports from src without a relative path, such as 'utils/escape';
 // each top-level directory of src is an alias (tsconfig.json has the same
 // paths for TypeScript and tsx)
@@ -14,9 +13,8 @@ const alias = readdirSync(src, { withFileTypes: true })
   .filter((entry) => entry.isDirectory())
   .map(({ name }) => ({
     find: new RegExp(`^${name}(?=/|$)`),
-    replacement: `${src}/${name}`,
+    replacement: `${src}/${name}`
   }));
-
 // Serve /data/colornames.json and its licence in development, and write them
 // into dist/data in the build, from the installed color-name-list
 const colorNames = (): Plugin => ({
@@ -43,14 +41,14 @@ const colorNames = (): Plugin => ({
       this.emitFile({
         type: 'asset',
         fileName: `data/${name}`,
-        source: String(source),
+        source: String(source)
       });
     }
 
     this.info(
       `color-name-list ${version}: ${count} names in data/colornames.json`
     );
-  },
+  }
 });
 
 export default defineConfig({
@@ -60,6 +58,6 @@ export default defineConfig({
     target: 'es2024',
     // Written without a sourceMappingURL comment and moved out of dist after
     // the build: CI keeps them as an artifact, the site doesn't serve them
-    sourcemap: 'hidden',
-  },
+    sourcemap: 'hidden'
+  }
 });

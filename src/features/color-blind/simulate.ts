@@ -18,37 +18,35 @@ type Matrix = readonly [
 const PROTAN_60: Matrix = [
   [0.38545, 0.769005, -0.154455],
   [0.100526, 0.829802, 0.069673],
-  [-0.007442, -0.02219, 1.029632],
+  [-0.007442, -0.02219, 1.029632]
 ];
 const PROTAN_100: Matrix = [
   [0.152286, 1.052583, -0.204868],
   [0.114503, 0.786281, 0.099216],
-  [-0.003882, -0.048116, 1.051998],
+  [-0.003882, -0.048116, 1.051998]
 ];
 const DEUTAN_60: Matrix = [
   [0.498864, 0.674741, -0.173604],
   [0.205199, 0.754872, 0.039929],
-  [-0.011131, 0.030969, 0.980162],
+  [-0.011131, 0.030969, 0.980162]
 ];
 const DEUTAN_100: Matrix = [
   [0.367322, 0.860646, -0.227968],
   [0.280085, 0.672501, 0.047413],
-  [-0.01182, 0.04294, 0.968881],
+  [-0.01182, 0.04294, 0.968881]
 ];
 const TRITAN_60: Matrix = [
   [1.104996, -0.046633, -0.058363],
   [-0.032137, 0.971635, 0.060503],
-  [0.001336, 0.317922, 0.680742],
+  [0.001336, 0.317922, 0.680742]
 ];
 const TRITAN_100: Matrix = [
   [1.255528, -0.076749, -0.178779],
   [-0.078411, 0.930809, 0.147602],
-  [0.004733, 0.691367, 0.3039],
+  [0.004733, 0.691367, 0.3039]
 ];
-
 const LUMINANCE = [0.2126, 0.7152, 0.0722] as const;
 const ACHROMA_100: Matrix = [LUMINANCE, LUMINANCE, LUMINANCE];
-
 /**
  * Move a fraction of the way from no change to a simulation matrix.
  * @param {Matrix} matrix - The full simulation.
@@ -68,7 +66,7 @@ export const SIMULATIONS = new Map<string, Matrix>([
   ['tritanomaly', TRITAN_60],
   ['tritanopia', TRITAN_100],
   ['achromatomaly', partial(ACHROMA_100, 0.6)],
-  ['achromatopsia', ACHROMA_100],
+  ['achromatopsia', ACHROMA_100]
 ]);
 
 const toLinear = (channel: number): number => {
@@ -76,7 +74,6 @@ const toLinear = (channel: number): number => {
 
   return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
 };
-
 const fromLinear = (value: number): number => {
   const c = Math.min(1, Math.max(0, value));
 

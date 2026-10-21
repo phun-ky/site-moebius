@@ -42,7 +42,7 @@ export const Tabs = (props: MoebiusSitePropsType) => {
 
             id: `tab-${id}`,
             role: 'tab',
-            'data-rel': id,
+            'data-rel': id
           };
 
           if (id === activeTab) {
@@ -73,7 +73,7 @@ export const Tabs = (props: MoebiusSitePropsType) => {
           id: `panel-${id}`,
           'data-rel': id,
           tabIndex: -1,
-          role: 'tabpanel',
+          role: 'tabpanel'
         };
 
         if (id !== activeTab) {

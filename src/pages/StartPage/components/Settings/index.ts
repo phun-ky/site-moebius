@@ -1,4 +1,5 @@
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
+
 import { SettingsColorExtras } from './SettingsColorExtras';
 import { SettingsColorScale } from './SettingsColorScale';
 

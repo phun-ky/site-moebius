@@ -12,7 +12,9 @@
     "preview": "vite preview",
     "prepare": "git config core.hooksPath .githooks || true",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint src --ext .ts",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "test": "node --import tsx --enable-source-maps --test \"{src,scripts}/**/__tests__/*.test.{ts,mjs}\"",
     "check:dist": "node scripts/check-dist.mjs",
     "check:layout": "node scripts/check-layout.mjs",
@@ -30,41 +32,26 @@
   },
   "homepage": "https://github.com/phun-ky/moebius-site#readme",
   "devDependencies": {
-    "@testing-library/dom": "^7.29.4",
-    "@testing-library/user-event": "^12.7.1",
+    "@eslint/markdown": "^8.0.3",
     "@types/chroma-js": "^2.4.5",
-    "@typescript-eslint/eslint-plugin": "^5.7.0",
-    "@typescript-eslint/parser": "^5.7.0",
+    "@types/node": "^24.19.1",
     "color-name-list": "^14.51.0",
-    "conventional-changelog-conventionalcommits": "^7.0.2",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-compat": "^3.13.0",
-    "eslint-plugin-import": "^2.24.2",
-    "eslint-plugin-jest": "^24.4.2",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.23.2",
-    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint": "^10.12.0",
+    "eslint-config-phun-ky": "^2.0.10",
     "fast-check": "^3.23.2",
-    "git-cz": "^4.9.0",
+    "globals": "^17.13.0",
     "playwright-core": "^1.63.0",
-    "prettier": "^2.4.1",
-    "prettier-eslint": "^13.0.0",
+    "prettier": "^3.9.9",
     "stylus": "^0.60.0",
     "terser": "^5.24.0",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.1",
     "vite": "^8.1.6"
   },
   "dependencies": {
     "@phun-ky/moebius": "^2.1.0",
     "chroma-js": "^2.4.2",
     "diff-dom": "^5.0.4"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/git-cz"
-    }
   }
 }

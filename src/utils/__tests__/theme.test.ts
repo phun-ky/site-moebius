@@ -26,14 +26,14 @@ const runThemeScript = (
         if (storageThrows) throw new Error('blocked');
 
         return stored;
-      },
+      }
     },
     window: { matchMedia: () => ({ matches: systemPrefersLight }) },
     document: {
       documentElement: {
-        classList: { add: (name: string) => classes.add(name) },
-      },
-    },
+        classList: { add: (name: string) => classes.add(name) }
+      }
+    }
   });
 
   return classes.has('theme--light') ? 'light' : 'dark';

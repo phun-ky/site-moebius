@@ -1,6 +1,5 @@
-import App from '../../../app';
-
 import { init } from '../';
+import App from '../../../app';
 import { router } from '../router';
 
 export const navigateTo = async (url: string) => {

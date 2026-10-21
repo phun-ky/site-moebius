@@ -1,8 +1,10 @@
 import { MoebiusColorValueHexType } from '@phun-ky/moebius';
-import { addOnAfterAppRender } from 'lib/spa';
-import { PaletteItem } from '../components/PaletteItem';
+
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
+import { addOnAfterAppRender } from 'lib/spa';
 import { onColorClick } from 'utils/on-color-click';
+
+import { PaletteItem } from '../components/PaletteItem';
 
 export type MoebiusSitePaletteItemsMapperArgsType = {
   id: string;
@@ -43,6 +45,6 @@ export const paletteItemsMapper = (
   return {
     id,
     name: id,
-    content: PaletteItem({ id, moebius, options }),
+    content: PaletteItem({ id, moebius, options })
   };
 };

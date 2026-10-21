@@ -18,11 +18,7 @@ export type EventDataSelector = {
 };
 
 export type UseStateValue =
-  | boolean
-  | string
-  | number
-  | unknown[]
-  | Record<string, unknown>;
+  boolean | string | number | unknown[] | Record<string, unknown>;
 
 export type UseStateReturn = [UseStateValue, FunctionType];
 

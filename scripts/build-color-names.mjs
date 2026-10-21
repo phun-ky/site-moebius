@@ -4,11 +4,11 @@
 // development and emits it in the build). The site serves it from its own
 // origin instead of fetching names from a third party. Dependabot keeps
 // color-name-list current.
+import { colornames } from 'color-name-list';
+
 import { readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
-
-import { colornames } from 'color-name-list';
 
 const HEX_COLOR = /^#[0-9a-f]{6}$/i;
 
@@ -81,7 +81,7 @@ export const colorNameFiles = async () => {
       'colornames.LICENSE.txt': await readFile(
         join(packageDir, 'LICENSE'),
         'utf8'
-      ),
-    },
+      )
+    }
   };
 };

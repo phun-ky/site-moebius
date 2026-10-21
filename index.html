@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="ph">
   <head>
     <title>moebius</title>
@@ -12,7 +12,6 @@
     <meta name="application-name" content="Moebius" />
     <meta property="og:site_name" content="moebius" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content=https://moebius.wtf/img/logo.png>
     <meta
       name="description"
       content="Generate color palettes and check them in a color blind simulator. Get the JavaScript code and CSS variables, ready to  use!"
@@ -102,8 +101,17 @@
         padding: 0;
         margin: 0;
         line-height: 1.5;
-        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-          Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          Segoe UI,
+          Roboto,
+          Helvetica Neue,
+          Arial,
+          Noto Sans,
+          sans-serif;
       }
       main.ph {
         flex-grow: 1;
@@ -339,7 +347,10 @@
       rel="preload"
       href="https://phun-ky.net/css/ph.css"
       as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
     />
   </head>
   <body class="ph">

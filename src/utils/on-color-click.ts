@@ -1,5 +1,7 @@
 import { MoebiusColorValueHexType } from '@phun-ky/moebius';
+
 import { MoebiusSiteEventType } from 'types';
+
 import { copy } from './copy';
 import { setOptions } from './set-options';
 
@@ -11,6 +13,6 @@ export const onColorClick = async (event: Event) => {
 
   await copy(hex);
   setOptions({
-    baseColor: hex,
+    baseColor: hex
   });
 };

@@ -6,6 +6,6 @@ export const potentialMatchesMapper = (route: Route): RouterMatch => {
 
   return {
     route: route,
-    result: route.regex ? pathName.match(route.regex) : null,
+    result: route.regex ? pathName.match(route.regex) : null
   };
 };
