@@ -45,6 +45,8 @@ jobs:
         run: npm run check:layout
       - name: Check the routes # Served like GitHub Pages: every route 200, unknown paths 404
         run: npm run check:routes
+      - name: Check the theme # Follows the system, saved choice wins, toggles once per click
+        run: npm run check:theme
 
   notify:
     name: Notify failed check

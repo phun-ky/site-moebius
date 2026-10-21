@@ -40,6 +40,8 @@ const main = async () => {
           viewport: { width, height: 900 },
           isMobile: phone,
           hasTouch: phone,
+          // The site follows the system setting while no theme is saved
+          colorScheme: theme,
         });
 
         try {
@@ -51,11 +53,12 @@ const main = async () => {
             timeout: 30_000,
           });
 
-          if (theme === 'light') {
-            await page.click('.ph.darkmode-button');
-            await page.waitForFunction(() =>
-              document.documentElement.classList.contains('theme--light')
-            );
+          const light = await page.evaluate(() =>
+            document.documentElement.classList.contains('theme--light')
+          );
+
+          if (light !== (theme === 'light')) {
+            throw new Error(`Expected the ${theme} theme`);
           }
 
           const { clientWidth, scrollWidth } = await page.evaluate(() => ({
