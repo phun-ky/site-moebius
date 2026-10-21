@@ -4,11 +4,11 @@
   "description": "asd",
   "type": "module",
   "scripts": {
-    "clean": "rm -rf dist/*",
+    "clean": "rm -rf dist/* sourcemaps",
     "assets": "mkdir -p dist && cp -a ./public/. ./dist/ && cp -a ./src/assets/. ./dist/ && node scripts/build-color-names.mjs",
     "prebuild": "npm run clean && npm run assets",
     "build": "rollup -c rollup.config.mjs",
-    "postbuild": "bash -c 'mv -f ./dist/*.{js,map} ./dist/js' && node scripts/build-routes.mjs",
+    "postbuild": "mkdir -p dist/js sourcemaps && bash -c 'mv -f ./dist/*.js ./dist/js && mv -f ./dist/*.map ./sourcemaps' && node scripts/build-routes.mjs",
     "build:watch": "rollup -c rollup.config.mjs -w",
     "prepare": "git config core.hooksPath .githooks || true",
     "typecheck": "tsc --noEmit",
@@ -16,6 +16,7 @@
     "test": "node --import tsx --enable-source-maps --test \"{src,scripts}/**/__tests__/*.test.{ts,mjs}\"",
     "check:layout": "node scripts/check-layout.mjs",
     "check:routes": "node scripts/check-routes.mjs",
+    "check:dist": "node scripts/check-dist.mjs",
     "commit": "npx git-cz",
     "dev": "npx browser-sync start -s \"dist\" --files \"dist/*.*\"  --single"
   },
@@ -60,10 +61,10 @@
     "prettier": "^2.4.1",
     "prettier-eslint": "^13.0.0",
     "rollup": "^2.39.0",
-    "rollup-plugin-dts": "^4.0.1",
     "rollup-plugin-svg-import": "^2.0.0",
     "rollup-plugin-typescript2": "^0.35.0",
     "stylus": "^0.60.0",
+    "terser": "^5.24.0",
     "tslib": "^2.3.1",
     "tsx": "^4.23.15",
     "typescript": "^4.5.4"
