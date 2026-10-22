@@ -7,10 +7,12 @@ export type MoebiusSiteCheckboxPropsType = {
   name: string;
   id: string;
   className?: string;
+  // Such as 'switch', for a checkbox that turns something on and off
+  role?: string;
 };
 
 export const Checkbox = (props: MoebiusSiteCheckboxPropsType) => {
-  const { checked = false, name, id, className = 'ph' } = props;
+  const { checked = false, name, id, className = 'ph', role } = props;
   const checkedAttribute = checked ? 'checked="checked"' : '';
 
   return html`<input
@@ -19,5 +21,6 @@ export const Checkbox = (props: MoebiusSiteCheckboxPropsType) => {
     name="${name}"
     id="${id}"
     class="${className}"
+    ${role ? `role="${role}"` : ''}
   />`;
 };
