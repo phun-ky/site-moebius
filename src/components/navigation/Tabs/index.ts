@@ -8,7 +8,9 @@ const html = String.raw;
 export type MoebiusSiteTabItem = {
   id: string;
   name: string;
-  content: string;
+  // A function is only called for the active tab, so hidden tabs cost
+  // nothing to render
+  content: string | (() => string);
 };
 
 export type MoebiusSiteTabItems = MoebiusSiteTabItem[];
@@ -115,9 +117,15 @@ export const Tabs = (props: MoebiusSitePropsType) => {
             return ` ${property}="${value}"`;
           })
           .join(' ');
+        const panelContent =
+          id !== activeTab
+            ? ''
+            : typeof content === 'function'
+              ? content()
+              : content;
 
         return html`<section class="ph" ${attrs} id="section-${id}">
-          ${content}
+          ${panelContent}
         </section>`;
       })
       .join('\n')}
