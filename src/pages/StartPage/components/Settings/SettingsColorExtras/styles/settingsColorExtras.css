@@ -1,12 +1,4 @@
-.ph.settings-color-extras-fieldset .ph.settings-color-extras-inner {
-  display: flex;
-  flex-direction: column;
-  grid-gap: var(--moebius-box-spacing);
-  justify-content: flex-start;
-}
-@media screen and (min-width: 768px) {
-  .ph.settings-color-extras-fieldset .ph.settings-color-extras-inner {
-    flex-direction: row;
-    flex-wrap: nowrap;
-  }
+.ph.settings-color-extras .ph.settings-color-extras-inner {
+  display: grid;
+  gap: 0.125rem;
 }

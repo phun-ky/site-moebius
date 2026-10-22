@@ -18,6 +18,10 @@ export type MoebiusSiteTabItems = MoebiusSiteTabItem[];
 export type MoebiusSitePropsType = {
   id: string;
   items: MoebiusSiteTabItems;
+  // The active tab, when it is kept outside the tabs, such as in the page's
+  // options; choosing a tab then calls onSelect instead
+  active?: string;
+  onSelect?: (id: string) => void;
 };
 
 // Arrow keys, Home and End move between tabs, as in the ARIA tabs pattern.
@@ -49,8 +53,9 @@ document.addEventListener('keydown', (event) => {
 });
 
 export const Tabs = (props: MoebiusSitePropsType) => {
-  const { id, items } = props;
-  const [activeTab, setActiveTab] = useState('interpolate', 'palette-tabs');
+  const { id, items, active, onSelect } = props;
+  const [ownActiveTab, setOwnActiveTab] = useState(items[0]?.id, `tabs-${id}`);
+  const activeTab = active ?? ownActiveTab;
 
   items.forEach((item: MoebiusSiteTabItem) => {
     const { id: itemId } = item;
@@ -58,7 +63,8 @@ export const Tabs = (props: MoebiusSitePropsType) => {
     addOnClick(`tab-${itemId}`, (e: MoebiusSiteEventType<HTMLElement>) => {
       e.preventDefault();
 
-      setActiveTab(itemId);
+      if (onSelect) onSelect(itemId);
+      else setOwnActiveTab(itemId);
     });
   });
 

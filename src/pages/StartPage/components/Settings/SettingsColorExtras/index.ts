@@ -26,30 +26,30 @@ export const SettingsColorExtras = (
     }
   );
 
-  return html`<form class="ph settings-color-extras">
+  return html`<form class="ph group settings-color-extras">
     <fieldset class="ph settings-color-extras-fieldset">
-      <legend class="ph">Corrections</legend>
+      <legend class="ph group-label">Corrections</legend>
 
       <div class="ph settings-color-extras-inner">
         ${[
           {
             id: 'bezier',
-            title: 'bezier',
+            title: 'Bezier',
             value: options.bezier
           },
           {
             id: 'correctLightness',
-            title: 'correct lightness',
+            title: 'Correct lightness',
             value: options.correctLightness
           },
           {
             id: 'noDuplicates',
-            title: 'no duplicates',
+            title: 'No duplicates',
             value: options.noDuplicates
           },
           {
             id: 'reverseDirection',
-            title: 'reverse direction',
+            title: 'Reverse direction',
             value: options.reverseDirection
           }
         ]
@@ -60,16 +60,6 @@ export const SettingsColorExtras = (
               id: setting.id,
               label: setting.title
             });
-            /*return html`<div class="ph input-group">
-            ${Checkbox({
-    checked: setting.value,
-    name: setting.id,
-    id: setting.id
-  })}
-            ${Label({ labelFor: setting.id, label: setting.title })}
-          </div>`;
-
-          */
           })
           .join('\n')}
       </div>

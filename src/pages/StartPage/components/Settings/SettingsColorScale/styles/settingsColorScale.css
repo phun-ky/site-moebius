@@ -1,33 +1,55 @@
-.ph.settings-color-scale-fieldset .ph.settings-color-scale-inner {
+/* The blend modes as one segmented control: each radio button sits, still
+   focusable, behind its label, and the checked one's label is raised */
+.ph.settings-color-scale .ph.settings-color-scale-inner {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--moebius-color-line);
+  border-radius: var(--moebius-radius-3);
+  background-color: var(--moebius-color-background);
+}
+.ph.settings-color-scale .ph.input-group {
+  position: relative;
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  grid-gap: var(--moebius-box-spacing);
-  justify-content: space-between;
-  margin-bottom: var(--moebius-space-4);
-  border: none;
+  align-items: stretch;
+  margin: 0;
 }
-@media screen and (min-width: 768px) {
-  .ph.settings-color-scale-fieldset .ph.settings-color-scale-inner {
-    justify-content: flex-start;
-    margin-bottom: 0;
-  }
+.ph.settings-color-scale input[type='radio'].ph {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  margin: 0;
+  border: 0;
+  /* Clicks reach the label, which checks the radio; the keyboard still
+     reaches the radio itself */
+  pointer-events: none;
 }
-@media screen and (min-width: 1024px) {
-  .ph.settings-color-scale-fieldset .ph.settings-color-scale-inner {
-    flex-wrap: wrap;
-  }
+.ph.settings-color-scale input[type='radio'].ph::before,
+.ph.settings-color-scale input[type='radio'].ph::after {
+  content: none;
 }
-.ph.settings-color-scale-fieldset .ph.input-group {
-  grid-gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0;
+.ph.settings-color-scale label.ph {
+  flex: 1;
+  margin: 0;
+  padding: 0.4375rem 0;
+  border-radius: var(--moebius-radius-2);
+  text-align: center;
+  font-size: 0.8125rem;
+  font-weight: var(--moebius-font-weight-medium);
+  color: var(--moebius-color-text);
+  cursor: pointer;
 }
-@media screen and (min-width: 2048px) {
-  .ph.settings-color-scale-fieldset .ph.input-group {
-    flex-shrink: 0;
-    flex-grow: 0;
-    align-items: flex-start;
-  }
+.ph.settings-color-scale input[type='radio'].ph:checked + label.ph {
+  background-color: var(--moebius-color-raised);
+  color: var(--moebius-color-text-strong);
+  font-weight: var(--moebius-font-weight-semibold);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
+}
+.ph.settings-color-scale input[type='radio'].ph:focus-visible + label.ph {
+  outline: 2px solid var(--moebius-color-focus);
+  outline-offset: 1px;
 }

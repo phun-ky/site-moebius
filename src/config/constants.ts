@@ -13,6 +13,8 @@ export type MoebiusSiteDefaultOptionsType = {
   colorScaleMode?: string;
   numberOfColors?: number;
   colorBlindSim?: string;
+  // The palette shown in the band and the results
+  palette?: string;
 };
 
 export const DEFAULT_OPTIONS: MoebiusSiteDefaultOptionsType = {
@@ -27,5 +29,20 @@ export const DEFAULT_OPTIONS: MoebiusSiteDefaultOptionsType = {
   noDuplicates: false,
   colorScaleMode: 'rgb',
   numberOfColors: 7,
-  colorBlindSim: 'normal'
+  colorBlindSim: 'normal',
+  palette: 'interpolate'
+};
+
+// What the page calls each palette moebius makes
+export const PALETTE_NAMES: Record<string, string> = {
+  interpolate: 'Interpolate',
+  luminanceShift: 'Luminance shift',
+  monochromatic: 'Monochromatic',
+  complement: 'Complement',
+  split: 'Split complementary',
+  triadic: 'Triadic',
+  tetradic: 'Tetradic',
+  pentadic: 'Pentadic',
+  hexadic: 'Hexadic',
+  analogous: 'Analogous'
 };

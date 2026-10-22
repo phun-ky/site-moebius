@@ -1,0 +1,64 @@
+/* The start page (#48): the settings panel beside the results, stacked on
+   narrower screens */
+.ph.workspace {
+  display: grid;
+  gap: var(--moebius-space-8);
+  max-width: 85rem;
+  margin: 0 auto;
+  padding: var(--moebius-space-6) 0 var(--moebius-space-10);
+}
+.ph.results {
+  display: grid;
+  gap: var(--moebius-space-8);
+  align-content: start;
+  min-width: 0;
+}
+@media screen and (min-width: 1024px) {
+  .ph.workspace {
+    grid-template-columns: 20rem minmax(0, 1fr);
+    gap: var(--moebius-space-10);
+  }
+}
+.ph.palettes {
+  display: grid;
+  gap: var(--moebius-space-4);
+  min-width: 0;
+}
+.ph.palettes > h2.ph {
+  font-size: var(--moebius-font-size-4);
+}
+.ph.palettes > .ph.hint {
+  margin: calc(-1 * var(--moebius-space-3)) 0 0;
+  font-size: var(--moebius-font-size-1);
+}
+/* A preview of the palette: a pie, a mix of its colors and a gradient */
+.ph.palette {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--moebius-space-4);
+  margin: var(--moebius-space-4) 0;
+}
+.ph.palette .ph.svg,
+.ph.palette .ph.mix {
+  width: 100%;
+  max-width: 16rem;
+  height: auto;
+  aspect-ratio: 1;
+}
+.ph.palette .ph.mix {
+  background-color: var(--moebius-color-well);
+}
+.ph.palette .ph.gradient {
+  grid-column: 1 / -1;
+  height: 4rem;
+  border-radius: var(--moebius-radius-3);
+}
+@media screen and (min-width: 768px) {
+  .ph.palette {
+    grid-template-columns: 12rem 12rem minmax(0, 1fr);
+  }
+  .ph.palette .ph.gradient {
+    grid-column: auto;
+    height: 100%;
+  }
+}
