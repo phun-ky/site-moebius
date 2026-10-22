@@ -140,7 +140,9 @@ export const PickColor = (props: MoebiusSitePickColorPropsType) => {
 
   // One row per color: the swatch opens the picker, the name says what it
   // is, the hex field takes a code, and the units button shows it in other
-  // color units
+  // color units. Until the color names load (#82) the name is a dash, so
+  // the element paints at once; the name filling in later then doesn't
+  // count as the page's largest paint, which would put it seconds late
   return html`<div
     class="ph color-row ${type}-color"
     role="group"
@@ -155,7 +157,7 @@ export const PickColor = (props: MoebiusSitePickColorPropsType) => {
     })}
     <p class="ph color-row-name" id="color-row-${type}">
       <span class="ph color-row-label">${title}</span>
-      <strong class="ph">${currentColor.name}</strong>
+      <strong class="ph">${currentColor.name || '–'}</strong>
     </p>
     ${TextInput({
       id: `color-picker-input-${type}-text`,
