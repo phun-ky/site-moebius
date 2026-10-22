@@ -2,7 +2,7 @@ const html = String.raw;
 
 import './styles/header.css';
 
-import logoSvg from './logo.svg?raw';
+import logoSvg from 'assets/logo/mark.svg?raw';
 
 // GitHub's mark, for the link to the source
 const githubIcon = html`<svg
