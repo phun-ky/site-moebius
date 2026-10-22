@@ -5,14 +5,18 @@ import globalJsdom from 'global-jsdom';
 
 import { TEST_COLOR_NAMES, installMoebius } from './helpers/moebius';
 
-globalJsdom('<!doctype html><html><body></body></html>', {
+// #app: init-moebius re-renders through the SPA, which needs its root
+globalJsdom('<!doctype html><html><body><div id="app"></div></body></html>', {
   url: 'https://moebius.wtf/'
 });
 
 const { copy } = await import('../copy');
 const { getOptions } = await import('../get-options');
 const { hideLoading } = await import('../hide-loading');
-const { initMoebius } = await import('../init-moebius');
+// Node's own CustomEvent is rejected by jsdom's dispatchEvent
+globalThis.CustomEvent = window.CustomEvent;
+
+const { initMoebius, whenColorNamesLoaded } = await import('../init-moebius');
 const { onColorClick } = await import('../on-color-click');
 const { setOptions } = await import('../set-options');
 const { DEFAULT_OPTIONS } = await import('../../config/constants');
@@ -120,7 +124,7 @@ describe('initMoebius', () => {
     assert.equal(fetchSpy.mock.callCount(), 0);
   });
 
-  it('loads colour names from the site and puts moebius on window', async (t) => {
+  it('renders without names first, then loads them after the first render', async (t) => {
     const fetchMock = t.mock.method(globalThis, 'fetch', async () =>
       Response.json(TEST_COLOR_NAMES)
     );
@@ -128,10 +132,34 @@ describe('initMoebius', () => {
     window.MoebiusColor = undefined;
     await initMoebius();
 
+    assert.equal(new window.MoebiusColor('#ff9900').name, '');
+    assert.equal(fetchMock.mock.callCount(), 0);
+
+    document.dispatchEvent(new window.CustomEvent('eventAfterAppRender'));
+    await whenColorNamesLoaded();
+
     assert.equal(
       String(fetchMock.mock.calls[0].arguments[0]),
       '/data/colornames.json'
     );
     assert.equal(new window.MoebiusColor('#ff9900').name, 'Orange');
+  });
+
+  it('keeps colours without names when the names fail to load', async (t) => {
+    t.mock.method(
+      globalThis,
+      'fetch',
+      async () => new Response('', { status: 503 })
+    );
+
+    const warn = t.mock.method(console, 'warn', () => {});
+
+    window.MoebiusColor = undefined;
+    await initMoebius();
+    document.dispatchEvent(new window.CustomEvent('eventAfterAppRender'));
+    await whenColorNamesLoaded();
+
+    assert.equal(new window.MoebiusColor('#ff9900').name, '');
+    assert.equal(warn.mock.callCount(), 1);
   });
 });
