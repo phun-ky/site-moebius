@@ -10,6 +10,13 @@ globalJsdom(
   }
 );
 
+// Node 26 has its own global localStorage, which global-jsdom leaves alone;
+// use jsdom's, as the browser would
+Object.defineProperty(globalThis, 'localStorage', {
+  value: window.localStorage,
+  configurable: true
+});
+
 // A matchMedia whose result and change listeners the tests control
 let systemLight = false;
 const listeners: (() => void)[] = [];
