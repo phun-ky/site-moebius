@@ -2,13 +2,12 @@ const html = String.raw;
 
 import './styles/header.css';
 
-import logoTextSvg from './logo-text.svg?raw';
 import logoSvg from './logo.svg?raw';
 
 export const Header = () => {
   return html`<header class="ph header">
     <a class="ph skip-link" href="#content">Skip to content</a>
-    <a class="ph home" href="/" aria-label="home">${logoSvg}${logoTextSvg}</a>
+    <a class="ph home" href="/" aria-label="moebius home">${logoSvg}</a>
     <div class="ph header-menu">
       <a
         class="ph"

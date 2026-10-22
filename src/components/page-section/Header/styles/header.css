@@ -5,12 +5,7 @@
   justify-content: flex-start;
   text-decoration: none;
 }
-.ph.header .ph.home > svg:first-of-type {
+.ph.header .ph.home > svg {
   height: 3rem;
   width: 3rem;
-}
-.ph.header .ph.home > svg:last-of-type {
-  width: 10rem;
-  fill: var(--moebius-color-text-strong);
-  margin-left: var(--moebius-space-4);
 }
