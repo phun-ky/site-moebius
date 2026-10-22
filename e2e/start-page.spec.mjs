@@ -9,7 +9,6 @@ import {
   swatchColors
 } from './helpers.mjs';
 
-const panel = '[role="tabpanel"]:not([hidden])';
 // The palette being shown, in the band at the top (#48)
 const band = '.ph.band .ph.swatch .ph.color';
 
@@ -68,19 +67,18 @@ test('the settings change the palettes and are kept in the link', async ({
   await expect.poll(() => swatchColors(page)).not.toEqual(before);
 });
 
-test('a tab shows its own palette, in the band too', async ({ page }) => {
+test('a palette tile shows its palette, in the band too', async ({ page }) => {
   await openStartPage(page);
 
   const before = await swatchColors(page);
 
-  await page.locator('#tab-complement').click();
+  await page
+    .locator('label.ph.palette-option:has(input[value="complement"])')
+    .click();
 
-  await expect(page.locator('#tab-complement')).toHaveAttribute(
-    'aria-selected',
-    'true'
-  );
-  await expect(page.locator('#section-complement')).toBeVisible();
-  await expect(page.locator('#section-interpolate')).toBeHidden();
+  await expect(
+    page.getByRole('radio', { name: 'Complement', exact: true })
+  ).toBeChecked();
   await expect(page.locator('.ph.band')).toHaveAttribute(
     'data-palette',
     'complement'
@@ -120,34 +118,37 @@ test('the color blind simulator changes the colors shown, not the palette', asyn
   ).toEqual(hexes);
 });
 
-for (const language of ['css', 'js']) {
-  test(`the ${language} export code is copied by its copy button`, async ({
-    page
-  }) => {
+for (const [name, language, pattern] of [
+  ['CSS', 'css', /--color-\S+: #[0-9a-f]{6};/],
+  ['JavaScript', 'js', /'#[0-9a-f]{6}'/],
+  ['Design tokens', 'json', /"colorSpace": "srgb"/]
+]) {
+  test(`the ${name} code is copied by its copy button`, async ({ page }) => {
     await openStartPage(page);
 
-    await page.locator(`${panel} details.export-code > summary`).click();
+    await page.getByRole('tab', { name, exact: true }).click();
 
-    const block = page.locator(`${panel} .ph.code-toolbar`, {
-      has: page.locator('.ph.language', {
-        hasText: new RegExp(`^${language}$`)
-      })
-    });
-    const code = block.locator('code');
+    const box = page.locator('.ph.code-box');
+    const code = box.locator('pre code');
 
-    await expect(code).toContainText(
-      language === 'css' ? /--color-\S+: #[0-9a-f]{6};/ : /'#[0-9a-f]{6}'/
-    );
+    await expect(code).toContainText(pattern);
 
-    const button = block.locator('button.ph.copy'); // By class: its name changes to "copied" when clicked
+    // By class: its name changes to "copied" when clicked
+    const button = box.locator('button.ph.copy');
 
     await button.click();
 
     await expect(button).toHaveText('copied');
-    await expect(block.getByRole('status')).toHaveText(
-      `${language} code copied`
-    );
-    expect(await clipboard(page)).toBe(await code.textContent());
+    await expect(box.getByRole('status')).toHaveText(`${language} code copied`);
+
+    const copied = await clipboard(page);
+
+    expect(copied).toBe(await code.textContent());
+
+    if (language === 'json') {
+      expect(JSON.parse(copied).interpolate['1'].$value.hex).toBe('#003f5c');
+    }
+
     await expect(button).toHaveText('copy');
   });
 }
@@ -165,10 +166,9 @@ test('options in a shared link are restored', async ({ page }) => {
   );
   await expect(page.locator('#color-scale-lch')).toBeChecked();
   await expect(page.locator('#color-blind-sim')).toHaveValue('protanopia');
-  await expect(page.locator('#tab-triadic')).toHaveAttribute(
-    'aria-selected',
-    'true'
-  );
+  await expect(
+    page.getByRole('radio', { name: 'Triadic', exact: true })
+  ).toBeChecked();
   await expect(page.locator('.ph.band')).toHaveAttribute(
     'data-palette',
     'triadic'

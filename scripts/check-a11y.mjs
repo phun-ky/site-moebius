@@ -37,11 +37,13 @@ const START_PAGE_STATES = [
     open: (page) => page.click('#color-units-primary-button')
   },
   {
-    name: 'second palette with its code',
+    name: 'second palette with its design tokens',
     open: async (page) => {
-      await page.click('#tab-luminanceShift');
-      await page.waitForSelector('#section-luminanceShift:not([hidden])');
-      await page.click('#section-luminanceShift summary');
+      await page.click(
+        'label.ph.palette-option:has(input[value="luminanceShift"])'
+      );
+      await page.waitForSelector('.ph.band[data-palette="luminanceShift"]');
+      await page.click('#tab-code-tokens');
     }
   }
 ];

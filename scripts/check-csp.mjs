@@ -120,12 +120,11 @@ const main = async () => {
 
         const settle = () => page.waitForTimeout(400);
 
-        await page
-          .locator('[role="tabpanel"]:not([hidden]) summary')
-          .first()
-          .click();
+        await page.click(
+          'label.ph.palette-option:has(input[value="luminanceShift"])'
+        );
         await settle();
-        await page.locator('[role="tab"]').nth(1).click();
+        await page.click('#tab-code-tokens');
         await settle();
         await page.click('label[for="color-scale-lab"]');
         await settle();
