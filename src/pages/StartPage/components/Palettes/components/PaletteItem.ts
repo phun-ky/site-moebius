@@ -2,8 +2,6 @@ import { CodeBlock } from 'components/page-section/CodeBlock';
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
 import { colorBlindCheck } from 'features/color-blind/color-blind-check';
 import { Accents } from 'pages/StartPage/components/Accents';
-import { css } from 'utils/export/css';
-import { js } from 'utils/export/js';
 import { getGradientStyle } from 'utils/get-gradient-style';
 
 import { SettingsColorBlind } from '../../Settings/SettingsColorBlind';
@@ -54,21 +52,13 @@ export const PaletteItem = (props: MoebiusSitePaletteItemPropsType) => {
       ${Accents({ colors: moebius.accents[id] })}
     </output>
 
-    <details class="ph">
+    <details class="ph export-code" data-palette="${id}">
       <summary class="ph">
         <h3 class="ph">CSS and JavaScript code</h3>
       </summary>
       <h4 class="ph">CSS Variables</h4>
-      ${CodeBlock({
-        id,
-        language: 'css',
-        content: css(moebius.colors[id], moebius.accents[id])
-      })}
+      ${CodeBlock({ id, language: 'css', content: '' })}
       <h4 class="ph">JavaScript</h4>
-      ${CodeBlock({
-        id,
-        language: 'js',
-        content: js(moebius.colors[id], moebius.accents[id])
-      })}
+      ${CodeBlock({ id, language: 'js', content: '' })}
     </details>`;
 };
