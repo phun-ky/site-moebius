@@ -1,8 +1,9 @@
 import { Label } from 'components/input-fields/Label';
-import { RadioButton } from 'components/input-fields/RadioButton';
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
-
-import './styles/settingsColorBlind.css';
+import { addOnChange } from 'lib/spa';
+import { EventType } from 'lib/spa/types';
+import { COLOR_BLIND_SIM_TYPES } from 'utils/sanitize-options';
+import { setOptions } from 'utils/set-options';
 
 const html = String.raw;
 
@@ -10,43 +11,33 @@ export type MoebiusSiteSettingsColorBlindPropsType = {
   options: MoebiusSiteDefaultOptionsType;
 };
 
+// A menu rather than nine radio buttons, so it fits the settings panel
 export const SettingsColorBlind = (
   props: MoebiusSiteSettingsColorBlindPropsType
 ) => {
   const { options } = props;
 
-  return html`<form class="ph color-blind-simulator">
-    <fieldset class="ph color-blind">
-      <legend class="ph">Color blind simulator</legend>
-      <div class="ph color-blind-inner">
-        ${[
-          { id: 'normal', title: 'normal' },
-          { id: 'protanomaly', title: 'protanomaly' },
-          { id: 'protanopia', title: 'protanopia' },
-          { id: 'deuteranomaly', title: 'deuteranomaly' },
-          { id: 'deuteranopia', title: 'deuteranopia' },
-          { id: 'tritanomaly', title: 'tritanomaly' },
-          { id: 'tritanopia', title: 'tritanopia' },
-          { id: 'achromatomaly', title: 'achromatomaly' },
-          { id: 'achromatopsia', title: 'achromatopsia' }
-        ]
-          .map((setting) => {
-            return html`<div class="ph input-group">
-              ${RadioButton({
-                checked: setting.id === options.colorBlindSim,
-                value: setting.id,
-                // One id per option, so each label checks its own radio
-                id: `color-blind-sim-${setting.id}`,
-                name: 'color-blind-sim'
-              })}
-              ${Label({
-                labelFor: `color-blind-sim-${setting.id}`,
-                label: setting.title
-              })}
-            </div>`;
-          })
-          .join('\n')}
-      </div>
-    </fieldset>
-  </form>`;
+  addOnChange('color-blind-sim', (e: EventType<HTMLSelectElement>) => {
+    setOptions({ colorBlindSim: e.target.value as string });
+  });
+
+  // Untagged, so Prettier keeps each option on one line: diff-dom can't read
+  // a closing tag split over lines
+  const choices = COLOR_BLIND_SIM_TYPES.map(
+    (type) =>
+      `<option value="${type}"${type === options.colorBlindSim ? ' selected' : ''}>${type}</option>`
+  ).join('');
+
+  return html`<div class="ph group color-blind-simulator">
+    ${Label({
+      labelFor: 'color-blind-sim',
+      label: 'Color blind simulator',
+      className: 'ph group-label'
+    })}
+    <div class="ph select">
+      <select class="ph" id="color-blind-sim">
+        ${choices}
+      </select>
+    </div>
+  </div>`;
 };

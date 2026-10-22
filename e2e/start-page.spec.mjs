@@ -10,6 +10,8 @@ import {
 } from './helpers.mjs';
 
 const panel = '[role="tabpanel"]:not([hidden])';
+// The palette being shown, in the band at the top (#48)
+const band = '.ph.band .ph.swatch .ph.color';
 
 test('typing a hex code makes it the primary color', async ({ page }) => {
   await openStartPage(page);
@@ -22,9 +24,10 @@ test('typing a hex code makes it the primary color', async ({ page }) => {
   await expect
     .poll(() => hashOptions(page))
     .toMatchObject({ baseColor: '#ff0000' });
-  await expect(
-    page.locator(`${panel} .ph.swatch .ph.color`).first()
-  ).toHaveAttribute('data-color-hex', '#ff0000');
+  await expect(page.locator(band).first()).toHaveAttribute(
+    'data-color-hex',
+    '#ff0000'
+  );
   await expect(
     page.locator('#color-picker-input-primary-color')
   ).toHaveAttribute('aria-label', /^Change the primary color, now \S/);
@@ -35,7 +38,7 @@ test('clicking a swatch copies its hex code and makes it the primary color', asy
 }) => {
   await openStartPage(page);
 
-  const swatch = page.locator(`${panel} .ph.swatch .ph.color`).nth(3);
+  const swatch = page.locator(band).nth(3);
   const hex = await swatch.getAttribute('data-color-hex');
 
   await swatch.click();
@@ -65,8 +68,10 @@ test('the settings change the palettes and are kept in the link', async ({
   await expect.poll(() => swatchColors(page)).not.toEqual(before);
 });
 
-test('a tab shows its own palette', async ({ page }) => {
+test('a tab shows its own palette, in the band too', async ({ page }) => {
   await openStartPage(page);
+
+  const before = await swatchColors(page);
 
   await page.locator('#tab-complement').click();
 
@@ -76,9 +81,16 @@ test('a tab shows its own palette', async ({ page }) => {
   );
   await expect(page.locator('#section-complement')).toBeVisible();
   await expect(page.locator('#section-interpolate')).toBeHidden();
-  await expect(
-    page.locator('#section-complement .ph.swatch .ph.color').first()
-  ).toBeVisible();
+  await expect(page.locator('.ph.band')).toHaveAttribute(
+    'data-palette',
+    'complement'
+  );
+  await expect
+    .poll(() => hashOptions(page))
+    .toMatchObject({
+      palette: 'complement'
+    });
+  await expect.poll(() => swatchColors(page)).not.toEqual(before);
 });
 
 test('the color blind simulator changes the colors shown, not the palette', async ({
@@ -86,16 +98,15 @@ test('the color blind simulator changes the colors shown, not the palette', asyn
 }) => {
   await openStartPage(page);
 
-  const swatches = page.locator(`${panel} .ph.swatch .ph.color`);
+  const swatches = page.locator(band);
   const hexes = await swatches.evaluateAll((colors) =>
     colors.map((color) => color.dataset.colorHex)
   );
   const before = await swatchColors(page);
 
-  // The label's text, as a visitor clicks it (#39)
-  await page.locator('label[for="color-blind-sim-deuteranopia"]').click();
+  await page.getByLabel('Color blind simulator').selectOption('deuteranopia');
 
-  await expect(page.locator('#color-blind-sim-deuteranopia')).toBeChecked();
+  await expect(page.locator('#color-blind-sim')).toHaveValue('deuteranopia');
   await expect
     .poll(() => hashOptions(page))
     .toMatchObject({
@@ -145,12 +156,21 @@ test('options in a shared link are restored', async ({ page }) => {
   await openStartPage(page, {
     baseColor: '#ff0000',
     colorScaleMode: 'lch',
-    colorBlindSim: 'protanopia'
+    colorBlindSim: 'protanopia',
+    palette: 'triadic'
   });
 
   await expect(page.locator('#color-picker-input-primary-text')).toHaveValue(
     /^#ff0000$/i
   );
   await expect(page.locator('#color-scale-lch')).toBeChecked();
-  await expect(page.locator('#color-blind-sim-protanopia')).toBeChecked();
+  await expect(page.locator('#color-blind-sim')).toHaveValue('protanopia');
+  await expect(page.locator('#tab-triadic')).toHaveAttribute(
+    'aria-selected',
+    'true'
+  );
+  await expect(page.locator('.ph.band')).toHaveAttribute(
+    'data-palette',
+    'triadic'
+  );
 });

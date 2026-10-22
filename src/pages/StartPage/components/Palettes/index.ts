@@ -1,7 +1,6 @@
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
 import { setCurrentPalettes } from 'features/export-code';
 import { addOnAfterAppRender, addOnChange } from 'lib/spa';
-import { EventType } from 'lib/spa/types';
 import { MoebiusSiteEventType } from 'types';
 import { generateAccentGradientCssVariables } from 'utils/generate-accent-gradients-css-variables';
 import { setOptions } from 'utils/set-options';
@@ -14,37 +13,34 @@ const html = String.raw;
 
 export type PalettesPropsType = {
   options: MoebiusSiteDefaultOptionsType;
+  moebius: typeof window.MoebiusPalettes;
+};
+
+/**
+ * Make the palettes for the options, for the band and the results.
+ * @param {MoebiusSiteDefaultOptionsType} options - The page's options.
+ * @returns {typeof window.MoebiusPalettes} The palettes.
+ */
+export const createPalettes = (options: MoebiusSiteDefaultOptionsType) => {
+  const { MoebiusColor, MoebiusPalettes } = window;
+
+  return new MoebiusPalettes({
+    baseColor: new MoebiusColor(options.baseColor, ''),
+    secondaryColor: new MoebiusColor(options.secondaryColor, ''),
+    divergentColor: new MoebiusColor(options.divergentColor, '').hex,
+    diverging: options.diverging,
+    bezier: options.bezier,
+    reverseDirection: options.reverseDirection,
+    randomOffset: options.randomOffset,
+    correctLightness: options.correctLightness,
+    noDuplicates: options.noDuplicates,
+    colorScaleMode: options.colorScaleMode,
+    numberOfColors: options.numberOfColors
+  });
 };
 
 export const Palettes = async (props: PalettesPropsType) => {
-  const { options } = props;
-  const {
-    baseColor,
-    secondaryColor,
-    divergentColor,
-    diverging,
-    bezier,
-    reverseDirection,
-    randomOffset,
-    correctLightness,
-    noDuplicates,
-    colorScaleMode,
-    numberOfColors
-  } = options;
-  const { MoebiusColor, MoebiusPalettes } = window;
-  const moebius = new MoebiusPalettes({
-    baseColor: new MoebiusColor(baseColor, ''),
-    secondaryColor: new MoebiusColor(secondaryColor, ''),
-    divergentColor: new MoebiusColor(divergentColor, '').hex,
-    diverging,
-    bezier,
-    reverseDirection,
-    randomOffset,
-    correctLightness,
-    noDuplicates,
-    colorScaleMode,
-    numberOfColors
-  });
+  const { options, moebius } = props;
 
   setCurrentPalettes(moebius);
 
@@ -66,15 +62,11 @@ export const Palettes = async (props: PalettesPropsType) => {
     }
   );
 
-  addOnChange(
-    '.ph.color-blind-simulator input[type="radio"]',
-    (e: EventType<HTMLInputElement>) => {
-      setOptions({ colorBlindSim: e.target.value });
-    }
-  );
-
   return html`<div class="ph palettes">
-    <h2 class="ph">Palettes</h2>
+    <h2 class="ph">Palette</h2>
+    <p class="ph hint">
+      Click any color to copy it and make it the primary color.
+    </p>
     ${PaletteItems({ moebius, options })}
   </div>`;
 };

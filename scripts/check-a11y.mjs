@@ -97,6 +97,10 @@ const main = async () => {
             );
             await state.open(page);
             await page.waitForTimeout(300);
+            // Opening a section can scroll the page; anything then under the
+            // pinned palette band counts as an obscured target for axe. Check
+            // the page at rest instead; axe still checks every element
+            await page.evaluate(() => window.scrollTo(0, 0));
             await page.addScriptTag({ content: AXE });
 
             const result = await page.evaluate(

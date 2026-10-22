@@ -31,7 +31,6 @@
 :root.theme--light {
   --ph-well-border-color: var(--moebius-color-input-border);
 }
-
 @media screen and (min-width: 425px) {
   :root {
     --moebius-box-spacing: var(--moebius-space-4);
@@ -81,215 +80,12 @@ h4.ph {
     max-width: 4096px;
   }
 }
-.ph.section.workspace > .ph.container.workspace {
-  grid-gap: var(--moebius-box-spacing);
-  display: flex;
-  flex-direction: column;
-}
-@media screen and (min-width: 1440px) {
-  .ph.section.workspace > .ph.container.workspace {
-    display: grid;
-    grid-template-areas: 'color-picker settings' 'palettes palettes';
-    grid-template-columns: auto 1fr;
-  }
-}
-.ph.section.workspace .ph.palettes {
-  grid-area: palettes;
-}
-@media screen and (min-width: 2048px) {
-  .ph.section.workspace .ph.palettes {
-    width: auto;
-  }
-}
 .ph.section {
   padding-top: var(--moebius-space-8);
   padding-bottom: var(--moebius-space-16);
 }
 .ph.section + .ph.section {
   padding-top: 0;
-}
-.ph.svg {
-  height: auto;
-  width: 256px;
-  max-width: 100%;
-  aspect-ratio: 1;
-  display: block;
-  grid-area: svg;
-}
-.ph.gradient {
-  display: block;
-  width: 100%;
-  height: 256px;
-  grid-area: gradient;
-}
-.ph.color-blind-warning {
-  grid-area: color-blind-warning;
-}
-.ph.palette {
-  display: grid;
-  grid-gap: var(--moebius-box-spacing);
-  grid-template-areas: 'color-blind-simulator' 'color-blind-warning' 'swatch' 'wheel' 'mix' 'gradient';
-  grid-template-columns: minmax(0, 1fr);
-}
-@media screen and (min-width: 620px) {
-  .ph.palette {
-    grid-template-areas: 'color-blind-simulator color-blind-simulator' 'color-blind-warning color-blind-warning' 'swatch swatch' 'wheel mix' 'gradient gradient';
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@media screen and (min-width: 768px) {
-  .ph.palette {
-    grid-template-areas: 'color-blind-simulator color-blind-simulator' 'color-blind-warning color-blind-warning' 'swatch swatch' 'wheel mix' 'gradient gradient';
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@media screen and (min-width: 1024px) {
-  .ph.palette {
-    grid-template-areas: 'color-blind-simulator color-blind-simulator color-blind-simulator' 'color-blind-warning color-blind-warning color-blind-warning' 'swatch swatch swatch' 'wheel mix gradient';
-    grid-template-columns: 255px 256px minmax(0, 1fr);
-  }
-}
-.ph.palette > * {
-  margin: 0;
-}
-.ph.palette .ph.mix {
-  grid-area: mix;
-  height: auto;
-  width: 256px;
-  max-width: 100%;
-  aspect-ratio: 1;
-  background-color: var(--moebius-color-well);
-  margin: 0 auto;
-}
-@media screen and (min-width: 620px) {
-  .ph.palette .ph.mix {
-    margin: 0;
-  }
-}
-.ph.palette .ph.svg {
-  grid-area: wheel;
-  margin: 0 auto;
-}
-@media screen and (min-width: 620px) {
-  .ph.palette .ph.svg {
-    margin: 0;
-  }
-}
-.ph.palette .ph.gradient {
-  grid-area: gradient;
-  margin-bottom: 0;
-}
-.ph.color-picker-inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-areas: 'primary' 'secondary' 'divergent';
-  grid-gap: var(--moebius-box-spacing);
-  color: var(--moebius-color-text);
-  font-size: var(--moebius-font-size-1);
-  line-height: 1.5rem;
-  position: relative;
-}
-@media screen and (min-width: 425px) {
-  .ph.color-picker-inner {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-areas: 'primary secondary divergent';
-  }
-}
-@media screen and (min-width: 768px) {
-  .ph.color-picker-inner {
-    grid-template-columns: repeat(auto-fit, minmax(8rem, 12rem));
-    grid-template-areas: 'primary secondary divergent';
-  }
-}
-@media screen and (min-width: 1024px) {
-  .ph.color-picker-inner {
-    grid-template-columns: repeat(auto-fit, minmax(8rem, 12rem));
-    grid-template-areas: 'primary secondary divergent';
-    font-size: var(--moebius-font-size-2);
-    line-height: 1.75rem;
-  }
-}
-@media screen and (min-width: 1200px) {
-  .ph.color-picker-inner {
-    grid-template-columns: 12rem 12rem 12rem;
-    grid-template-areas: 'primary secondary divergent';
-  }
-}
-@media screen and (min-width: 2048px) {
-  .ph.color-picker-inner {
-    grid-template-columns: 12rem 12rem 12rem;
-    grid-template-areas: 'primary secondary divergent';
-  }
-}
-.ph.color-picker {
-  position: relative;
-  grid-area: color-picker;
-  display: flex;
-  flex-direction: column;
-  grid-gap: var(--moebius-box-spacing);
-  padding-top: var(--moebius-box-spacing);
-}
-.ph.color-picker .ph.color-picker-input-container {
-  display: flex;
-  flex-direction: column;
-  border: 0;
-  padding: 0;
-  min-width: 0;
-  grid-gap: var(--moebius-inner-spacing);
-  width: 100%;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-.ph.color-picker .ph.color-picker-input-container > legend.ph {
-  margin: 0;
-}
-.ph.color-picker .ph.color-picker-input-container .ph.color-picker-input {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  padding: 0;
-  border: none;
-  width: 100%;
-  grid-gap: var(--moebius-inner-spacing);
-}
-.ph.color-picker .ph.color-picker-input-container.primary-color {
-  grid-area: primary;
-}
-.ph.color-picker .ph.color-picker-input-container.secondary-color {
-  grid-area: secondary;
-}
-.ph.color-picker .ph.color-picker-input-container.divergent-color {
-  grid-area: divergent;
-}
-.ph.color-picker .ph.color-picker-input-container input[type='text'].ph {
-  font-size: var(--moebius-font-size-2);
-  font-family: var(--moebius-font-family-code);
-  text-align: center;
-  width: 100%;
-}
-.ph.color-picker .ph.color-picker-input-container .color-picker-button.ph {
-  appearance: none;
-  background: none;
-  border: 0;
-  cursor: pointer;
-  aspect-ratio: 1/1;
-  padding: 0;
-  position: relative;
-  border: 0.125rem solid var(--moebius-color-input-border);
-  border-radius: var(--moebius-radius-2);
-}
-.ph.color-picker
-  .ph.color-picker-input-container
-  .color-picker-button.ph::before {
-  bottom: 0.25rem;
-  color: inherit;
-  content: attr(data-color-name);
-  font-size: var(--moebius-font-size-2);
-  font-weight: var(--moebius-font-weight-regular);
-  left: 0.25rem;
-  line-height: 1.333;
-  position: absolute;
 }
 .ph.color-picker-help {
   grid-area: help;
@@ -604,15 +400,6 @@ dialog.ph .ph.close {
 }
 dialog.ph .ph.close:hover {
   color: var(--moebius-color-text-strong);
-}
-.ph.button.color-unit-modal-toggle-button {
-  /* Black in the light theme, light grey in the dark theme */
-  color: var(--moebius-color-text-strong);
-  width: 100%;
-}
-.ph.button.color-unit-modal-toggle-button .ph.icon {
-  line-height: 100%;
-  margin-right: var(--moebius-space-2);
 }
 .ph.button {
   color: var(--moebius-color-text-strong);

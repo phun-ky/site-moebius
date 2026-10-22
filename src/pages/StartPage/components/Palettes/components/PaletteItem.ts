@@ -4,9 +4,6 @@ import { colorBlindCheck } from 'features/color-blind/color-blind-check';
 import { Accents } from 'pages/StartPage/components/Accents';
 import { getGradientStyle } from 'utils/get-gradient-style';
 
-import { SettingsColorBlind } from '../../Settings/SettingsColorBlind';
-import { Swatch } from '../../Swatch';
-
 import { ColorBlindWarning } from './ColorBlindWarning';
 import { SettingsLuminanceShift } from './SettingsLuminanceShift';
 import { SettingsMonochromatic } from './SettingsMonochromatic';
@@ -26,9 +23,10 @@ export const PaletteItem = (props: MoebiusSitePaletteItemPropsType) => {
   const colorBlindCheckResult = colorBlindCheck(moebius.colors[id]);
   const isColorBlindSafe = colorBlindCheckResult.length === 0;
 
-  return html`<div class="ph palette ${id}">
-      ${SettingsColorBlind({ options })}
-      ${!isColorBlindSafe ? ColorBlindWarning(colorBlindCheckResult) : ''}
+  return html`${!isColorBlindSafe ? ColorBlindWarning(colorBlindCheckResult) : ''}
+    ${SettingsLuminanceShift({ id, options })}
+    ${SettingsMonochromatic({ id, options })}
+    <div class="ph palette ${id}">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
@@ -42,12 +40,7 @@ export const PaletteItem = (props: MoebiusSitePaletteItemPropsType) => {
         id="${id}-gradient"
         style="${gradientStyle}"
       ></div>
-      <div class="ph swatch" id="${id}">
-        ${Swatch(moebius.colors[id], id, options)}
-      </div>
     </div>
-    ${SettingsLuminanceShift({ id, options })}
-    ${SettingsMonochromatic({ id, options })}
     <div class="ph accents" id="${id}-accents">
       ${Accents({ colors: moebius.accents[id] })}
     </div>

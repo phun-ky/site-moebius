@@ -1,0 +1,114 @@
+/* How tall the band is, and room for it when the page scrolls something
+   into view, such as a control reached with Tab, so it isn't hidden under
+   the band */
+:root:has(.ph.band) {
+  --band-height: clamp(9.5rem, 30vh, 18.75rem);
+
+  scroll-padding-top: calc(var(--band-height) + var(--moebius-space-4));
+}
+@media screen and (max-width: 767px) {
+  :root:has(.ph.band) {
+    --band-height: 10.5rem;
+  }
+}
+
+/* Full width despite the page's side margin, and pinned to the top; the
+   header scrolls away above it */
+.ph.band {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  margin: calc(-1 * var(--moebius-space-5)) calc(-1 * var(--moebius-space-5)) 0;
+}
+.ph.band .ph.swatch {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) repeat(5, minmax(0, 1fr)) minmax(
+      0,
+      1.6fr
+    );
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 0;
+  height: var(--band-height);
+}
+.ph.band .ph.swatch .ph.color {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 0.1875rem;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  padding: var(--moebius-space-4) var(--moebius-space-3);
+  font-family: var(--moebius-font-family-code);
+  font-size: 0.8125rem;
+  font-weight: var(--moebius-font-weight-semibold);
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  cursor: pointer;
+  aspect-ratio: auto;
+}
+/* The color's name, under its hex code */
+.ph.band .ph.swatch .ph.color::before {
+  position: static;
+  order: 2;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--moebius-font-family-body);
+  font-size: 0.75rem;
+  font-weight: var(--moebius-font-weight-regular);
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-transform: none;
+  opacity: 0.85;
+}
+.ph.band .ph.swatch .ph.color:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -6px;
+}
+/* The interpolate palette runs from the primary to the secondary color */
+.ph.band[data-palette='interpolate'] .ph.color:first-child::after,
+.ph.band[data-palette='interpolate'] .ph.color:last-child::after {
+  position: absolute;
+  top: var(--moebius-space-4);
+  left: var(--moebius-space-3);
+  font-family: var(--moebius-font-family-body);
+  font-size: 0.6875rem;
+  font-weight: var(--moebius-font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+.ph.band[data-palette='interpolate'] .ph.color:first-child::after {
+  content: 'Primary';
+}
+.ph.band[data-palette='interpolate'] .ph.color:last-child::after {
+  content: 'Secondary';
+}
+@media screen and (max-width: 767px) {
+  .ph.band .ph.swatch {
+    grid-template-columns: none;
+  }
+  .ph.band .ph.swatch .ph.color {
+    padding: 0.625rem 0.5rem;
+    font-size: 0.6875rem;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    justify-content: flex-start;
+  }
+  .ph.band .ph.swatch .ph.color::before {
+    display: none;
+  }
+  .ph.band[data-palette='interpolate'] .ph.color:first-child::after,
+  .ph.band[data-palette='interpolate'] .ph.color:last-child::after {
+    top: auto;
+    left: 0.5rem;
+    bottom: 0.625rem;
+    font-size: 0.5625rem;
+  }
+}

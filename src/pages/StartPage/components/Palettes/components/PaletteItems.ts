@@ -1,5 +1,7 @@
 import { Tabs } from 'components/navigation/Tabs';
-import { MoebiusSiteDefaultOptionsType } from 'config/constants';
+import { MoebiusSiteDefaultOptionsType, PALETTE_NAMES } from 'config/constants';
+import { PALETTE_TYPES } from 'utils/sanitize-options';
+import { setOptions } from 'utils/set-options';
 
 import { paletteItemsMapper } from '../utils/palette-items-mapper';
 
@@ -10,21 +12,17 @@ export type MoebiusSitePaletteItemsPropsType = {
 
 export const PaletteItems = (props: MoebiusSitePaletteItemsPropsType) => {
   const { moebius, options } = props;
-  const outputIdArray = [
-    'interpolate',
-    'luminanceShift',
-    'monochromatic',
-    'complement',
-    'split',
-    'triadic',
-    'tetradic',
-    'pentadic',
-    'hexadic',
-    'analogous'
-  ];
-  const paletteTabItems = outputIdArray.map((id) =>
-    paletteItemsMapper({ id, moebius, options })
-  );
+  const paletteTabItems = PALETTE_TYPES.map((id) => ({
+    ...paletteItemsMapper({ id, moebius, options }),
+    name: PALETTE_NAMES[id]
+  }));
 
-  return Tabs({ id: 'palettes', items: paletteTabItems });
+  // The chosen palette is an option, like the rest, so the band shows the
+  // same one and a shared link keeps it
+  return Tabs({
+    id: 'palettes',
+    items: paletteTabItems,
+    active: options.palette,
+    onSelect: (palette) => setOptions({ palette })
+  });
 };

@@ -12,12 +12,19 @@ export type MoebiusSiteToggleboxPropsType = {
   label: string;
 };
 
+// A switch: the label names the setting, and the checkbox is drawn as a
+// track with a knob. The label used to say only "on" or "off"
 export const Togglebox = (props: MoebiusSiteToggleboxPropsType) => {
   const { checked = false, name, id, className = '', label } = props;
 
   return html`<div class="ph toggle-controls">
-    ${label}
-    ${Checkbox({ checked, name, id, className: `ph toggle ${className}` })}
-    ${Label({ labelFor: id, label: checked ? 'on' : 'off' })}
+    ${Label({ labelFor: id, label, className: 'ph toggle-label' })}
+    ${Checkbox({
+      checked,
+      name,
+      id,
+      className: `ph toggle ${className}`,
+      role: 'switch'
+    })}
   </div>`;
 };

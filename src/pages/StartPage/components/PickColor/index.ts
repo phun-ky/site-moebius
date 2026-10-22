@@ -138,35 +138,45 @@ export const PickColor = (props: MoebiusSitePickColorPropsType) => {
     }
   });
 
-  return html`<fieldset class="ph color-picker-input-container ${type}-color">
-    <legend class="ph">${title}</legend>
-    <div class="ph color-picker-input">
-      ${PickColorButton({
-        id: `color-picker-input-${type}-color`,
-        color: currentColor.hex,
-        colorName: currentColor.name,
-        label: `Change the ${title.toLowerCase()} color, now ${currentColor.name}`,
-        className: 'color-picker-button color'
-      })}
-      ${Dialog({
-        id: `color-picker-modal-${type}`,
-        className: `color-picker-modal ${type}`,
-        content: ColorPickerHueMap({ type, color })
-      })}
-      ${TextInput({
-        id: `color-picker-input-${type}-text`,
-        label: 'Hex code',
-        value: currentColor.hex.toUpperCase()
-      })}
-    </div>
-
+  // One row per color: the swatch opens the picker, the name says what it
+  // is, the hex field takes a code, and the units button shows it in other
+  // color units. Until the color names load (#82) the name is a dash, so
+  // the element paints at once; the name filling in later then doesn't
+  // count as the page's largest paint, which would put it seconds late
+  return html`<div
+    class="ph color-row ${type}-color"
+    role="group"
+    aria-labelledby="color-row-${type}"
+  >
+    ${PickColorButton({
+      id: `color-picker-input-${type}-color`,
+      color: currentColor.hex,
+      colorName: currentColor.name,
+      label: `Change the ${title.toLowerCase()} color, now ${currentColor.name}`,
+      className: 'color-picker-button color'
+    })}
+    <p class="ph color-row-name" id="color-row-${type}">
+      <span class="ph color-row-label">${title}</span>
+      <strong class="ph">${currentColor.name || '–'}</strong>
+    </p>
+    ${TextInput({
+      id: `color-picker-input-${type}-text`,
+      label: `${title} color, hex code`,
+      value: currentColor.hex.toUpperCase()
+    })}
     <button
+      type="button"
       class="ph button color-unit-modal-toggle-button"
       id="color-units-${type}-button"
+      aria-label="The ${title.toLowerCase()} color in other units"
     >
-      <span class="ph icon">#</span> Color units
+      Aa
     </button>
-
+    ${Dialog({
+      id: `color-picker-modal-${type}`,
+      className: `color-picker-modal ${type}`,
+      content: ColorPickerHueMap({ type, color })
+    })}
     ${Dialog({
       id: `color-units-${type}-modal`,
       className: 'color-units-modal',
@@ -175,5 +185,5 @@ export const PickColor = (props: MoebiusSitePickColorPropsType) => {
         type
       })
     })}
-  </fieldset>`;
+  </div>`;
 };

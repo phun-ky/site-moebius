@@ -25,9 +25,11 @@ export const SettingsColorScale = (
     }
   );
 
-  return html` <form class="ph settings-color-scale">
+  // The blend modes look like one segmented control; each is a radio button
+  // and its label
+  return html`<form class="ph group settings-color-scale">
     <fieldset class="ph settings-color-scale-fieldset">
-      <legend class="ph">Color scale method</legend>
+      <legend class="ph group-label">Blend</legend>
       <div class="ph settings-color-scale-inner">
         ${[
           { id: 'rgb', title: 'rgb' },

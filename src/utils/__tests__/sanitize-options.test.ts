@@ -27,7 +27,8 @@ describe('sanitizeOptions', () => {
       noDuplicates: false,
       colorScaleMode: 'lch',
       numberOfColors: 9,
-      colorBlindSim: 'tritanopia'
+      colorBlindSim: 'tritanopia',
+      palette: 'triadic'
     };
 
     assert.deepEqual(sanitizeOptions(valid), valid);
@@ -39,9 +40,16 @@ describe('sanitizeOptions', () => {
       'secondaryColor',
       'divergentColor',
       'colorScaleMode',
-      'colorBlindSim'
+      'colorBlindSim',
+      'palette'
     ]) {
       assert.deepEqual(sanitizeOptions({ [key]: PAYLOAD }), {}, key);
+    }
+  });
+
+  it('drops palettes moebius does not make', () => {
+    for (const palette of ['nope', 'constructor', '', 'Interpolate']) {
+      assert.deepEqual(sanitizeOptions({ palette }), {}, palette);
     }
   });
 

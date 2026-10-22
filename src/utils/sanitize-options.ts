@@ -14,6 +14,20 @@ export const COLOR_BLIND_SIM_TYPES = [
   'achromatopsia'
 ];
 
+// The palettes moebius makes, in the order the page lists them
+export const PALETTE_TYPES = [
+  'interpolate',
+  'luminanceShift',
+  'monochromatic',
+  'complement',
+  'split',
+  'triadic',
+  'tetradic',
+  'pentadic',
+  'hexadic',
+  'analogous'
+];
+
 export const MIN_NUMBER_OF_COLORS = 2;
 
 export const MAX_NUMBER_OF_COLORS = 32;
@@ -86,6 +100,12 @@ export const sanitizeOptions = (
     COLOR_BLIND_SIM_TYPES.includes(colorBlindSim)
   ) {
     options.colorBlindSim = colorBlindSim;
+  }
+
+  const palette = own('palette');
+
+  if (typeof palette === 'string' && PALETTE_TYPES.includes(palette)) {
+    options.palette = palette;
   }
 
   const numberOfColors = own('numberOfColors');
