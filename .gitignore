@@ -134,3 +134,6 @@ moebius.d.ts
 moebius.js
 moebius.js.map
 sourcemaps
+
+# Screenshots from npm run check:layout
+screenshots/
