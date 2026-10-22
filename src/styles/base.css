@@ -11,18 +11,7 @@
   -webkit-font-smoothing: antialised;
 }
 html {
-  font-family: var(
-    --ph-font-family,
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Roboto,
-    Helvetica,
-    Arial,
-    sans-serif,
-    Apple Color Emoji,
-    Segoe UI Emoji
-  );
+  font-family: var(--moebius-font-family-body);
 }
 html,
 body {
@@ -30,8 +19,8 @@ body {
   min-height: 100%;
 }
 body {
-  background-color: var(--ph-color-background, #181a22);
-  color: var(--ph-color-text, #9fa8ad);
+  background-color: var(--moebius-color-background);
+  color: var(--moebius-color-text);
   padding: 0;
   margin: 0;
   line-height: 1.5;
@@ -55,26 +44,26 @@ main.ph {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
+  margin-top: var(--moebius-space-10);
+  margin-bottom: var(--moebius-space-10);
 }
 
 .ph.frontpage .ph.container {
-  margin-bottom: 1.25rem;
-  margin-top: 1.25rem;
+  margin-bottom: var(--moebius-space-5);
+  margin-top: var(--moebius-space-5);
   max-width: 1024px;
 }
 
 .ph.project .ph.banner .ph.container {
   max-width: 48rem;
   width: 100%;
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
-  padding-top: 6rem;
-  padding-bottom: 6rem;
+  margin-top: var(--moebius-space-10);
+  margin-bottom: var(--moebius-space-10);
+  padding-top: var(--moebius-space-24);
+  padding-bottom: var(--moebius-space-24);
 }
 footer.ph.footer {
-  font-size: 1.25rem;
+  font-size: var(--moebius-font-size-4);
   z-index: 100;
   flex-grow: 0;
   margin-top: auto;
@@ -84,29 +73,29 @@ footer.ph.footer {
   flex-direction: column;
   min-height: 100%;
   position: relative;
-  padding: 1.25rem;
+  padding: var(--moebius-space-5);
 }
 a.ph {
-  color: var(--ph-color-link, #6ca7f9);
-  font-weight: 500;
+  color: var(--moebius-color-link);
+  font-weight: var(--moebius-font-weight-medium);
 }
 a.ph:visited {
-  color: var(--ph-color-link-visited, #6ca7f9);
+  color: var(--moebius-color-link);
 }
 a.ph:active {
-  color: var(--ph-color-link-active, #6ca7f9);
+  color: var(--moebius-color-link);
 }
 a.ph:hover {
-  color: var(--ph-color-link-hover, #6ca7f9);
+  color: var(--moebius-color-link);
 }
 p,
 p.ph,
 .ph.byline {
   font-style: normal;
   max-width: 65ch;
-  font-size: 1rem;
+  font-size: var(--moebius-font-size-2);
   line-height: 1.75rem;
-  color: var(--ph-color-text, #9fa8ad);
+  color: var(--moebius-color-text);
   margin-top: 1.25em;
   margin-bottom: 1.25em;
 }
@@ -115,23 +104,23 @@ p.ph,
   opacity: 0.7;
 }
 article.ph {
-  color: var(--ph-color-text, #9fa8ad);
-  font-size: 1rem;
+  color: var(--moebius-color-text);
+  font-size: var(--moebius-font-size-2);
   line-height: 1.75rem;
 }
 p.lead,
 p.ph.lead {
-  color: var(--ph-color-text-accent, #e4e4e7);
-  font-weight: 600;
+  color: var(--moebius-color-text-strong);
+  font-weight: var(--moebius-font-weight-semibold);
   line-height: 1.75rem;
-  margin-bottom: 2.5rem;
-  font-size: 1.125rem;
+  margin-bottom: var(--moebius-space-10);
+  font-size: var(--moebius-font-size-3);
 }
 .ph.frontpage p.ph.lead {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
+  padding-top: var(--moebius-space-10);
+  padding-bottom: var(--moebius-space-10);
   margin: 0;
-  font-weight: normal;
+  font-weight: var(--moebius-font-weight-regular);
   color: inherit;
 }
 .ph.author p.ph,
@@ -144,65 +133,65 @@ h3.ph,
 h4.ph,
 h5.ph,
 h6.ph {
-  color: var(--ph-color-text-accent, #e4e4e7);
+  color: var(--moebius-color-text-strong);
 }
 h1.ph {
-  margin-bottom: 2.5rem;
-  font-size: 2.25rem;
+  margin-bottom: var(--moebius-space-10);
+  font-size: var(--moebius-font-size-7);
   line-height: 1.25;
-  font-weight: 700;
+  font-weight: var(--moebius-font-weight-bold);
 }
 @media screen and (min-width: 768px) {
   h1.ph {
-    font-size: 3rem;
+    font-size: var(--moebius-font-size-8);
     line-height: 1.375;
   }
 }
 @media screen and (min-width: 1024px) {
   h1.ph {
-    font-size: 3.75rem;
+    font-size: var(--moebius-font-size-9);
     line-height: 1.375;
   }
 }
 h1.ph > em.ph {
-  font-weight: normal;
+  font-weight: var(--moebius-font-weight-regular);
   max-width: 65ch;
-  font-size: 1rem;
+  font-size: var(--moebius-font-size-2);
   line-height: 1.75rem;
   display: block;
-  color: var(--ph-color-text);
+  color: var(--moebius-color-text);
 }
 .ph.frontpage h1.ph {
-  margin-bottom: 2.5rem;
-  font-size: 3rem;
+  margin-bottom: var(--moebius-space-10);
+  font-size: var(--moebius-font-size-8);
   line-height: 1.375;
 }
 @media screen and (min-width: 1024px) {
   .ph.frontpage h1.ph {
-    font-size: 4.75rem;
+    font-size: var(--moebius-font-size-10);
   }
 }
 h2.ph {
-  font-size: 1.75rem;
+  font-size: var(--moebius-font-size-6);
   line-height: 1.3333333;
-  margin-bottom: 1rem;
-  margin-top: 2rem;
+  margin-bottom: var(--moebius-space-4);
+  margin-top: var(--moebius-space-8);
 }
 h3.ph {
-  font-size: 1.5rem;
+  font-size: var(--moebius-font-size-5);
   line-height: 1.3333333;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  font-weight: 400;
+  margin-bottom: var(--moebius-space-4);
+  margin-top: var(--moebius-space-4);
+  font-weight: var(--moebius-font-weight-regular);
 }
 h4.ph {
-  font-size: 1.25rem;
+  font-size: var(--moebius-font-size-4);
   line-height: 1.3333333;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  font-weight: 500;
+  margin-bottom: var(--moebius-space-4);
+  margin-top: var(--moebius-space-4);
+  font-weight: var(--moebius-font-weight-medium);
   text-transform: uppercase;
-  color: var(--ph-color-text);
+  color: var(--moebius-color-text);
 }
 header.ph.header {
   display: flex;
@@ -245,7 +234,7 @@ header.ph.header {
   background-color: transparent;
   border: none;
   border-radius: 50%;
-  color: var(--ph-color-text);
+  color: var(--moebius-color-text);
   cursor: pointer;
   display: flex;
   height: 3rem;
@@ -254,7 +243,7 @@ header.ph.header {
 }
 .ph.darkmode-button:active,
 .ph.darkmode-button:hover {
-  background-color: var(--ph-color-well-background);
+  background-color: var(--moebius-color-well);
 }
 .ph.darkmode-button > svg.ph {
   pointer-events: none;
@@ -283,10 +272,10 @@ p.ph:has(> img[src^='/img']) {
   left: -9999px;
   top: 0.5rem;
   z-index: 1000;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  background-color: var(--ph-color-background, #181a22);
-  color: var(--ph-color-link, #6ca7f9);
+  padding: var(--moebius-space-2) var(--moebius-space-4);
+  border-radius: var(--moebius-radius-2);
+  background-color: var(--moebius-color-background);
+  color: var(--moebius-color-link);
 }
 .ph.skip-link:focus {
   left: 0.5rem;

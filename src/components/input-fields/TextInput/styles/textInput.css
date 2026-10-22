@@ -1,15 +1,15 @@
 input.ph {
-  font-family: var(--ph-font-family-code);
-  font-size: 1rem;
+  font-family: var(--moebius-font-family-code);
+  font-size: var(--moebius-font-size-2);
   height: 3rem;
   width: 100%;
-  border-radius: 6px;
-  font-weight: 500;
+  border-radius: var(--moebius-radius-2);
+  font-weight: var(--moebius-font-weight-medium);
   text-align: left;
-  font-family: var(--ph-font-family);
+  font-family: var(--moebius-font-family-body);
   line-height: 1.3333;
-  padding: 0 0.5rem;
-  color: var(--ph-color-text-accent);
-  background-color: var(--ph-input-background-color);
-  border: 0.125rem solid var(--ph-input-border-color);
+  padding: 0 var(--moebius-space-2);
+  color: var(--moebius-color-text-strong);
+  background-color: var(--moebius-color-input-background);
+  border: 0.125rem solid var(--moebius-color-input-border);
 }

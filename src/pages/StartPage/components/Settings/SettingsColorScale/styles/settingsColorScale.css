@@ -4,7 +4,7 @@
   flex-wrap: nowrap;
   grid-gap: var(--moebius-box-spacing);
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: var(--moebius-space-4);
   border: none;
 }
 @media screen and (min-width: 768px) {

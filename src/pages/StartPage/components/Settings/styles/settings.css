@@ -4,8 +4,8 @@
   flex-direction: column;
   grid-gap: var(--moebius-box-spacing);
   padding: var(--moebius-box-spacing);
-  border-radius: 12px;
-  background-color: var(--ph-color-well-background);
+  border-radius: var(--moebius-radius-4);
+  background-color: var(--moebius-color-well);
 }
 @media screen and (min-width: 1200px) {
   .ph.settings {

@@ -1,7 +1,7 @@
 form.ph.color-blind-simulator {
   grid-area: color-blind-simulator;
   width: 100%;
-  border-radius: 12px;
+  border-radius: var(--moebius-radius-4);
   grid-gap: var(--moebius-inner-spacing);
 }
 form.ph.color-blind-simulator legend.ph {

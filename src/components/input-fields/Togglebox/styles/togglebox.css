@@ -1,9 +1,9 @@
 .ph.toggle-controls {
-  font-family: var(--ph-font-family);
-  font-size: 1rem;
-  color: var(--ph-color-text-accent);
+  font-family: var(--moebius-font-family-body);
+  font-size: var(--moebius-font-size-2);
+  color: var(--moebius-color-text-strong);
   line-height: 1.333;
-  font-weight: 500;
+  font-weight: var(--moebius-font-weight-medium);
   flex-direction: column;
   align-items: flex-start;
   display: flex;
@@ -37,13 +37,13 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  font-size: 1.125rem;
-  font-family: var(--ph-font-family);
-  font-weight: normal;
+  font-size: var(--moebius-font-size-3);
+  font-family: var(--moebius-font-family-body);
+  font-weight: var(--moebius-font-weight-regular);
   margin-bottom: 0;
 }
 .ph.toggle[type='checkbox'] + label.ph {
-  padding-left: 4.5rem;
+  padding-left: var(--moebius-space-18);
 }
 .ph.toggle[type='checkbox'] + label.ph::after {
   content: '';
@@ -59,10 +59,10 @@
   left: 0;
   padding: 0;
   line-height: 2rem;
-  border-radius: 1rem;
-  background-color: var(--ph-color-well-background);
+  border-radius: var(--moebius-radius-6);
+  background-color: var(--moebius-color-well);
   transition: all 70ms cubic-bezier(0.4, 0, 0.2, 1);
-  border: 0.125rem solid var(--ph-color-text-accent);
+  border: 0.125rem solid var(--moebius-color-text-strong);
 }
 .ph.toggle[type='checkbox'] + label.ph::before {
   content: '';
@@ -74,7 +74,7 @@
   flex-shrink: 0;
   flex-grow: 0;
   margin: 0;
-  background-color: var(--ph-color-text);
+  background-color: var(--moebius-color-text);
   position: absolute;
   left: 0.5rem;
   border-radius: 50%;
@@ -85,17 +85,17 @@
 }
 .ph.toggle[type='checkbox']:checked + label.ph::before {
   left: 2.5rem;
-  background-color: var(--ph-color-link);
+  background-color: var(--moebius-color-link);
   background-image: none;
 }
 .ph.toggle[type='checkbox']:focus + label.ph::after {
-  outline: var(--ph-color-link) solid 0.1875rem;
+  outline: var(--moebius-color-link) solid 0.1875rem;
   outline-offset: 0.125rem;
 }
 .ph.toggle[type='checkbox']:focus:not(:focus-visible) + label.ph::after {
   outline: none;
 }
 .ph.toggle[type='checkbox']:focus-visible + label.ph::after {
-  outline: var(--ph-color-link) solid 0.1875rem;
+  outline: var(--moebius-color-link) solid 0.1875rem;
   outline-offset: 0.125rem;
 }
