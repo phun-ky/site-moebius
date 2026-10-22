@@ -92,6 +92,10 @@
         "alpha": 0.3,
         "hex": "#262a3b"
       }
+    },
+    "focus": {
+      "$description": "Focus rings",
+      "$value": "{color.link}"
     }
   },
   "font": {

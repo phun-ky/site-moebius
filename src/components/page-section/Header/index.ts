@@ -4,29 +4,63 @@ import './styles/header.css';
 
 import logoSvg from './logo.svg?raw';
 
-export const Header = () => {
+// GitHub's mark, for the link to the source
+const githubIcon = html`<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 16 16"
+  fill="currentColor"
+  aria-hidden="true"
+  class="ph"
+>
+  <path
+    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.34.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+  />
+</svg>`;
+// The site's own pages, in the order the header lists them
+const PAGES = [
+  { path: '/', name: 'Palettes' },
+  { path: '/about', name: 'About' }
+];
+const COFFEE = 'https://www.paypal.me/phunky/20';
+const SPONSOR = 'https://github.com/sponsors/phun-ky';
+const SOURCE = 'https://github.com/phun-ky/site-moebius';
+const NEW_TAB = '<span class="ph visually-hidden"> (opens in a new tab)</span>';
+/**
+ * A link, always on one line: diff-dom, which renders these templates, does
+ * not close a tag written as `</a` + newline + `>`, and Prettier splits long
+ * tags in `html` templates. This template is untagged, so Prettier leaves it.
+ * @param {string} attributes - The link's attributes.
+ * @param {string} content - What it shows.
+ * @returns {string} The link.
+ */
+const link = (attributes: string, content: string) =>
+  `<a ${attributes}>${content}</a>`;
+
+export type MoebiusSiteHeaderPropsType = {
+  // The path of the page being shown, to mark its link as current
+  path?: string;
+};
+
+export const Header = ({ path }: MoebiusSiteHeaderPropsType = {}) => {
+  const links = PAGES.map((page) =>
+    link(
+      `class="ph" href="${page.path}" data-link="${page.path}"${page.path === path ? ' aria-current="page"' : ''}`,
+      page.name
+    )
+  ).join('');
+
   return html`<header class="ph header">
     <a class="ph skip-link" href="#content">Skip to content</a>
-    <a class="ph home" href="/" aria-label="moebius home">${logoSvg}</a>
+    ${link('class="ph home" href="/" data-link="/" aria-label="moebius home"', logoSvg)}
+    <nav class="ph site-nav" aria-label="Site">${links}</nav>
     <div class="ph header-menu">
-      <a
-        class="ph"
-        href="https://www.paypal.me/phunky/20"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        buy me a coffee?
-      </a>
-      <a
-        class="ph"
-        href="https://github.com/sponsors/phun-ky"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        sponsor me!
-      </a>
+      <div class="ph support">
+        ${link(`class="ph" href="${COFFEE}" rel="noopener noreferrer" target="_blank"`, `Buy me a coffee${NEW_TAB}`)}
+        ${link(`class="ph" href="${SPONSOR}" rel="noopener noreferrer" target="_blank"`, `Sponsor${NEW_TAB}`)}
+      </div>
+      ${link(`class="ph icon-button" href="${SOURCE}" aria-label="Source on GitHub"`, githubIcon)}
       <button
-        class="ph darkmode-button"
+        class="ph icon-button darkmode-button"
         aria-label="Switch between light and dark theme"
       >
         <svg

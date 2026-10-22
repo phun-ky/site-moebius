@@ -33,6 +33,37 @@ test('links move between pages without a reload, and back works', async ({
   expect(await page.evaluate(() => window.notReloaded)).toBe(true);
 });
 
+test('the header links to every page and marks the current one', async ({
+  page
+}) => {
+  await page.goto('/about');
+  await rendered(page);
+
+  const header = page.getByRole('banner');
+  const nav = header.getByRole('navigation', { name: 'Site' });
+
+  await expect(nav.getByRole('link', { name: 'About' })).toHaveAttribute(
+    'aria-current',
+    'page'
+  );
+  await expect(nav.getByRole('link', { name: 'Palettes' })).not.toHaveAttribute(
+    'aria-current'
+  );
+  await expect(
+    header.getByRole('link', { name: 'Source on GitHub' })
+  ).toBeVisible();
+  await expect(
+    header.getByRole('button', { name: 'Switch between light and dark theme' })
+  ).toBeVisible();
+
+  await nav.getByRole('link', { name: 'Palettes' }).click();
+  await expect(page).toHaveURL('/');
+  await expect(nav.getByRole('link', { name: 'Palettes' })).toHaveAttribute(
+    'aria-current',
+    'page'
+  );
+});
+
 test('an unknown address shows the not-found page with status 404', async ({
   page
 }) => {

@@ -164,6 +164,36 @@
         "hex": "#6ca7f9",
         "alpha": 0
       }
+    },
+    "line": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [1.0, 1.0, 1.0],
+        "hex": "#ffffff",
+        "alpha": 0.09
+      }
+    },
+    "line-strong": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [1.0, 1.0, 1.0],
+        "hex": "#ffffff",
+        "alpha": 0.16
+      }
+    },
+    "raised": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.1804, 0.1922, 0.251],
+        "hex": "#2e3140"
+      }
+    },
+    "danger": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [1.0, 0.5412, 0.502],
+        "hex": "#ff8a80"
+      }
     }
   }
 }
