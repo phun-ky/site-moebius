@@ -125,21 +125,21 @@ const main = async () => {
       return copied === hex ? null : `copied ${copied}, not ${hex}`;
     });
 
-    await test('arrow keys, Home and End move between tabs', async (page) => {
+    await test('arrow keys, Home and End move between the code tabs', async (page) => {
       const selected = () =>
         page.evaluate(
           () => document.querySelector('[role="tab"][aria-selected="true"]')?.id
         );
 
-      await page.focus('#tab-interpolate');
+      await page.focus('#tab-code-css');
       await page.keyboard.press('ArrowRight');
       await page.waitForFunction(() =>
         document
-          .querySelector('#tab-luminanceShift')
+          .querySelector('#tab-code-js')
           ?.matches('[aria-selected="true"]')
       );
 
-      if ((await focused(page)) !== 'tab-luminanceShift')
+      if ((await focused(page)) !== 'tab-code-js')
         return `focus is on ${await focused(page)} after ArrowRight`;
 
       await page.keyboard.press('End');
@@ -150,10 +150,29 @@ const main = async () => {
       await page.keyboard.press('Home');
       await page.waitForTimeout(300);
 
-      return last === 'tab-analogous' &&
-        (await selected()) === 'tab-interpolate'
+      return last === 'tab-code-tokens' && (await selected()) === 'tab-code-css'
         ? null
         : `End selected ${last}, Home selected ${await selected()}`;
+    });
+
+    await test('arrow keys choose a palette, and the band shows it', async (page) => {
+      await page.focus('input[name="palette"][value="interpolate"]');
+      await page.keyboard.press('ArrowRight');
+      await page.waitForFunction(
+        () =>
+          document.querySelector('.ph.band')?.dataset.palette ===
+          'luminanceShift'
+      );
+
+      const focus = await page.evaluate(
+        () =>
+          document.activeElement?.matches('input[name="palette"]') &&
+          document.activeElement.value
+      );
+
+      return focus === 'luminanceShift'
+        ? null
+        : `focus is on ${await focused(page)} after ArrowRight`;
     });
 
     await test('Enter opens the colour picker, Escape closes it', async (page) => {

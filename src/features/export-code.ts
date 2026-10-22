@@ -1,66 +1,53 @@
+import { MoebiusColorValueHexType } from '@phun-ky/moebius';
+
 import { copy } from 'utils/copy';
 import { css } from 'utils/export/css';
 import { js } from 'utils/export/js';
+import { tokens } from 'utils/export/tokens';
 
-// The palettes on the page, for the export code of a palette that is opened
-let currentPalettes: typeof window.MoebiusPalettes | undefined;
+// The formats the code box offers, in its order (#48, #96)
+export const CODE_FORMATS = [
+  { id: 'css', name: 'CSS', language: 'css' },
+  { id: 'js', name: 'JavaScript', language: 'js' },
+  { id: 'tokens', name: 'Design tokens', language: 'json' }
+];
 
 /**
- * Remember the palettes the page shows.
- * @param {typeof window.MoebiusPalettes} palettes - The current palettes.
+ * A palette's code in one of the formats.
+ * @param {string} format - `css`, `js` or `tokens`.
+ * @param {MoebiusColorValueHexType[]} colors - The palette's colors.
+ * @param {MoebiusColorValueHexType[][]} accents - Each color's shades.
+ * @param {string} palette - The palette's name, such as `interpolate`.
+ * @returns {string} The code.
+ * @throws {RangeError} For a format the code box doesn't offer.
  */
-export const setCurrentPalettes = (
-  palettes: typeof window.MoebiusPalettes
-): void => {
-  currentPalettes = palettes;
+export const exportCode = (
+  format: string,
+  colors: MoebiusColorValueHexType[],
+  accents: MoebiusColorValueHexType[][],
+  palette: string
+): string => {
+  if (format === 'css') return css(colors, accents);
+
+  if (format === 'js') return js(colors, accents);
+
+  if (format === 'tokens') return tokens(colors, accents, palette);
+
+  throw new RangeError(`No code format called ${format}`);
 };
 
 /**
- * Fill and highlight the CSS and JavaScript code of one palette. The code
- * is only made when its section is opened: making and highlighting it for
- * every palette on every render was a large part of the start page's
- * first render (#82).
- * @param {HTMLDetailsElement} details - The opened code section.
+ * Highlight the code in the code box. It runs on its own turn after the
+ * page has rendered, so the highlighting doesn't hold up the first paint
+ * (#82).
  */
-export const fillExportCode = (details: HTMLDetailsElement): void => {
-  const id = details.dataset.palette;
-
-  if (!id || !currentPalettes) return;
-
-  const { colors, accents } = currentPalettes;
-  const code = {
-    css: css(colors[id], accents[id]),
-    js: js(colors[id], accents[id])
-  };
-
-  for (const [language, content] of Object.entries(code)) {
-    const element = details.querySelector<HTMLElement>(
-      `#${id}-code-${language}`
-    );
-
-    if (!element || element.textContent === content) continue;
-
-    element.textContent = content;
-    window.Prism?.highlightElement(element);
-  }
+export const highlightCode = (): void => {
+  setTimeout(() => {
+    document
+      .querySelectorAll<HTMLElement>('.ph.code-box pre code')
+      .forEach((element) => window.Prism?.highlightElement(element));
+  }, 0);
 };
-
-// toggle doesn't bubble, so listen while it is captured
-document.addEventListener(
-  'toggle',
-  (event) => {
-    const details = event.target;
-
-    if (
-      details instanceof HTMLDetailsElement &&
-      details.open &&
-      details.matches('.ph.export-code')
-    ) {
-      fillExportCode(details);
-    }
-  },
-  true
-);
 
 // How long a copy button says what happened before it reads "copy" again
 const COPY_FEEDBACK_MS = 2000;

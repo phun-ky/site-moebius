@@ -62,3 +62,59 @@
     height: 100%;
   }
 }
+.ph.results .ph.hint {
+  margin: 0;
+  font-size: var(--moebius-font-size-1);
+  line-height: 1.5;
+}
+.ph.shades,
+.ph.code-box {
+  display: grid;
+  gap: var(--moebius-space-3);
+  margin-top: var(--moebius-space-6);
+  min-width: 0;
+}
+.ph.shades > h3.ph,
+.ph.code-box > h3.ph {
+  color: var(--moebius-color-text-strong);
+  font-size: var(--moebius-font-size-3);
+  font-weight: var(--moebius-font-weight-semibold);
+}
+.ph.shades > .ph.hint,
+.ph.code-box > .ph.hint {
+  margin-top: calc(-1 * var(--moebius-space-2));
+}
+/* The code: the copy button in the corner, the language named by its tab */
+.ph.code-box .ph.code-toolbar .ph.tools {
+  top: var(--moebius-space-3);
+  right: var(--moebius-space-3);
+}
+.ph.code-box .ph.code-toolbar .ph.language {
+  display: none;
+}
+.ph.code-box .ph.code-toolbar .ph.copy {
+  padding: 0.3125rem 0.75rem;
+  border: 1px solid var(--moebius-color-line-strong);
+  border-radius: var(--moebius-radius-2);
+  background-color: var(--moebius-color-background);
+  color: var(--moebius-color-text-strong);
+  font-size: 0.8125rem;
+  text-transform: none;
+}
+.ph.code-box .ph.code-toolbar .ph.copy:focus-visible {
+  outline: 2px solid var(--moebius-color-focus);
+  outline-offset: 1px;
+}
+.ph.code-box .ph.code-toolbar pre.ph {
+  max-height: 24rem;
+  margin: 0;
+  padding: var(--moebius-space-4);
+  overflow: auto;
+  border-radius: 0;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+.ph.code-box .ph.code-toolbar pre.ph:focus-visible {
+  outline: 2px solid var(--moebius-color-focus);
+  outline-offset: -2px;
+}

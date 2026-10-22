@@ -8,6 +8,8 @@ export type MoebiusSiteCodeBlockPropsType = {
   content: string;
 };
 
+// The code can be longer than its box, which then scrolls; tabindex lets
+// keyboard users scroll it too
 export const CodeBlock = (props: MoebiusSiteCodeBlockPropsType) => {
   const { id, language, content } = props;
 
@@ -18,6 +20,8 @@ export const CodeBlock = (props: MoebiusSiteCodeBlockPropsType) => {
       <span class="ph copy-status visually-hidden" role="status"></span>
     </div>
     <pre
+      tabindex="0"
+      aria-label="${language} code"
       class="ph language-${language}"
       language="${language}"
     ><code class="ph language-${language} ${language}" id="${id}-code-${language}">${escapeText(

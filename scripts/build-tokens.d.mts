@@ -9,6 +9,12 @@ export type Tokens = {
   files: string[];
 };
 
+export declare const flatten: (
+  group: object,
+  path?: string[],
+  type?: string
+) => Map<string, Token>;
+
 export declare const readTokens: (file?: string) => Promise<Tokens>;
 
 export declare const tokensToCss: (tokens: Tokens) => string;

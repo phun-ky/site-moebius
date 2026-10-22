@@ -1,11 +1,10 @@
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
-import { setCurrentPalettes } from 'features/export-code';
-import { addOnAfterAppRender, addOnChange } from 'lib/spa';
+import { addOnChange } from 'lib/spa';
 import { MoebiusSiteEventType } from 'types';
-import { generateAccentGradientCssVariables } from 'utils/generate-accent-gradients-css-variables';
 import { setOptions } from 'utils/set-options';
 
-import { PaletteItems } from './components/PaletteItems';
+import { PalettePicker } from './components/PalettePicker';
+import { paletteItemsMapper } from './utils/palette-items-mapper';
 
 import './styles/palettes.css';
 
@@ -42,12 +41,6 @@ export const createPalettes = (options: MoebiusSiteDefaultOptionsType) => {
 export const Palettes = async (props: PalettesPropsType) => {
   const { options, moebius } = props;
 
-  setCurrentPalettes(moebius);
-
-  addOnAfterAppRender(() => {
-    generateAccentGradientCssVariables(moebius.accents);
-  });
-
   addOnChange(
     '#luminanceShift-diverging',
     (e: MoebiusSiteEventType<HTMLInputElement>) => {
@@ -62,11 +55,14 @@ export const Palettes = async (props: PalettesPropsType) => {
     }
   );
 
+  const palette = options.palette ?? 'interpolate';
+
   return html`<div class="ph palettes">
-    <h2 class="ph">Palette</h2>
+    <h2 class="ph" id="palette-heading">Palette</h2>
     <p class="ph hint">
       Click any color to copy it and make it the primary color.
     </p>
-    ${PaletteItems({ moebius, options })}
+    ${PalettePicker({ moebius, active: palette })}
+    ${paletteItemsMapper({ id: palette, moebius, options }).content()}
   </div>`;
 };

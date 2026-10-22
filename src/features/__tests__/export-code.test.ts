@@ -9,68 +9,36 @@ globalJsdom('<!doctype html><html><body></body></html>', {
   url: 'https://moebius.wtf/'
 });
 
-const { copyCode, fillExportCode, setCurrentPalettes } =
-  await import('../export-code');
+const { CODE_FORMATS, copyCode, exportCode } = await import('../export-code');
 
-const section = (id: string) => {
-  document.body.insertAdjacentHTML(
-    'beforeend',
-    `<details class="ph export-code" data-palette="${id}">
-      <summary>Code</summary>
-      <code id="${id}-code-css"></code>
-      <code id="${id}-code-js"></code>
-    </details>`
-  );
+before(installMoebius);
 
-  return document.querySelector<HTMLDetailsElement>(
-    `details[data-palette="${id}"]`
-  )!;
-};
+describe('exportCode', () => {
+  const colors: `#${string}`[] = ['#003f5c', '#ff9900'];
+  const accents: `#${string}`[][] = [['#003f5c'], ['#ff9900']];
 
-before(async () => {
-  await installMoebius();
-  setCurrentPalettes(
-    new window.MoebiusPalettes({
-      baseColor: new window.MoebiusColor('#003f5c'),
-      secondaryColor: new window.MoebiusColor('#ff9900'),
-      divergentColor: '#f5f5f5',
-      numberOfColors: 5
-    })
-  );
-});
+  it('writes every format the code box offers', () => {
+    for (const { id } of CODE_FORMATS) {
+      assert.match(
+        exportCode(id, colors, accents, 'interpolate'),
+        /#003f5c/,
+        id
+      );
+    }
+  });
 
-describe('export code', () => {
-  it('is empty until its section is opened', () => {
-    const details = section('interpolate');
-
+  it('writes CSS, JavaScript and parsable design tokens', () => {
+    assert.match(exportCode('css', colors, accents, 'x'), /^:root\{/);
+    assert.match(exportCode('js', colors, accents, 'x'), /'#ff9900'/);
     assert.equal(
-      details.querySelector('#interpolate-code-css')?.textContent,
-      ''
+      JSON.parse(exportCode('tokens', colors, accents, 'triadic')).triadic['2']
+        .$value.hex,
+      '#ff9900'
     );
   });
 
-  it('is filled for the opened palette only, when it opens', async () => {
-    const opened = section('complement');
-    const other = section('triadic');
-
-    opened.open = true;
-    await new Promise((resolve) => opened.addEventListener('toggle', resolve));
-
-    assert.match(
-      opened.querySelector('#complement-code-css')?.textContent ?? '',
-      /^:root\{\n {2}--color-/
-    );
-    assert.match(
-      opened.querySelector('#complement-code-js')?.textContent ?? '',
-      /'#[0-9a-f]{6}'/
-    );
-    assert.equal(other.querySelector('#triadic-code-css')?.textContent, '');
-  });
-
-  it('does nothing without a palette id', () => {
-    const details = document.createElement('details');
-
-    assert.doesNotThrow(() => fillExportCode(details));
+  it('throws RangeError for a format it does not know', () => {
+    assert.throws(() => exportCode('yaml', colors, accents, 'x'), RangeError);
   });
 });
 
