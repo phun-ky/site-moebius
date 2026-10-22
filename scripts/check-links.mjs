@@ -1,7 +1,9 @@
 // Check every link on the built site and in the repo's Markdown (#39). Each
 // page is rendered in headless Chrome, and every link, script, stylesheet,
-// icon and URL in a <meta> tag on it must answer 200, including the icons
-// the web app manifest and browserconfig.xml point at. A link to `#id` needs
+// icon and URL in a <meta> tag on it must answer 200, and so must the icons
+// in the web app manifest and the pages in robots.txt and sitemap.xml (they
+// list the site's own address, which is checked against the build). A
+// link to `#id` needs
 // an element with that id. Relative links in the Markdown files must point
 // at a file in the repo, and `#heading` links at a heading in the file.
 //
@@ -115,7 +117,7 @@ const collect = (page) =>
     return { urls, missing };
   });
 /**
- * The URLs a manifest or browserconfig.xml points at.
+ * The URLs a manifest, sitemap.xml or robots.txt points at.
  * @param {string} url - Its URL.
  * @param {string} text - Its contents.
  * @returns {string[]} The URLs.
@@ -127,10 +129,12 @@ const linkedFrom = (url, text) => {
     );
   }
 
-  if (url.endsWith('.xml')) {
-    return [...text.matchAll(/\bsrc="([^"]+)"/g)].map(
-      ([, src]) => new URL(src, url).href
-    );
+  if (url.endsWith('/sitemap.xml')) {
+    return [...text.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, loc]) => loc);
+  }
+
+  if (url.endsWith('/robots.txt')) {
+    return [...text.matchAll(/^Sitemap:\s*(\S+)/gim)].map(([, map]) => map);
   }
 
   return [];
@@ -201,6 +205,8 @@ const main = async () => {
   markdown.forEach(({ file, external }) =>
     external.forEach((url) => add(url, file))
   );
+
+  add(`${origin}/robots.txt`, 'the site root');
 
   try {
     for (const { path } of PAGES) {

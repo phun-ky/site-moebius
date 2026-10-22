@@ -21,6 +21,7 @@
     "check:html": "node scripts/check-html.mjs",
     "check:links": "node scripts/check-links.mjs",
     "check:links:external": "node scripts/check-links.mjs --external",
+    "check:metadata": "node scripts/check-metadata.mjs",
     "check:layout": "node scripts/check-layout.mjs",
     "check:a11y": "node scripts/check-a11y.mjs",
     "check:keyboard": "node scripts/check-keyboard.mjs",
