@@ -20,11 +20,12 @@ const TYPES = {
 const isFile = (file) => existsSync(file) && statSync(file).isFile();
 
 /**
- * Serve a directory on a free port on 127.0.0.1.
+ * Serve a directory on 127.0.0.1.
  * @param {string} root - The directory to serve.
+ * @param {number} [port] - The port; a free one if left out.
  * @returns {Promise<import('node:http').Server>} The listening server.
  */
-export const serve = (root) =>
+export const serve = (root, port = 0) =>
   new Promise((resolve) => {
     const server = createServer((req, res) => {
       const pathname = decodeURIComponent(
@@ -67,5 +68,5 @@ export const serve = (root) =>
       (gzip ? stream.pipe(createGzip()) : stream).pipe(res);
     });
 
-    server.listen(0, '127.0.0.1', () => resolve(server));
+    server.listen(port, '127.0.0.1', () => resolve(server));
   });
