@@ -118,3 +118,23 @@
   outline: 2px solid var(--moebius-color-focus);
   outline-offset: -2px;
 }
+/* The palette has colors some color blind people can't tell apart */
+.ph.color-blind-warning {
+  display: grid;
+  gap: var(--moebius-space-1);
+  margin-top: var(--moebius-space-4);
+  padding: var(--moebius-space-3) var(--moebius-space-4);
+  border-radius: var(--moebius-radius-3);
+  background-color: var(--moebius-color-notice-warning);
+  font-size: var(--moebius-font-size-1);
+  line-height: 1.5;
+}
+.ph.color-blind-warning > .ph.title {
+  margin: 0;
+  color: var(--moebius-color-text-strong);
+  font-weight: var(--moebius-font-weight-semibold);
+}
+.ph.color-blind-warning > .ph.description {
+  margin: 0;
+  color: var(--moebius-color-text-strong);
+}
