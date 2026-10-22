@@ -2,9 +2,10 @@ import 'global-jsdom/register';
 import assert from 'node:assert/strict';
 import { before, describe, it } from 'node:test';
 
+import { flatten } from '../../../scripts/build-tokens.mjs';
 import { css } from '../export/css';
 import { js } from '../export/js';
-import { generateAccentGradientCssVariables } from '../generate-accent-gradients-css-variables';
+import { colorValue, tokens } from '../export/tokens';
 import { getGradientStyle } from '../get-gradient-style';
 
 import { installMoebius } from './helpers/moebius';
@@ -52,17 +53,52 @@ describe('getGradientStyle', () => {
   });
 });
 
-describe('generateAccentGradientCssVariables', () => {
-  it('sets one custom property per accent group', () => {
-    generateAccentGradientCssVariables({
-      interpolate: [['#000000', '#ffffff']]
-    } as never);
+describe('design tokens export', () => {
+  const colors: `#${string}`[] = ['#003f5c', '#ff9900'];
+  const shades: `#${string}`[][] = [
+    ['#003f5c', '#000000'],
+    ['#ff9900', '#000000']
+  ];
+  const out = () => JSON.parse(tokens(colors, shades, 'interpolate'));
 
-    assert.equal(
-      document.documentElement.style.getPropertyValue(
-        '--moebius-accent-interpolate-gradient-1'
-      ),
-      'linear-gradient(0deg, rgb(0,0,0) 33%,rgb(255,255,255) 66%)'
+  it('writes each color as an srgb token with its hex and name', () => {
+    assert.deepEqual(out().interpolate['1'], {
+      $value: {
+        colorSpace: 'srgb',
+        components: [0, 0.2471, 0.3608],
+        hex: '#003f5c'
+      },
+      $description: 'Deep Sea'
+    });
+    assert.equal(out().$type, 'color');
+  });
+
+  it('numbers the shades under each color', () => {
+    assert.deepEqual(Object.keys(out().interpolate.shades), ['1', '2']);
+    assert.equal(out().interpolate.shades['2']['1'].$value.hex, '#ff9900');
+  });
+
+  it('follows the format, so the token reader for tokens/ accepts it', () => {
+    const flat = flatten(out());
+
+    assert.equal(flat.size, colors.length + shades.flat().length);
+
+    for (const [, token] of flat) assert.equal(token.type, 'color');
+  });
+
+  it('has the same colors as the CSS export', () => {
+    const hexes = [...flatten(out()).values()].map(
+      (token) => (token.value as { hex: string }).hex
     );
+    const inCss = [...css(colors, shades).matchAll(/#[0-9a-f]{6}/g)].map(
+      ([hex]) => hex
+    );
+
+    assert.deepEqual(hexes.sort(), inCss.sort());
+  });
+
+  it('rounds the components to four decimals', () => {
+    assert.deepEqual(colorValue('#FFFFFF').components, [1, 1, 1]);
+    assert.equal(colorValue('#FFFFFF').hex, '#ffffff');
   });
 });
