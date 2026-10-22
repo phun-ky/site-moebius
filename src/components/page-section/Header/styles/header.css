@@ -11,6 +11,6 @@
 }
 .ph.header .ph.home > svg:last-of-type {
   width: 10rem;
-  fill: var(--ph-color-text-accent);
-  margin-left: 1rem;
+  fill: var(--moebius-color-text-strong);
+  margin-left: var(--moebius-space-4);
 }

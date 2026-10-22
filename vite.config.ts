@@ -4,6 +4,7 @@ import { readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 import { colorNameFiles } from './scripts/build-color-names.mjs';
+import { readTokens, tokensToCss } from './scripts/build-tokens.mjs';
 
 const src = fileURLToPath(new URL('./src', import.meta.url));
 // Code imports from src without a relative path, such as 'utils/escape';
@@ -50,6 +51,25 @@ const colorNames = (): Plugin => ({
     );
   }
 });
+// The design tokens in tokens/ as CSS custom properties (#42), imported as
+// 'virtual:moebius-tokens.css'. The dev server reloads when a token file
+// changes.
+const TOKENS_ID = 'virtual:moebius-tokens.css';
+const designTokens = (): Plugin => ({
+  name: 'moebius-design-tokens',
+  resolveId(id) {
+    return id === TOKENS_ID ? `\0${TOKENS_ID}` : undefined;
+  },
+  async load(id) {
+    if (id !== `\0${TOKENS_ID}`) return undefined;
+
+    const tokens = await readTokens();
+
+    tokens.files.forEach((file) => this.addWatchFile(file));
+
+    return tokensToCss(tokens);
+  }
+});
 // Content Security Policy for the built site (#35). GitHub Pages can't send
 // headers, so it goes into a <meta> tag, which can't use frame-ancestors or
 // reporting. Only the build gets it: the dev server injects inline styles
@@ -93,7 +113,7 @@ const securityMeta = (): Plugin => ({
 });
 
 export default defineConfig({
-  plugins: [colorNames(), securityMeta()],
+  plugins: [colorNames(), designTokens(), securityMeta()],
   resolve: { alias },
   build: {
     target: 'es2024',

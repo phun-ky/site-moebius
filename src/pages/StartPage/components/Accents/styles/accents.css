@@ -45,11 +45,11 @@
   text-transform: uppercase;
   text-align: right;
   min-height: 2rem;
-  font-weight: 500;
-  font-size: 1.125rem;
+  font-weight: var(--moebius-font-weight-medium);
+  font-size: var(--moebius-font-size-3);
   line-height: 2rem;
-  padding: 0.5rem;
-  font-family: var(--ph-font-family-code);
+  padding: var(--moebius-space-2);
+  font-family: var(--moebius-font-family-code);
 }
 .ph.accents .ph.colors .ph.color::before,
 .ph.accents .ph.group .ph.color::before {
