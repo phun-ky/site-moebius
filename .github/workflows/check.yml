@@ -70,6 +70,8 @@ jobs:
         run: npm run check:html
       - name: Check the links # Pages, assets and anchors in the build, relative links in the Markdown
         run: npm run check:links
+      - name: Check the metadata # Titles, descriptions, canonical URLs, social card, sitemap and robots.txt
+        run: npm run check:metadata
 
   notify:
     name: Notify failed check

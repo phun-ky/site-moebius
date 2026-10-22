@@ -1,0 +1,24 @@
+{
+  "site": "https://moebius.wtf",
+  "name": "moebius",
+  "image": {
+    "path": "/img/social-card.png",
+    "width": 1200,
+    "height": 630,
+    "alt": "The moebius logo, a ring of overlapping colored circles, and the words: color palettes and a color blind simulator"
+  },
+  "pages": {
+    "/": {
+      "title": "moebius: color palette generator and color blind simulator",
+      "description": "Generate color palettes and check them in a color blind simulator. Get the JavaScript code and CSS variables, ready to use."
+    },
+    "/about": {
+      "title": "About moebius",
+      "description": "What moebius is, how it makes color palettes, and who made it."
+    },
+    "/404": {
+      "title": "Page not found · moebius",
+      "description": "There is no page at this address on moebius."
+    }
+  }
+}
