@@ -37,20 +37,20 @@ export const PaletteItem = (props: MoebiusSitePaletteItemPropsType) => {
         viewBox="0 0 256 256"
       ></svg>
       ${SVGPixels({ id, colors: moebius.colors[id] })}
-      <output
+      <div
         class="ph gradient"
         id="${id}-gradient"
         style="${gradientStyle}"
-      ></output>
-      <output class="ph swatch" id="${id}">
+      ></div>
+      <div class="ph swatch" id="${id}">
         ${Swatch(moebius.colors[id], id, options)}
-      </output>
+      </div>
     </div>
     ${SettingsLuminanceShift({ id, options })}
     ${SettingsMonochromatic({ id, options })}
-    <output class="ph accents" id="${id}-accents">
+    <div class="ph accents" id="${id}-accents">
       ${Accents({ colors: moebius.accents[id] })}
-    </output>
+    </div>
 
     <details class="ph export-code" data-palette="${id}">
       <summary class="ph">

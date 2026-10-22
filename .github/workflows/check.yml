@@ -66,6 +66,10 @@ jobs:
         run: npm run check:routes
       - name: Check the theme # Follows the system, saved choice wins, toggles once per click
         run: npm run check:theme
+      - name: Validate the HTML # The built files and every page as rendered
+        run: npm run check:html
+      - name: Check the links # Pages, assets and anchors in the build, relative links in the Markdown
+        run: npm run check:links
 
   notify:
     name: Notify failed check

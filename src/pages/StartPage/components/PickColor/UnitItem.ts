@@ -9,17 +9,19 @@ export type MoebiusSiteUnitItemPropsType = {
     title: string;
     value: string | Record<string, string | number>;
   };
+  idPrefix: string;
 };
 
 export const UnitItem = (props: MoebiusSiteUnitItemPropsType) => {
-  const { item } = props;
+  const { item, idPrefix } = props;
+  const id = `${idPrefix}-${item.unit}`;
 
   return html`<div class="ph input-group">
-    ${Label({ labelFor: item.unit, label: item.title })}
+    ${Label({ labelFor: id, label: item.title })}
     ${TextInput({
       readonly: true,
       className: `ph ${item.unit}`,
-      id: item.unit,
+      id,
       value:
         typeof item.value !== 'string'
           ? Object.keys(item.value)

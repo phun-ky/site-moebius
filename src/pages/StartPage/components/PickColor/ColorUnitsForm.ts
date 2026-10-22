@@ -6,10 +6,13 @@ const html = String.raw;
 
 export type MoebiusSiteColorUnitsFormPropsType = {
   color: MoebiusColorValueHexType;
+  // primary, secondary or divergent: keeps the ids unique across the three
+  // forms on the page
+  type: string;
 };
 
 export const ColorUnitsForm = (props: MoebiusSiteColorUnitsFormPropsType) => {
-  const { color } = props;
+  const { color, type } = props;
   const { MoebiusColor } = window;
   const mColor = new MoebiusColor(color);
   const items = [
@@ -31,6 +34,6 @@ export const ColorUnitsForm = (props: MoebiusSiteColorUnitsFormPropsType) => {
   ];
 
   return html`<form class="ph color-units">
-    ${items.map((item) => UnitItem({ item })).join('\n')}
+    ${items.map((item) => UnitItem({ item, idPrefix: type })).join('\n')}
   </form>`;
 };

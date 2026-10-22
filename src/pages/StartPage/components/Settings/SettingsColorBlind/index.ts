@@ -1,7 +1,6 @@
 import { Label } from 'components/input-fields/Label';
 import { RadioButton } from 'components/input-fields/RadioButton';
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
-import { uniqueID } from 'utils/unique-id';
 
 import './styles/settingsColorBlind.css';
 
@@ -15,7 +14,6 @@ export const SettingsColorBlind = (
   props: MoebiusSiteSettingsColorBlindPropsType
 ) => {
   const { options } = props;
-  const id = uniqueID();
 
   return html`<form class="ph color-blind-simulator">
     <fieldset class="ph color-blind">
@@ -37,11 +35,12 @@ export const SettingsColorBlind = (
               ${RadioButton({
                 checked: setting.id === options.colorBlindSim,
                 value: setting.id,
-                id,
+                // One id per option, so each label checks its own radio
+                id: `color-blind-sim-${setting.id}`,
                 name: 'color-blind-sim'
               })}
               ${Label({
-                labelFor: id,
+                labelFor: `color-blind-sim-${setting.id}`,
                 label: setting.title
               })}
             </div>`;
