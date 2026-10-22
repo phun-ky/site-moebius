@@ -164,6 +164,58 @@
         "hex": "#0750b6",
         "alpha": 0
       }
+    },
+    "logo": {
+      "$description": "The logo's steps: moebius blending #003f5c into #ff9900 in LCH, in 7 steps",
+      "1": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.0, 0.2471, 0.3608],
+          "hex": "#003f5c"
+        }
+      },
+      "2": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.2078, 0.2941, 0.498],
+          "hex": "#354b7f"
+        }
+      },
+      "3": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.4588, 0.3137, 0.5804],
+          "hex": "#755094"
+        }
+      },
+      "4": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.7137, 0.302, 0.5647],
+          "hex": "#b64d90"
+        }
+      },
+      "5": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.9137, 0.3098, 0.4627],
+          "hex": "#e94f76"
+        }
+      },
+      "6": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [1.0, 0.4196, 0.298],
+          "hex": "#ff6b4c"
+        }
+      },
+      "7": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [1.0, 0.6, 0.0],
+          "hex": "#ff9900"
+        }
+      }
     }
   }
 }

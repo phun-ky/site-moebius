@@ -164,6 +164,58 @@
         "hex": "#6ca7f9",
         "alpha": 0
       }
+    },
+    "logo": {
+      "$description": "The logo's steps for dark backgrounds: the same blend from a lighter start, #5c88aa",
+      "1": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.3608, 0.5333, 0.6667],
+          "hex": "#5c88aa"
+        }
+      },
+      "2": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.4706, 0.5373, 0.7647],
+          "hex": "#7889c3"
+        }
+      },
+      "3": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.6745, 0.5098, 0.7922],
+          "hex": "#ac82ca"
+        }
+      },
+      "4": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.8863, 0.4588, 0.7216],
+          "hex": "#e275b8"
+        }
+      },
+      "5": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [1.0, 0.4235, 0.5608],
+          "hex": "#ff6c8f"
+        }
+      },
+      "6": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [1.0, 0.4745, 0.3451],
+          "hex": "#ff7958"
+        }
+      },
+      "7": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [1.0, 0.6, 0.0],
+          "hex": "#ff9900"
+        }
+      }
     }
   }
 }
