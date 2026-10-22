@@ -1,11 +1,83 @@
-.ph.header .ph.home {
-  position: relative;
+header.ph.header {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  text-decoration: none;
+  gap: var(--moebius-space-5);
+  height: 3.5rem;
+  padding: 0 var(--moebius-space-4);
+  border-bottom: 1px solid var(--moebius-color-line);
+}
+.ph.header .ph.home {
+  display: flex;
+  align-items: center;
+  flex: none;
 }
 .ph.header .ph.home > svg {
-  height: 3rem;
-  width: 3rem;
+  height: 2rem;
+  width: 2rem;
+}
+.ph.site-nav {
+  display: flex;
+  gap: var(--moebius-space-4);
+  font-size: var(--moebius-font-size-1);
+}
+.ph.header a.ph {
+  color: var(--moebius-color-text);
+  font-weight: var(--moebius-font-weight-regular);
+  text-decoration: none;
+}
+.ph.header a.ph:hover {
+  color: var(--moebius-color-text-strong);
+}
+.ph.site-nav a.ph[aria-current='page'] {
+  color: var(--moebius-color-text-strong);
+  font-weight: var(--moebius-font-weight-semibold);
+}
+.ph.header-menu {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--moebius-space-2);
+}
+/* The support links need room; on phones the icons are enough */
+.ph.support {
+  display: none;
+  align-items: center;
+  gap: var(--moebius-space-3);
+  font-size: var(--moebius-font-size-1);
+  padding-right: var(--moebius-space-3);
+  margin-right: var(--moebius-space-1);
+  border-right: 1px solid var(--moebius-color-line);
+}
+@media screen and (min-width: 768px) {
+  .ph.support {
+    display: flex;
+  }
+}
+.ph.icon-button {
+  display: inline-grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: var(--moebius-radius-3);
+  background: none;
+  color: var(--moebius-color-text);
+  cursor: pointer;
+}
+.ph.header a.ph.icon-button {
+  color: var(--moebius-color-text);
+}
+.ph.icon-button:hover {
+  background-color: var(--moebius-color-well);
+  color: var(--moebius-color-text-strong);
+}
+.ph.icon-button:focus-visible,
+.ph.header a.ph:focus-visible {
+  outline: 2px solid var(--moebius-color-focus);
+  outline-offset: 2px;
+}
+.ph.icon-button > svg.ph {
+  pointer-events: none;
+  width: 1.25rem;
+  height: 1.25rem;
 }

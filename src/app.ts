@@ -65,7 +65,10 @@ const App = async (match: RouterMatch, params: unknown) => {
     content = currentPage();
   }
 
-  return html`${Header()}
+  // The header marks the link to the page being shown
+  const path = typeof match === 'string' ? undefined : match.route.path;
+
+  return html`${Header({ path })}
     <main class="ph main" id="content" tabindex="-1">${content}</main>
     ${Footer()}`;
 };

@@ -73,6 +73,10 @@ footer.ph.footer {
   flex-direction: column;
   min-height: 100%;
   position: relative;
+}
+/* The header runs edge to edge; the content keeps its distance from the
+   sides of the window */
+main.ph.main {
   padding: var(--moebius-space-5);
 }
 a.ph {
@@ -192,63 +196,6 @@ h4.ph {
   font-weight: var(--moebius-font-weight-medium);
   text-transform: uppercase;
   color: var(--moebius-color-text);
-}
-header.ph.header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-grow: 0;
-  grid-gap: 1rem;
-  min-height: 3rem;
-}
-@media screen and (min-width: 1440px) {
-  header.ph.header {
-    position: sticky;
-    top: 20px;
-    z-index: 100;
-  }
-
-  .ph.project header.ph.header {
-    position: static;
-    top: unset;
-  }
-}
-.ph.header-menu {
-  margin-left: auto;
-  min-height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  grid-gap: 1rem;
-}
-.ph.header-menu a.ph {
-  display: none;
-}
-@media screen and (min-width: 640px) {
-  .ph.header-menu a.ph {
-    display: inline-block;
-  }
-}
-.ph.darkmode-button {
-  align-items: center;
-  background-color: transparent;
-  border: none;
-  border-radius: 50%;
-  color: var(--moebius-color-text);
-  cursor: pointer;
-  display: flex;
-  height: 3rem;
-  justify-content: center;
-  width: 3rem;
-}
-.ph.darkmode-button:active,
-.ph.darkmode-button:hover {
-  background-color: var(--moebius-color-well);
-}
-.ph.darkmode-button > svg.ph {
-  pointer-events: none;
-  height: 2rem;
-  width: 2rem;
 }
 .ph.hide-dark {
   display: none;
