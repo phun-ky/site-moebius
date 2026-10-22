@@ -45,6 +45,7 @@ export const paletteItemsMapper = (
   return {
     id,
     name: id,
-    content: PaletteItem({ id, moebius, options })
+    // Built only when this palette's tab is active (#82)
+    content: () => PaletteItem({ id, moebius, options })
   };
 };

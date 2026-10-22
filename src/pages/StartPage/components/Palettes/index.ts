@@ -1,4 +1,5 @@
 import { MoebiusSiteDefaultOptionsType } from 'config/constants';
+import { setCurrentPalettes } from 'features/export-code';
 import { addOnAfterAppRender, addOnChange } from 'lib/spa';
 import { EventType } from 'lib/spa/types';
 import { MoebiusSiteEventType } from 'types';
@@ -45,10 +46,10 @@ export const Palettes = async (props: PalettesPropsType) => {
     numberOfColors
   });
 
+  setCurrentPalettes(moebius);
+
   addOnAfterAppRender(() => {
     generateAccentGradientCssVariables(moebius.accents);
-
-    window.Prism.highlightAll();
   });
 
   addOnChange(
