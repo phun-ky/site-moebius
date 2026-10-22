@@ -1,7 +1,7 @@
 {
   "name": "moebius-site",
   "private": true,
-  "description": "asd",
+  "description": "moebius.wtf: color palettes from two colors, a color blind simulator, and the code to use them",
   "type": "module",
   "scripts": {
     "clean": "rm -rf dist sourcemaps",
