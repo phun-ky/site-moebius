@@ -170,7 +170,10 @@ export const PickColor = (props: MoebiusSitePickColorPropsType) => {
     ${Dialog({
       id: `color-units-${type}-modal`,
       className: 'color-units-modal',
-      content: ColorUnitsForm({ color: color as MoebiusColorValueHexType })
+      content: ColorUnitsForm({
+        color: color as MoebiusColorValueHexType,
+        type
+      })
     })}
   </fieldset>`;
 };

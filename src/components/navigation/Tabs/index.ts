@@ -76,14 +76,17 @@ export const Tabs = (props: MoebiusSitePropsType) => {
           };
 
           if (id === activeTab) {
-            attributes['aria-selected'] = true;
+            attributes['aria-selected'] = 'true';
           }
 
           const attrs = Object.entries(attributes)
             .map((attr) => {
               const [property, value] = attr;
 
-              return ` ${property}="${value}"`;
+              // A boolean attribute is written without a value
+              return value === true
+                ? ` ${property}`
+                : ` ${property}="${value}"`;
             })
             .join(' ');
 
@@ -114,7 +117,8 @@ export const Tabs = (props: MoebiusSitePropsType) => {
           .map((attr) => {
             const [property, value] = attr;
 
-            return ` ${property}="${value}"`;
+            // A boolean attribute is written without a value
+            return value === true ? ` ${property}` : ` ${property}="${value}"`;
           })
           .join(' ');
         const panelContent =
