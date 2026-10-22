@@ -14,7 +14,8 @@ export const CodeBlock = (props: MoebiusSiteCodeBlockPropsType) => {
   return html`<div class="ph code-toolbar">
     <div class="ph tools">
       <span class="ph language">${language}</span>
-      <button class="ph copy">copy</button>
+      <button type="button" class="ph copy">copy</button>
+      <span class="ph copy-status visually-hidden" role="status"></span>
     </div>
     <pre
       class="ph language-${language}"

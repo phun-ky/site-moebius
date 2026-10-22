@@ -103,7 +103,6 @@ export const Tabs = (props: MoebiusSitePropsType) => {
         const { id, content } = item;
         const attributes: Record<string, string | number | boolean> = {
           'aria-labelledby': `tab-${id}`,
-          id: `panel-${id}`,
           'data-rel': id,
           tabIndex: -1,
           role: 'tabpanel'

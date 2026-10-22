@@ -1,3 +1,4 @@
+import { copy } from 'utils/copy';
 import { css } from 'utils/export/css';
 import { js } from 'utils/export/js';
 
@@ -60,3 +61,45 @@ document.addEventListener(
   },
   true
 );
+
+// How long a copy button says what happened before it reads "copy" again
+const COPY_FEEDBACK_MS = 2000;
+
+/**
+ * Copy the code in the code block a copy button belongs to. The button
+ * says whether it worked, and so does a status message for screen readers.
+ * @param {HTMLButtonElement} button - The copy button.
+ * @returns {Promise<boolean>} Whether the code was copied.
+ */
+export const copyCode = async (button: HTMLButtonElement): Promise<boolean> => {
+  const toolbar = button.closest('.ph.code-toolbar');
+  const language = toolbar?.querySelector('.ph.language')?.textContent ?? '';
+  const status = toolbar?.querySelector('.ph.copy-status');
+  const copied = await copy(toolbar?.querySelector('code')?.textContent ?? '');
+
+  button.textContent = copied ? 'copied' : 'copy failed';
+
+  if (status) {
+    status.textContent = copied
+      ? `${language} code copied`
+      : `Could not copy the ${language} code`;
+  }
+
+  setTimeout(() => {
+    button.textContent = 'copy';
+
+    if (status) status.textContent = '';
+  }, COPY_FEEDBACK_MS);
+
+  return copied;
+};
+
+// The code blocks are re-rendered with the palettes, so one listener on the
+// document handles every copy button
+document.addEventListener('click', (event) => {
+  const button = (event.target as Element | null)?.closest?.(
+    '.ph.code-toolbar .ph.copy'
+  );
+
+  if (button instanceof HTMLButtonElement) void copyCode(button);
+});
