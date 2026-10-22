@@ -1,5 +1,6 @@
 import { Footer } from './components/page-section/Footer';
 import { Header } from './components/page-section/Header';
+import metadata from './config/pages.json';
 import { addOnAfterAppRender } from './lib/spa';
 import { RouterMatch } from './lib/spa/types';
 import { getParams } from './lib/spa/utils/get-params';
@@ -27,6 +28,12 @@ const App = async (match: RouterMatch, params: unknown) => {
 
     _params = getParams(match);
     _hashParams = readHashOptions();
+
+    // The built HTML has the title of the page it was opened on; moving to
+    // another page changes it here
+    document.title =
+      metadata.pages[route.path as keyof typeof metadata.pages]?.title ??
+      metadata.name;
   }
 
   globalThis.activeElement = document.activeElement;

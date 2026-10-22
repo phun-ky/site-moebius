@@ -1,7 +1,7 @@
 {
   "name": "moebius",
   "short_name": "moebius",
-  "description": "Generate color palettes and check them in a color blind simulator. Get the JavaScript code and CSS variables, ready to  use!",
+  "description": "Generate color palettes and check them in a color blind simulator. Get the JavaScript code and CSS variables, ready to use.",
   "start_url": "/",
   "scope": ".",
   "icons": [

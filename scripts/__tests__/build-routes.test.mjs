@@ -4,7 +4,22 @@ import { describe, it } from 'node:test';
 
 import fc from 'fast-check';
 
-import { parseRoutePaths, routeFile } from '../build-routes.mjs';
+import {
+  NOT_FOUND,
+  pageHead,
+  parseRoutePaths,
+  robots,
+  routeFile,
+  sitemap,
+  withPageHead
+} from '../build-routes.mjs';
+
+const config = JSON.parse(
+  await readFile(
+    new URL('../../src/config/pages.json', import.meta.url),
+    'utf8'
+  )
+);
 
 describe('parseRoutePaths', () => {
   it('reads every path from the real routes.ts', async () => {
@@ -63,6 +78,95 @@ describe('routeFile', () => {
           assert.match(file, /^[a-z0-9-]+(\/[a-z0-9-]+)*\.html$/);
         }
       })
+    );
+  });
+});
+
+describe('pages.json', () => {
+  it('has a page for every route and for the not-found page', async () => {
+    const source = await readFile(
+      new URL('../../src/lib/spa/router/routes.ts', import.meta.url),
+      'utf8'
+    );
+
+    for (const path of [...parseRoutePaths(source), NOT_FOUND]) {
+      assert.ok(config.pages[path], path);
+    }
+  });
+});
+
+describe('pageHead', () => {
+  it('gives a route its title, canonical URL and social card', () => {
+    const head = pageHead(config, '/about');
+
+    assert.match(head, /<title>About moebius<\/title>/);
+    assert.match(
+      head,
+      /<link rel="canonical" href="https:\/\/moebius.wtf\/about" \/>/
+    );
+    assert.match(
+      head,
+      /og:image" content="https:\/\/moebius.wtf\/img\/social-card.png"/
+    );
+    assert.doesNotMatch(head, /noindex/);
+  });
+
+  it('keeps the not-found page out of search, with no canonical URL', () => {
+    const head = pageHead(config, NOT_FOUND);
+
+    assert.match(head, /<meta name="robots" content="noindex" \/>/);
+    assert.doesNotMatch(head, /canonical|og:url/);
+  });
+
+  it('escapes the text it puts in attributes', () => {
+    const head = pageHead(
+      {
+        ...config,
+        pages: { '/x': { title: 'A & B', description: '"<b>"' } }
+      },
+      '/x'
+    );
+
+    assert.match(head, /<title>A &amp; B<\/title>/);
+    assert.match(head, /content="&quot;&lt;b&gt;&quot;"/);
+  });
+
+  it('throws RangeError for a page pages.json does not have', () => {
+    assert.throws(() => pageHead(config, '/nope'), RangeError);
+  });
+});
+
+describe('withPageHead', () => {
+  it('puts the metadata in place of the title', () => {
+    const html = withPageHead(
+      '<head><title>moebius</title><meta charset="utf-8"></head>',
+      config,
+      '/'
+    );
+
+    assert.equal(html.match(/<title>/g).length, 1);
+    assert.match(html, /<title>moebius: color palette/);
+  });
+
+  it('throws when there is no title to replace', () => {
+    assert.throws(() => withPageHead('<head></head>', config, '/'));
+  });
+});
+
+describe('sitemap and robots', () => {
+  it('lists every page in the sitemap', () => {
+    assert.equal(
+      sitemap('https://moebius.wtf', ['/', '/about'])
+        .match(/<loc>[^<]+/g)
+        .join(),
+      '<loc>https://moebius.wtf/,<loc>https://moebius.wtf/about'
+    );
+  });
+
+  it('points robots.txt at the sitemap', () => {
+    assert.match(
+      robots('https://moebius.wtf'),
+      /^Sitemap: https:\/\/moebius.wtf\/sitemap.xml$/m
     );
   });
 });
