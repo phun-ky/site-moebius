@@ -41,13 +41,13 @@ export const hashOptions = (page) =>
   );
 
 /**
- * The colours of the swatches in the open palette, as shown.
+ * The colours of the palette in the band, as shown.
  * @param {import('@playwright/test').Page} page - The page.
  * @returns {Promise<string[]>} Their background colours.
  */
 export const swatchColors = (page) =>
   page
-    .locator('[role="tabpanel"]:not([hidden]) .ph.swatch .ph.color')
+    .locator('.ph.band .ph.swatch .ph.color')
     .evaluateAll((colors) =>
       colors.map((color) => color.style.backgroundColor)
     );

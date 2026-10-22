@@ -129,11 +129,7 @@ const main = async () => {
         await settle();
         await page.click('label[for="color-scale-lab"]');
         await settle();
-        await page
-          .locator('[role="tabpanel"]:not([hidden])')
-          .getByText('deuteranopia', { exact: true })
-          .first()
-          .click();
+        await page.selectOption('#color-blind-sim', 'deuteranopia');
         await settle();
         await page.click('.ph.darkmode-button');
         await page.waitForTimeout(500);
