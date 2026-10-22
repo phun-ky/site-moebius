@@ -4,8 +4,10 @@ import { eventAfterAppRender } from './lib/spa/utils/event-after-app-render';
 import { popstate } from './lib/spa/utils/popstate';
 import { initTheme } from './utils/theme';
 
-// Styles, in the order the page used to load them: the base page styles,
-// the shared phun-ky.net styles, the site's own, then code highlighting
+// Styles: the design tokens (made from tokens/ at build), then, in the order
+// the page used to load them, the base page styles, the shared phun-ky.net
+// styles, the site's own, and code highlighting
+import 'virtual:moebius-tokens.css';
 import './styles/base.css';
 import './styles/vendor/phun-ky/ph.css';
 import './styles/index.css';

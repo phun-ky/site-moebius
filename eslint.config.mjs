@@ -10,7 +10,9 @@ export default defineConfig([
   {
     extends: [customConfig],
     rules: {
-      'import/no-unused-modules': 'off'
+      'import/no-unused-modules': 'off',
+      // Vite plugins make modules such as 'virtual:moebius-tokens.css'
+      'import-x/no-unresolved': ['error', { ignore: ['^virtual:'] }]
     }
   },
   {

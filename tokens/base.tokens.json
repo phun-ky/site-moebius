@@ -1,0 +1,407 @@
+{
+  "$description": "The moebius.wtf design tokens that are the same in both themes. Format: Design Tokens Community Group 2025.10.",
+  "color": {
+    "$type": "color",
+    "link": {
+      "$value": "{color.brand}"
+    },
+    "background-gradient": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.149, 0.1647, 0.2314],
+        "hex": "#262a3b"
+      }
+    },
+    "well-hover": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.6235, 0.6588, 0.6784],
+        "hex": "#9fa8ad",
+        "alpha": 0.5
+      }
+    },
+    "well-transparent": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.6235, 0.6588, 0.6784],
+        "hex": "#9fa8ad",
+        "alpha": 0.1
+      }
+    },
+    "input-background": {
+      "$value": "{color.well}"
+    },
+    "notice-warning": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.8235, 0.6, 0.1333],
+        "hex": "#d29922",
+        "alpha": 0.2
+      }
+    },
+    "notice-note": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.1843, 0.5059, 0.9686],
+        "hex": "#2f81f7",
+        "alpha": 0.2
+      }
+    },
+    "notice-important": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.6392, 0.4431, 0.9686],
+        "hex": "#a371f7",
+        "alpha": 0.2
+      }
+    },
+    "notice-error": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.9725, 0.3176, 0.2863],
+        "hex": "#f85149",
+        "alpha": 0.2
+      }
+    },
+    "notice-success": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.1804, 0.6275, 0.2627],
+        "hex": "#2ea043",
+        "alpha": 0.2
+      }
+    },
+    "notice-info": {
+      "$value": "{color.well}"
+    },
+    "code": {
+      "$value": "{color.code-6}"
+    },
+    "backdrop": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.0, 0.0, 0.0],
+        "alpha": 0.55,
+        "hex": "#000000"
+      }
+    },
+    "tab-background": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [0.149, 0.1647, 0.2314],
+        "alpha": 0.3,
+        "hex": "#262a3b"
+      }
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "body": {
+        "$value": [
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica Neue",
+          "Arial",
+          "Noto Sans",
+          "sans-serif"
+        ]
+      },
+      "code": {
+        "$value": [
+          "Menlo for Powerline",
+          "Menlo Regular for Powerline",
+          "DejaVu Sans Mono",
+          "Consolas",
+          "Monaco",
+          "Andale Mono",
+          "Ubuntu Mono",
+          "monospace"
+        ]
+      }
+    },
+    "size": {
+      "$type": "dimension",
+      "1": {
+        "$value": {
+          "value": 0.875,
+          "unit": "rem"
+        }
+      },
+      "2": {
+        "$value": {
+          "value": 1,
+          "unit": "rem"
+        }
+      },
+      "3": {
+        "$value": {
+          "value": 1.125,
+          "unit": "rem"
+        }
+      },
+      "4": {
+        "$value": {
+          "value": 1.25,
+          "unit": "rem"
+        }
+      },
+      "5": {
+        "$value": {
+          "value": 1.5,
+          "unit": "rem"
+        }
+      },
+      "6": {
+        "$value": {
+          "value": 1.75,
+          "unit": "rem"
+        }
+      },
+      "7": {
+        "$value": {
+          "value": 2.25,
+          "unit": "rem"
+        }
+      },
+      "8": {
+        "$value": {
+          "value": 3,
+          "unit": "rem"
+        }
+      },
+      "9": {
+        "$value": {
+          "value": 3.75,
+          "unit": "rem"
+        }
+      },
+      "10": {
+        "$value": {
+          "value": 4.75,
+          "unit": "rem"
+        }
+      }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "regular": {
+        "$value": 400
+      },
+      "medium": {
+        "$value": 500
+      },
+      "semibold": {
+        "$value": 600
+      },
+      "bold": {
+        "$value": 700
+      }
+    }
+  },
+  "space": {
+    "$type": "dimension",
+    "$description": "Each step is a quarter rem: space.4 is 1rem.",
+    "1": {
+      "$value": {
+        "value": 0.25,
+        "unit": "rem"
+      }
+    },
+    "2": {
+      "$value": {
+        "value": 0.5,
+        "unit": "rem"
+      }
+    },
+    "3": {
+      "$value": {
+        "value": 0.75,
+        "unit": "rem"
+      }
+    },
+    "4": {
+      "$value": {
+        "value": 1.0,
+        "unit": "rem"
+      }
+    },
+    "5": {
+      "$value": {
+        "value": 1.25,
+        "unit": "rem"
+      }
+    },
+    "6": {
+      "$value": {
+        "value": 1.5,
+        "unit": "rem"
+      }
+    },
+    "8": {
+      "$value": {
+        "value": 2.0,
+        "unit": "rem"
+      }
+    },
+    "10": {
+      "$value": {
+        "value": 2.5,
+        "unit": "rem"
+      }
+    },
+    "12": {
+      "$value": {
+        "value": 3.0,
+        "unit": "rem"
+      }
+    },
+    "16": {
+      "$value": {
+        "value": 4.0,
+        "unit": "rem"
+      }
+    },
+    "18": {
+      "$value": {
+        "value": 4.5,
+        "unit": "rem"
+      }
+    },
+    "24": {
+      "$value": {
+        "value": 6.0,
+        "unit": "rem"
+      }
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "1": {
+      "$value": {
+        "value": 0.1875,
+        "unit": "rem"
+      }
+    },
+    "2": {
+      "$value": {
+        "value": 0.375,
+        "unit": "rem"
+      }
+    },
+    "3": {
+      "$value": {
+        "value": 0.5,
+        "unit": "rem"
+      }
+    },
+    "4": {
+      "$value": {
+        "value": 0.75,
+        "unit": "rem"
+      }
+    },
+    "5": {
+      "$value": {
+        "value": 0.875,
+        "unit": "rem"
+      }
+    },
+    "6": {
+      "$value": {
+        "value": 1,
+        "unit": "rem"
+      }
+    },
+    "7": {
+      "$value": {
+        "value": 1.5,
+        "unit": "rem"
+      }
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "dialog": {
+      "$description": "Dialogs and the colour picker's hue map",
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [0, 0, 0],
+            "alpha": 0.14,
+            "hex": "#000000"
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 16,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 24,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 2,
+            "unit": "px"
+          }
+        },
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [0, 0, 0],
+            "alpha": 0.12,
+            "hex": "#000000"
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 6,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 30,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 5,
+            "unit": "px"
+          }
+        },
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [0, 0, 0],
+            "alpha": 0.2,
+            "hex": "#000000"
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 8,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 10,
+            "unit": "px"
+          },
+          "spread": {
+            "value": -5,
+            "unit": "px"
+          }
+        }
+      ]
+    }
+  }
+}
