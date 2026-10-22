@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { before, describe, it } from 'node:test';
+import { before, describe, it, mock } from 'node:test';
 
 import globalJsdom from 'global-jsdom';
 
@@ -9,7 +9,8 @@ globalJsdom('<!doctype html><html><body></body></html>', {
   url: 'https://moebius.wtf/'
 });
 
-const { fillExportCode, setCurrentPalettes } = await import('../export-code');
+const { copyCode, fillExportCode, setCurrentPalettes } =
+  await import('../export-code');
 
 const section = (id: string) => {
   document.body.insertAdjacentHTML(
@@ -70,5 +71,83 @@ describe('export code', () => {
     const details = document.createElement('details');
 
     assert.doesNotThrow(() => fillExportCode(details));
+  });
+});
+
+describe('copy button', () => {
+  const codeBlock = (code: string) => {
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      `<div class="ph code-toolbar">
+        <div class="ph tools">
+          <span class="ph language">css</span>
+          <button type="button" class="ph copy">copy</button>
+          <span class="ph copy-status" role="status"></span>
+        </div>
+        <pre><code>${code}</code></pre>
+      </div>`
+    );
+
+    const toolbar = document.querySelector('.ph.code-toolbar:last-child')!;
+
+    return {
+      button: toolbar.querySelector<HTMLButtonElement>('.ph.copy')!,
+      status: toolbar.querySelector('.ph.copy-status')!
+    };
+  };
+  const stubClipboard = (writeText: (text: string) => Promise<void>) => {
+    const fn = mock.fn(writeText);
+
+    Object.defineProperty(navigator, 'clipboard', {
+      value: { writeText: fn },
+      configurable: true
+    });
+
+    return fn;
+  };
+
+  it('copies the code, says so, and reads "copy" again after a while', async () => {
+    mock.timers.enable({ apis: ['setTimeout'] });
+
+    try {
+      const writeText = stubClipboard(async () => {});
+      const { button, status } = codeBlock(':root{--color-1:#003f5c}');
+
+      assert.equal(await copyCode(button), true);
+      assert.deepEqual(writeText.mock.calls[0].arguments, [
+        ':root{--color-1:#003f5c}'
+      ]);
+      assert.equal(button.textContent, 'copied');
+      assert.equal(status.textContent, 'css code copied');
+
+      mock.timers.tick(2000);
+      assert.equal(button.textContent, 'copy');
+      assert.equal(status.textContent, '');
+    } finally {
+      mock.timers.reset();
+    }
+  });
+
+  it('says so when the clipboard refuses', async () => {
+    stubClipboard(async () => {
+      throw new Error('denied');
+    });
+    mock.method(console, 'error', () => {});
+
+    const { button, status } = codeBlock('x');
+
+    assert.equal(await copyCode(button), false);
+    assert.equal(button.textContent, 'copy failed');
+    assert.equal(status.textContent, 'Could not copy the css code');
+  });
+
+  it('is what a click on a copy button does', async () => {
+    const writeText = stubClipboard(async () => {});
+    const { button } = codeBlock('clicked');
+
+    button.click();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    assert.deepEqual(writeText.mock.calls[0].arguments, ['clicked']);
   });
 });

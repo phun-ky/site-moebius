@@ -5,3 +5,4 @@ dist/
 sourcemaps/
 coverage/
 screenshots/
+test-results/

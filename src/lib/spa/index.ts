@@ -40,6 +40,9 @@ export const spa = (() => {
   let onRouteChangeEventArray: FunctionType[] = [];
   let onAfterAppRenderEventArray: FunctionType[] = [];
   let effectIndex = 0;
+  // Counts renders, so a render that finishes after a newer one has started
+  // can tell that it is out of date
+  let renderCount = 0;
 
   const init = async (
     templateCallback: TemplateCallback,
@@ -65,6 +68,8 @@ export const spa = (() => {
     await render(routeDetails);
   };
   const render = async (routeDetails?: RouteDetails) => {
+    const thisRender = ++renderCount;
+
     let page = _page;
     let routeChanged = false;
 
@@ -112,6 +117,12 @@ export const spa = (() => {
         );
       }
     }
+
+    // A page can take a while to make, such as the start page waiting for
+    // moebius or the colour names. If another render started meanwhile, for
+    // example after the back button, this one would replace a newer page
+    if (thisRender !== renderCount) return;
+
     updateNodes(_root, _html);
 
     await waitFor(10);

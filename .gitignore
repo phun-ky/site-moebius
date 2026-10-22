@@ -137,3 +137,6 @@ sourcemaps
 
 # Screenshots from npm run check:layout
 screenshots/
+
+# Traces of failed end-to-end tests, from npm run test:e2e
+test-results/

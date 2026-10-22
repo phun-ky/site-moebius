@@ -1,0 +1,46 @@
+# Run the end-to-end tests many times on GitHub's runner, to find flaky tests
+# before trusting new ones (#41), without tying up a laptop. Start it from
+# the Actions tab.
+
+name: E2E repeat
+
+on:
+  workflow_dispatch:
+    inputs:
+      repeat:
+        description: How many times to run each test
+        default: '10'
+        required: true
+
+# Read-only by default; jobs ask for what they need
+permissions:
+  contents: read
+
+jobs:
+  repeat:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Setup Node.js environment
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Run each end-to-end test ${{ inputs.repeat }} times
+        run: npm run test:e2e -- --repeat-each "$REPEAT"
+        env:
+          REPEAT: ${{ inputs.repeat }}
+      - name: Keep the traces of failed tests
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: e2e-traces-${{ github.sha }}
+          path: test-results
+          retention-days: 14

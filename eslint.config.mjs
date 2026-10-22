@@ -6,7 +6,7 @@ import { parser as TSEslintParser } from 'typescript-eslint';
 
 export default defineConfig([
   // Build output
-  globalIgnores(['dist/**', 'sourcemaps/**', 'coverage/**']),
+  globalIgnores(['dist/**', 'sourcemaps/**', 'coverage/**', 'test-results/**']),
   {
     extends: [customConfig],
     rules: {
@@ -24,6 +24,20 @@ export default defineConfig([
       // Command-line scripts report to the terminal
       'no-console': 'off',
       // Runs in Node, not in the browsers in .browserslistrc
+      'compat/compat': 'off'
+    }
+  },
+  {
+    // Playwright runs these in Node; the callbacks given to page.evaluate run
+    // in the page
+    files: ['e2e/**/*.mjs', 'playwright.config.mjs'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.browser
+      }
+    },
+    rules: {
       'compat/compat': 'off'
     }
   },
