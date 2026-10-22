@@ -4,6 +4,7 @@
 import { createReadStream, existsSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { extname, join, normalize } from 'node:path';
+import { createGzip } from 'node:zlib';
 
 const TYPES = {
   '.html': 'text/html',
@@ -48,11 +49,22 @@ export const serve = (root) =>
         return;
       }
 
+      const type =
+        TYPES[extname(file ?? notFound)] ?? 'application/octet-stream';
+      // Text is gzipped when the client accepts it, as on GitHub Pages, so
+      // transfer sizes match production
+      const gzip =
+        /^(text\/|application\/(json|manifest))|svg/.test(type) &&
+        /\bgzip\b/.test(req.headers['accept-encoding'] ?? '');
+
       res.writeHead(file ? 200 : 404, {
-        'content-type':
-          TYPES[extname(file ?? notFound)] ?? 'application/octet-stream'
+        'content-type': type,
+        ...(gzip ? { 'content-encoding': 'gzip' } : {})
       });
-      createReadStream(file ?? notFound).pipe(res);
+
+      const stream = createReadStream(file ?? notFound);
+
+      (gzip ? stream.pipe(createGzip()) : stream).pipe(res);
     });
 
     server.listen(0, '127.0.0.1', () => resolve(server));
