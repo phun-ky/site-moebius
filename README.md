@@ -1,6 +1,6 @@
 # moebius-site
 
-![logo](./public/images/logo.svg)
+![logo](./public/img/logo.png)
 
 > Möebius …
 
