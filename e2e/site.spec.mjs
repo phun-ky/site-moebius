@@ -8,7 +8,7 @@ test('a deep link to /about opens the about page', async ({ page }) => {
 
   expect(response?.status()).toBe(200);
   await rendered(page);
-  await expect(page.locator('main h1')).toHaveText('About');
+  await expect(page.locator('main h1')).toHaveText('About moebius');
   await expect(page).toHaveTitle('About moebius');
 });
 
@@ -29,7 +29,7 @@ test('links move between pages without a reload, and back works', async ({
 
   await page.goBack();
   await expect(page).toHaveURL('/about');
-  await expect(page.locator('main h1')).toHaveText('About');
+  await expect(page.locator('main h1')).toHaveText('About moebius');
   expect(await page.evaluate(() => window.notReloaded)).toBe(true);
 });
 
