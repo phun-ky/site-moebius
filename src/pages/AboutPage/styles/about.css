@@ -1,0 +1,103 @@
+/* The about page (#102): one readable column, its sections in the order
+   the start page is used */
+.ph.container.about {
+  display: grid;
+  gap: var(--moebius-space-8);
+  max-width: 44rem;
+  margin: var(--moebius-space-10) auto var(--moebius-space-16);
+  line-height: 1.6;
+}
+.ph.about-head {
+  display: grid;
+  gap: var(--moebius-space-4);
+}
+.ph.about h1.ph {
+  color: var(--moebius-color-text-strong);
+  font-size: var(--moebius-font-size-7);
+  font-weight: var(--moebius-font-weight-semibold);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+/* The start page's default palette */
+.ph.about-strip {
+  display: flex;
+  height: 0.5rem;
+  max-width: 16rem;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+.ph.about-strip i {
+  flex: 1;
+}
+.ph.about .ph.lead {
+  max-width: none;
+  margin: 0;
+  font-weight: var(--moebius-font-weight-regular);
+  color: var(--moebius-color-text-strong);
+  font-size: var(--moebius-font-size-4);
+  line-height: 1.5;
+}
+.ph.about section.ph {
+  display: grid;
+  gap: var(--moebius-space-3);
+}
+.ph.about h2.ph {
+  margin: 0;
+  color: var(--moebius-color-text-strong);
+  font-size: var(--moebius-font-size-5);
+  font-weight: var(--moebius-font-weight-semibold);
+  line-height: 1.25;
+}
+.ph.about p.ph,
+.ph.about ul.ph,
+.ph.about dl.ph {
+  max-width: none;
+  margin: 0;
+}
+.ph.about ul.ph {
+  display: grid;
+  gap: var(--moebius-space-2);
+  padding-left: var(--moebius-space-5);
+}
+.ph.about strong.ph {
+  color: var(--moebius-color-text-strong);
+  font-weight: var(--moebius-font-weight-semibold);
+}
+/* The palettes, as terms and what they are */
+.ph.palette-list {
+  display: grid;
+  gap: var(--moebius-space-1) var(--moebius-space-6);
+}
+.ph.palette-list dt.ph {
+  margin-top: var(--moebius-space-2);
+  color: var(--moebius-color-text-strong);
+  font-weight: var(--moebius-font-weight-semibold);
+}
+.ph.palette-list dd.ph {
+  margin: 0;
+}
+@media screen and (min-width: 768px) {
+  .ph.palette-list {
+    grid-template-columns: 11rem minmax(0, 1fr);
+  }
+  .ph.palette-list dt.ph {
+    margin-top: 0;
+  }
+}
+.ph.about a.ph.button-link {
+  display: inline-block;
+  padding: var(--moebius-space-2) var(--moebius-space-5);
+  border-radius: var(--moebius-radius-3);
+  background-color: var(--moebius-color-link);
+  color: var(--moebius-color-background);
+  font-weight: var(--moebius-font-weight-semibold);
+  text-decoration: none;
+}
+.ph.about a.ph.button-link:hover {
+  color: var(--moebius-color-background);
+  text-decoration: underline;
+}
+.ph.about a.ph:focus-visible {
+  outline: 2px solid var(--moebius-color-focus);
+  outline-offset: 2px;
+}
