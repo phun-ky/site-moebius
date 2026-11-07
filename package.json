@@ -54,7 +54,7 @@
     "color-name-list": "^14.62.0",
     "eslint": "^10.13.0",
     "eslint-config-phun-ky": "^2.0.10",
-    "fast-check": "^3.23.2",
+    "fast-check": "^4.10.2",
     "global-jsdom": "^30.0.0",
     "globals": "^17.13.0",
     "html-validate": "^11.16.2",
