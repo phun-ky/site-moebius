@@ -43,6 +43,7 @@ describe('the rendered assets', () => {
       ['public/img/meta/android-chrome-192x192.png', 192, 192],
       ['public/img/meta/android-chrome-512x512.png', 512, 512],
       ['public/img/social-card.png', 1200, 630],
+      ['docs/img/social-preview.png', 1280, 640],
       ['docs/img/banner-dark.png', 1280, 320],
       ['docs/img/banner-light.png', 1280, 320]
     ]) {
