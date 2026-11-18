@@ -1,7 +1,7 @@
 // Render the logo's asset set from src/assets/logo/mark.svg (#43): the
 // favicons, the icons for the web app manifest and the Apple home screen,
-// the social card, and the README banners for GitHub's light and dark
-// themes. The PNGs are screenshots from the installed Google Chrome (set
+// the social card, the repo's social preview on GitHub, and the README
+// banners for GitHub's light and dark themes. The PNGs are screenshots from the installed Google Chrome (set
 // CHROME_PATH to use another binary), so text uses the site's own font
 // stack. Run `npm run render:assets` after changing the mark, and commit
 // what it writes.
@@ -158,20 +158,25 @@ const main = async () => {
         await icon(size, appBackground, 0.12);
     }
 
-    outputs['public/img/social-card.png'] = await shot(
-      page({
-        mark,
-        size: 300,
-        width: 1200,
-        height: 630,
-        padding: 96,
-        background: hex(dark, 'color.background'),
-        text: hex(dark, 'color.text-strong'),
-        lines: words
-      }),
-      1200,
-      630
-    );
+    const card = (width, height) =>
+      shot(
+        page({
+          mark,
+          size: 300,
+          width,
+          height,
+          padding: 96,
+          background: hex(dark, 'color.background'),
+          text: hex(dark, 'color.text-strong'),
+          lines: words
+        }),
+        width,
+        height
+      );
+
+    outputs['public/img/social-card.png'] = await card(1200, 630);
+    // The repo's social preview on GitHub, uploaded by hand in Settings
+    outputs['docs/img/social-preview.png'] = await card(1280, 640);
 
     // GitHub shows the README on its own background, light or dark
     for (const [theme, tokens] of [
