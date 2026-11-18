@@ -67,7 +67,7 @@ the browser checks and end-to-end tests. Set `CHROME_PATH` to use another Chrome
 or Chromium.
 
 ```sh
-npm ci          # install, and point git at the commit hook in .githooks
+npm ci          # install, and point git at the commit hooks in .githooks
 npm run dev     # a dev server at http://localhost:5173
 npm run build   # build the site into dist/
 ```

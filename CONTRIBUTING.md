@@ -196,6 +196,11 @@ The DCO check on every pull request fails if a commit isn't signed off.
 - Commits follow [Conventional Commits](https://www.conventionalcommits.org/),
   with the project's emoji: `feat: 🎸` for something new, `fix: 🐛` for a bug,
   `docs: ✏️`, `refactor: 💡`, `test: 💍`, `chore: 🤖` and `ci: 🎡`.
+- No AI attribution in commit messages, such as a `Co-authored-by` trailer
+  naming an AI tool or a "Generated with" footer. `.githooks/commit-msg` rejects
+  them (the patterns are in `.githooks/ai-attribution.patterns`), and the Checks
+  workflow runs the same hook on every commit in a pull request, including
+  commits made in GitHub's web editor.
 - The site has no releases: every merge to `main` is deployed. A pull request
   must leave the site working and looking right on its own.
 - Open a pull request against `main`, with what it changes, how to test it and
