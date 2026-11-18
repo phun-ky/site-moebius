@@ -56,7 +56,7 @@ jobs:
         run: npm run lint
       - name: Check formatting
         run: npm run format:check
-      - name: Test, with coverage # 80% of lines in utils, features, config and the SPA router and helpers
+      - name: Test, with coverage # At least 95% of lines and statements, 97% of functions and 94% of branches in utils, features, config and the SPA router and helpers
         run: npm run test:coverage
       - name: End-to-end tests # Playwright in Chrome, desktop and phone: colours, settings, simulator, export, theme, routes
         run: npm run test:e2e

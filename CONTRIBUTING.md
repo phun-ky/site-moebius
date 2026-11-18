@@ -154,7 +154,9 @@ Some rules specific to this site:
 - **Bug fixes must come with a regression test** that fails without the fix.
 - **Coverage must not drop.** `npm run test:coverage` fails when the code it
   measures, the utilities, features, configuration and the router, falls below
-  80% of lines.
+  95% of lines and statements, 97% of functions or 94% of branches. The floor
+  goes up as tests are added, towards 99% of lines, 100% of functions and 95% of
+  branches.
 - **The browser checks must pass:** layout, accessibility, keyboard, Content
   Security Policy, performance budgets, HTML, links and metadata. The
   [README](README.md#checks) lists them. Run the ones your change touches before
