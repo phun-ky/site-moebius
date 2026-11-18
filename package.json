@@ -76,6 +76,10 @@
   "overrides": {
     "micromark-extension-math": {
       "katex": "^0.18.2"
+    },
+    "test-exclude": {
+      "minimatch": "^11.0.1",
+      "glob": "^14.0.2"
     }
   }
 }
