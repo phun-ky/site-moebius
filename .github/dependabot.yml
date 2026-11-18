@@ -29,10 +29,13 @@ updates:
   # comments up to date
   - package-ecosystem: 'github-actions'
     directory: '/'
+    # As for npm: each major gets its own PR, so one blocked major can't
+    # hold back the rest
     groups:
       actions:
-        patterns:
-          - '*'
+        update-types:
+          - 'minor'
+          - 'patch'
     schedule:
       interval: 'weekly'
     cooldown:
