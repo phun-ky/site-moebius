@@ -35,14 +35,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/phun-ky/moebius-site.git"
+    "url": "git+ssh://git@github.com/phun-ky/site-moebius.git"
   },
   "author": "Alexander Vassbotn Røyne-Helgesen <alexander+github.com@phun-ky.net>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/phun-ky/moebius-site/issues"
+    "url": "https://github.com/phun-ky/site-moebius/issues"
   },
-  "homepage": "https://github.com/phun-ky/moebius-site#readme",
+  "homepage": "https://moebius.wtf",
   "devDependencies": {
     "@eslint/markdown": "^8.0.3",
     "@playwright/test": "^1.64.1",
