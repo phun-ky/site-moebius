@@ -23,8 +23,10 @@ smooths out the experience for everyone involved.
   - [Reporting Bugs](#reporting-bugs)
   - [Suggesting Enhancements](#suggesting-enhancements)
   - [Contributing Code](#contributing-code)
+    - [Architecture](#architecture)
     - [Coding Style](#coding-style)
     - [Tests](#tests)
+    - [Checks](#checks)
     - [Design Tokens and the Logo](#design-tokens-and-the-logo)
     - [Developer Certificate of Origin](#developer-certificate-of-origin)
     - [Commits and Pull Requests](#commits-and-pull-requests)
@@ -122,10 +124,38 @@ using the site.
 
 ### Contributing Code
 
-Set up the project as described in the [README](README.md#development): Node.js
-24 and Google Chrome, then `npm ci`, `npm run build` and `npm test`. Larger
-changes are best discussed in an issue first, so the work fits the
+You need [Node.js](https://nodejs.org/) 24, which CI uses, and Google Chrome for
+the browser checks and end-to-end tests. Set `CHROME_PATH` to use another Chrome
+or Chromium.
+
+```sh
+npm ci          # install, and point git at the commit hooks in .githooks
+npm run dev     # a dev server at http://localhost:5173
+npm test
+npm run build   # build the site into dist/
+```
+
+Larger changes are best discussed in an issue first, so the work fits the
 [roadmap](ROADMAP.md).
+
+#### Architecture
+
+A small single-page app in TypeScript, built with [Vite](https://vite.dev/) and
+served by GitHub Pages. The palettes come from
+[moebius](https://github.com/phun-ky/moebius), a library by the same author. The
+color names are converted at build time from
+[color-name-list](https://github.com/meodai/color-names) and served from the
+site itself, like everything else: the page loads nothing from other hosts, and
+a strict Content Security Policy keeps it that way.
+
+| Folder                  | What it holds                                                     |
+| ----------------------- | ----------------------------------------------------------------- |
+| [`src/`](src)           | The app: pages, components, styles and the color blind simulation |
+| [`tokens/`](tokens)     | The design tokens, turned into CSS at build time                  |
+| [`public/`](public)     | Files served as they are: favicons, icons, the social card        |
+| [`scripts/`](scripts)   | Build steps and the checks that run in CI                         |
+| [`e2e/`](e2e)           | End-to-end tests with Playwright                                  |
+| [`docs/img/`](docs/img) | The banners in the README                                         |
 
 #### Coding Style
 
@@ -158,20 +188,49 @@ Some rules specific to this site:
   goes up as tests are added, towards 99% of lines, 100% of functions and 95% of
   branches.
 - **The browser checks must pass:** layout, accessibility, keyboard, Content
-  Security Policy, performance budgets, HTML, links and metadata. The
-  [README](README.md#checks) lists them. Run the ones your change touches before
-  you push; CI runs all of them.
+  Security Policy, performance budgets, HTML, links and metadata.
+  [Checks](#checks) lists them. Run the ones your change touches before you
+  push; CI runs all of them.
 - **A change that adds bytes** must stay within the
   [performance budgets](performance-budgets.json). Raising a budget needs a
   reason in the pull request.
 
+#### Checks
+
+Every pull request runs all of these, and must pass them to merge.
+
+| Command                     | What it checks                                                                    |
+| --------------------------- | --------------------------------------------------------------------------------- |
+| `npm run typecheck`         | TypeScript, in strict mode                                                        |
+| `npm run lint`              | [ESLint](https://eslint.org/) with `eslint-config-phun-ky`                        |
+| `npm run format:check`      | [Prettier](https://prettier.io/) formatting                                       |
+| `npm test`                  | Unit tests with `node:test`; `npm run test:coverage` also measures coverage       |
+| `npm run test:e2e`          | End-to-end tests with Playwright, at desktop and phone size                       |
+| `npm run check:dist`        | The build has no source maps and its JavaScript is minified                       |
+| `npm run check:layout`      | No sideways scrolling at seven widths; screenshots of every page                  |
+| `npm run check:origins`     | Nothing loads from other hosts                                                    |
+| `npm run check:csp`         | No Content Security Policy violations                                             |
+| `npm run check:a11y`        | No [axe](https://github.com/dequelabs/axe-core) violations of WCAG 2.2 AA         |
+| `npm run check:keyboard`    | Everything works with the keyboard                                                |
+| `npm run check:performance` | The [performance budgets](performance-budgets.json) on a throttled phone          |
+| `npm run check:routes`      | Every page answers as GitHub Pages serves it, and unknown paths get 404           |
+| `npm run check:theme`       | The theme follows the system setting until you choose one                         |
+| `npm run check:html`        | The HTML is valid, as built and as rendered                                       |
+| `npm run check:links`       | Every link, asset and anchor works; `check:links:external` checks other sites too |
+| `npm run check:metadata`    | Titles, descriptions, canonical URLs, the social card, sitemap and robots.txt     |
+
+The `check:` scripts and the end-to-end tests need a build first.
+
 #### Design Tokens and the Logo
 
-- **Colors, fonts, sizes and shadows** are design tokens in [`tokens/`](tokens).
-  Use the `--moebius-` custom properties in CSS, and add a token rather than a
-  fixed value; see the [tokens README](tokens/README.md).
+- **Colors, fonts, sizes and shadows** are design tokens in [`tokens/`](tokens),
+  in the Design Tokens Community Group format. The build turns them into CSS
+  custom properties: change the tokens, not the generated CSS. Use the
+  `--moebius-` custom properties in CSS, and add a token rather than a fixed
+  value; see the [tokens README](tokens/README.md).
 - **The logo** is [`src/assets/logo/mark.svg`](src/assets/logo/mark.svg). After
-  changing it, run `npm run render:assets` and commit the files it writes.
+  changing it, run `npm run render:assets` to redraw the favicons, icons, social
+  card and banners, and commit the files it writes.
 
 #### Developer Certificate of Origin
 
@@ -203,8 +262,10 @@ The DCO check on every pull request fails if a commit isn't signed off.
   them (the patterns are in `.githooks/ai-attribution.patterns`), and the Checks
   workflow runs the same hook on every commit in a pull request, including
   commits made in GitHub's web editor.
-- The site has no releases: every merge to `main` is deployed. A pull request
-  must leave the site working and looking right on its own.
+- The site has no releases or versions: every merge to `main` is built and
+  deployed to GitHub Pages by the
+  [Deploy workflow](.github/workflows/deploy.yml), so `main` is what the site
+  runs. A pull request must leave the site working and looking right on its own.
 - Open a pull request against `main`, with what it changes, how to test it and
   the issue it closes. The Checks workflow builds the site and runs every check
   and test; all of it must pass before it can be merged.
