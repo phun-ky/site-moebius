@@ -23,13 +23,11 @@ export const paletteItemsMapper = (
     const element = document.querySelector(`#${id}-svg`);
 
     if (element) {
-      element.innerHTML = '';
-
       const colors = moebius.colors[id].map((color: MoebiusColorValueHexType) =>
         moebius.monochromatic(color, { numberOfColors: 3 })
       );
 
-      element.appendChild(svgHelper.getColorPiePaths(colors));
+      element.replaceChildren(svgHelper.getColorPiePaths(colors));
 
       const colorElements = element.querySelectorAll('path[data-color-hex]');
 
