@@ -19,6 +19,7 @@
     "test:coverage": "c8 npm test",
     "test:e2e": "playwright test",
     "render:assets": "node scripts/render-assets.mjs",
+    "banners": "node scripts/banners/render.mjs",
     "check:dist": "node scripts/check-dist.mjs",
     "check:html": "node scripts/check-html.mjs",
     "check:links": "node scripts/check-links.mjs",
