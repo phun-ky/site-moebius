@@ -30,7 +30,7 @@ const NETWORK = {
 };
 const CPU_SLOWDOWN = 4;
 const median = (values) => {
-  const sorted = [...values].sort((a, b) => a - b);
+  const sorted = values.toSorted((a, b) => a - b);
 
   return sorted[Math.floor(sorted.length / 2)];
 };
